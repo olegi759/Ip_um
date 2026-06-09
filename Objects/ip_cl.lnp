@@ -1,0 +1,11 @@
+".\Objects\STARTUP.obj",
+".\Objects\main_ipCL.obj",
+".\Objects\init_ipCL.obj",
+".\Objects\tpic_ipCL.obj",
+".\Objects\uart0_ipCL.obj",
+".\Objects\work_PC_ipCL.obj",
+".\Objects\timers_ipCL.obj",
+".\Objects\test_SL_ipCL.obj",
+".\Objects\DATAPAGE.obj" 
+TO ".\Objects\ip_cl" 
+PRINT(".\Listings\ip_cl.m51") RAMSIZE(256) 

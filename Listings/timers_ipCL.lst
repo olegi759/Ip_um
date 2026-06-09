@@ -1,0 +1,182 @@
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/09/2026 08:34:03 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIMERS_IPCL
+OBJECT MODULE PLACED IN .\Objects\timers_ipCL.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE timers_ipCL.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\L
+                    -istings\timers_ipCL.lst) OBJECT(.\Objects\timers_ipCL.obj)
+
+line level    source
+
+   1          /**************************
+   2          программа контроля звуковых линий IP усилителя
+   3          ***************************/
+   4          //#include "C8051F330.h"
+   5          #include "extern_ipCL.h"
+   6          
+   7          
+   8          /*********************************************
+   9          обработка прерывания Т2
+  10          // Программа обработки прерывания таймера 3 
+  11          // 16 bit auto reload
+  12          // Timer clock = SYSCLK = sis/12
+  13          // Прерывание 10ms
+  14          *****************************************************/ 
+  15          void INT_Timer_2( void ) interrupt 5
+  16          {
+  17   1      
+  18   1      
+  19   1              TF2H=0;
+  20   1              
+  21   1              if(c_10ms==0){
+  22   2                      c_10ms=99;
+  23   2                      if(c_seconds>=79){//49
+  24   3                              c_seconds=0;                    
+  25   3                      }
+  26   2                      else c_seconds++;
+  27   2                      
+  28   2                      if(c_seconds==1)F_start_test_L1=1;//2
+  29   2                      else if(c_seconds==21)F_start_test_L2=1;//14            
+  30   2                      else if(c_seconds==41)F_start_test_L3=1;//26            
+  31   2                      else if(c_seconds==61)F_start_test_L4=1;//38            
+  32   2              }
+  33   1              else c_10ms--;
+  34   1      }
+  35          
+  36          /*********************************************
+  37          обработка прерывания Т3
+  38          // Программа обработки прерывания таймера 3 
+  39          // 16 bit auto reload
+  40          // Timer clock = SYSCLK = 
+  41          // Прерывание 500us dac
+  42          //для смирнова 4ms(2ms прерыв *2 в прерывании)
+  43          //v6 8ms (2прер *4)
+  44          *****************************************************/ 
+  45          void INT_Timer_3( void ) interrupt 14
+  46          {
+  47   1      
+  48   1              TMR3CN &=0x7F;//TF3H=0;
+  49   1              
+  50   1              div_f_start_dac++;
+  51   1              if(div_f_start_dac >3){
+  52   2                      div_f_start_dac=0;
+  53   2                      F_load_idac=1;
+  54   2                      
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/09/2026 08:34:03 PAGE 2   
+
+  55   2              }
+  56   1      
+  57   1              
+  58   1      /*
+  59   1              if(F_div_f_start_dac==0)F_div_f_start_dac=1;
+  60   1              else{
+  61   1                      F_div_f_start_dac=0;
+  62   1                      F_load_idac=1;
+  63   1              }               
+  64   1      */              
+  65   1                              
+  66   1      }
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/09/2026 08:34:03 PAGE 3   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION INT_Timer_2 (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0D0              PUSH    PSW
+                                           ; SOURCE LINE # 15
+                                           ; SOURCE LINE # 19
+0004 C2CF              CLR     TF2H
+                                           ; SOURCE LINE # 21
+0006 E500        E     MOV     A,c_10ms
+0008 7035              JNZ     ?C0001
+                                           ; SOURCE LINE # 22
+000A 750063      E     MOV     c_10ms,#063H
+                                           ; SOURCE LINE # 23
+000D E500        E     MOV     A,c_seconds
+000F C3                CLR     C
+0010 944F              SUBB    A,#04FH
+0012 4005              JC      ?C0002
+                                           ; SOURCE LINE # 24
+0014 750000      E     MOV     c_seconds,#00H
+                                           ; SOURCE LINE # 25
+0017 8002              SJMP    ?C0003
+0019         ?C0002:
+                                           ; SOURCE LINE # 26
+0019 0500        E     INC     c_seconds
+001B         ?C0003:
+                                           ; SOURCE LINE # 28
+001B E500        E     MOV     A,c_seconds
+001D B40104            CJNE    A,#01H,?C0004
+0020 D200        E     SETB    F_start_test_L1
+0022 801D              SJMP    ?C0012
+0024         ?C0004:
+                                           ; SOURCE LINE # 29
+0024 E500        E     MOV     A,c_seconds
+0026 B41504            CJNE    A,#015H,?C0006
+0029 D200        E     SETB    F_start_test_L2
+002B 8014              SJMP    ?C0012
+002D         ?C0006:
+                                           ; SOURCE LINE # 30
+002D E500        E     MOV     A,c_seconds
+002F B42904            CJNE    A,#029H,?C0008
+0032 D200        E     SETB    F_start_test_L3
+0034 800B              SJMP    ?C0012
+0036         ?C0008:
+                                           ; SOURCE LINE # 31
+0036 E500        E     MOV     A,c_seconds
+0038 B43D06            CJNE    A,#03DH,?C0012
+003B D200        E     SETB    F_start_test_L4
+                                           ; SOURCE LINE # 32
+003D 8002              SJMP    ?C0012
+003F         ?C0001:
+                                           ; SOURCE LINE # 33
+003F 1500        E     DEC     c_10ms
+                                           ; SOURCE LINE # 34
+0041         ?C0012:
+0041 D0D0              POP     PSW
+0043 D0E0              POP     ACC
+0045 32                RETI    
+             ; FUNCTION INT_Timer_2 (END)
+
+             ; FUNCTION INT_Timer_3 (BEGIN)
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/09/2026 08:34:03 PAGE 4   
+
+0000 C0E0              PUSH    ACC
+0002 C0D0              PUSH    PSW
+                                           ; SOURCE LINE # 45
+                                           ; SOURCE LINE # 48
+0004 53917F            ANL     TMR3CN,#07FH
+                                           ; SOURCE LINE # 50
+0007 0500        E     INC     div_f_start_dac
+                                           ; SOURCE LINE # 51
+0009 E500        E     MOV     A,div_f_start_dac
+000B D3                SETB    C
+000C 9403              SUBB    A,#03H
+000E 4005              JC      ?C0014
+                                           ; SOURCE LINE # 52
+0010 750000      E     MOV     div_f_start_dac,#00H
+                                           ; SOURCE LINE # 53
+0013 D200        E     SETB    F_load_idac
+                                           ; SOURCE LINE # 55
+                                           ; SOURCE LINE # 66
+0015         ?C0014:
+0015 D0D0              POP     PSW
+0017 D0E0              POP     ACC
+0019 32                RETI    
+             ; FUNCTION INT_Timer_3 (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     96    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

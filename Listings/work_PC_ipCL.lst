@@ -1,0 +1,592 @@
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE WORK_PC_IPCL
+OBJECT MODULE PLACED IN .\Objects\work_PC_ipCL.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE work_PC_ipCL.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\
+                    -Listings\work_PC_ipCL.lst) OBJECT(.\Objects\work_PC_ipCL.obj)
+
+line level    source
+
+   1          /**************************
+   2          программа контрол€ звуковых линий IP усилител€
+   3          ***************************/
+   4          //#include "C8051F330.h"
+   5          #include "extern_ipCL.h"
+   6          #include <string.h>
+   7          //обработка команды
+   8          void work_PC(void){
+   9   1      
+  10   1         switch (Rx_command_PC){                 //код команды
+  11   2              case CMD_PC_INSTALL_SL:
+  12   2                      set_install=0;
+  13   2                      if(bufRX_PC[0]==0xFF)install_cahal_1=1;
+  14   2                      if(bufRX_PC[1]==0xFF)install_cahal_2=1;
+  15   2                      if(bufRX_PC[2]==0xFF)install_cahal_3=1;
+  16   2                      if(bufRX_PC[3]==0xFF)install_cahal_4=1;
+  17   2      
+  18   2                      //инстал€ци€ звуковых линий
+  19   2                      install_SL();
+  20   2              
+  21   2                      //отправл€ем результат
+  22   2                       Tx_command_PC=CMD_PC_INSTALL_SL;
+  23   2                       n_byte_Tx_PC=sizeof(struct _Status_SL);
+  24   2                       /*загружаем данные в буф передачи*/
+  25   2                       memcpy(&bufTX_PC[0],&Status_SL,n_byte_Tx_PC);
+  26   2                       st_Tx_PC=TX_ADDRESS;
+  27   2                       Tx_counter_or_error=n_byte_Tx_PC;
+  28   2      
+  29   2                      SBUF0 =COD_START_TX_PC;
+  30   2                      //сброс старых
+  31   2                      Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
+  32   2                      Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
+  33   2                      Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
+  34   2                      Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;      
+  35   2              break;     
+  36   2              case CMD_PC_TEST_SL:
+  37   2                      set_canal_test[0]=bufRX_PC[0];
+  38   2                      set_canal_test[1]=bufRX_PC[1];
+  39   2                      set_canal_test[2]=bufRX_PC[2];
+  40   2                      set_canal_test[3]=bufRX_PC[3];
+  41   2      
+  42   2                      //ответ
+  43   2                       Tx_command_PC=CMD_PC_TEST_SL;
+  44   2                       n_byte_Tx_PC=sizeof(struct _Status_SL);
+  45   2                       /*загружаем данные в буф передачи*/
+  46   2                       memcpy(&bufTX_PC[0],&Status_SL,n_byte_Tx_PC);
+  47   2                       st_Tx_PC=TX_ADDRESS;
+  48   2                       Tx_counter_or_error=n_byte_Tx_PC;
+  49   2      
+  50   2                      SBUF0 =COD_START_TX_PC; 
+  51   2              
+  52   2                      //сброс старых
+  53   2                      if(set_canal_test[0]==0){Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;}
+  54   2                      if(set_canal_test[1]==0){Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;}
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 2   
+
+  55   2                      if(set_canal_test[2]==0){Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;}
+  56   2                      if(set_canal_test[3]==0){Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;}            
+  57   2              break;     
+  58   2              case CMD_PC_SET_RELE_SL:
+  59   2                      if(bufRX_PC[0]==0xFF){
+  60   3                              set_rele[0]=0xFF;
+  61   3                              set_canal_test[0]=0;
+  62   3                              RELE_L1_ON;
+  63   3                              
+  64   3                              if(F_run_test){//1-идет тест
+  65   4                                      if(canal_test==1){
+  66   5                                              IDAC_L1_OFF;
+  67   5                                              F_run_test=0;
+  68   5                                              //IDA0=0;
+  69   5                                              IDA0L=0;        
+  70   5                                              IDA0H=0;
+  71   5                                      }
+  72   4                              }
+  73   3                      }
+  74   2                      else{
+  75   3                              set_rele[0]=0;
+  76   3                              RELE_L1_OFF;                                            
+  77   3                      }
+  78   2                      if(bufRX_PC[1]==0xFF){
+  79   3                              set_rele[1]=0xFF;
+  80   3                              set_canal_test[1]=0;
+  81   3                              RELE_L2_ON;
+  82   3                              
+  83   3                              if(F_run_test){//1-идет тест
+  84   4                                      if(canal_test==2){
+  85   5                                              IDAC_L2_OFF;
+  86   5                                              F_run_test=0;
+  87   5                                              //IDA0=0;
+  88   5                                              IDA0L=0;        
+  89   5                                              IDA0H=0;
+  90   5                                      }
+  91   4                              }
+  92   3                      }
+  93   2                      else{
+  94   3                              set_rele[1]=0;
+  95   3                              RELE_L2_OFF;                                            
+  96   3                      }
+  97   2                      if(bufRX_PC[2]==0xFF){
+  98   3                              set_rele[2]=0xFF;
+  99   3                              set_canal_test[2]=0;
+ 100   3                              RELE_L3_ON;
+ 101   3                              
+ 102   3                              if(F_run_test){//1-идет тест
+ 103   4                                      if(canal_test==3){
+ 104   5                                              IDAC_L3_OFF;
+ 105   5                                              F_run_test=0;
+ 106   5                                              //IDA0=0;
+ 107   5                                              IDA0L=0;        
+ 108   5                                              IDA0H=0;
+ 109   5                                      }
+ 110   4                              }
+ 111   3                      }
+ 112   2                      else{
+ 113   3                              set_rele[2]=0;
+ 114   3                              RELE_L3_OFF;                                            
+ 115   3                      }
+ 116   2                      if(bufRX_PC[3]==0xFF){
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 3   
+
+ 117   3                              set_rele[3]=0xFF;
+ 118   3                              set_canal_test[3]=0;
+ 119   3                              RELE_L4_ON;
+ 120   3                              
+ 121   3                              if(F_run_test){//1-идет тест
+ 122   4                                      if(canal_test==4){
+ 123   5                                              IDAC_L4_OFF;
+ 124   5                                              F_run_test=0;
+ 125   5                                              //IDA0=0;
+ 126   5                                              IDA0L=0;        
+ 127   5                                              IDA0H=0;
+ 128   5                                      }
+ 129   4                              }
+ 130   3                      }
+ 131   2                      else{
+ 132   3                              set_rele[3]=0;
+ 133   3                              RELE_L4_OFF;                                            
+ 134   3                      }
+ 135   2                      //ответ
+ 136   2                       Tx_command_PC=CMD_PC_SET_RELE_SL;
+ 137   2                       n_byte_Tx_PC=4;
+ 138   2                       /*загружаем данные в буф передачи*/
+ 139   2                       bufTX_PC[0]=set_rele[0];
+ 140   2                       bufTX_PC[1]=set_rele[1];
+ 141   2                       bufTX_PC[2]=set_rele[2];
+ 142   2                       bufTX_PC[3]=set_rele[3];
+ 143   2                       st_Tx_PC=TX_ADDRESS;
+ 144   2                       Tx_counter_or_error=n_byte_Tx_PC;
+ 145   2      
+ 146   2                      SBUF0 =COD_START_TX_PC;
+ 147   2                      
+ 148   2                      //загрузка tpic
+ 149   2                      PCA0CPH2  = 0;//reset wdt
+ 150   2                      set_tpic1();
+ 151   2                      set_tpic2();
+ 152   2                      
+ 153   2              break;
+ 154   2              case CMD_PC_READ_RELE_SL:
+ 155   2                      //ответ
+ 156   2                       Tx_command_PC=CMD_PC_READ_RELE_SL;
+ 157   2                       n_byte_Tx_PC=4;
+ 158   2                       /*загружаем данные в буф передачи*/
+ 159   2                       bufTX_PC[0]=set_rele[0];
+ 160   2                       bufTX_PC[1]=set_rele[1];
+ 161   2                       bufTX_PC[2]=set_rele[2];
+ 162   2                       bufTX_PC[3]=set_rele[3];
+ 163   2                       st_Tx_PC=TX_ADDRESS;
+ 164   2                       Tx_counter_or_error=n_byte_Tx_PC;
+ 165   2      
+ 166   2                      SBUF0 =COD_START_TX_PC;
+ 167   2              break;
+ 168   2      
+ 169   2         }
+ 170   1         
+ 171   1      }
+ 172          
+ 173          
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 4   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION work_PC (BEGIN)
+                                           ; SOURCE LINE # 8
+                                           ; SOURCE LINE # 10
+0000 E500        E     MOV     A,Rx_command_PC
+0002 24FE              ADD     A,#0FEH
+0004 6074              JZ      ?C0007
+0006 14                DEC     A
+0007 7003              JNZ     $ + 5H
+0009 020000      R     LJMP    ?C0012
+000C 14                DEC     A
+000D 7003              JNZ     $ + 5H
+000F 020000      R     LJMP    ?C0029
+0012 2403              ADD     A,#03H
+0014 6003              JZ      $ + 5H
+0016 020000      R     LJMP    ?C0030
+                                           ; SOURCE LINE # 11
+0019         ?C0002:
+                                           ; SOURCE LINE # 12
+0019 E4                CLR     A
+001A F500        E     MOV     set_install,A
+                                           ; SOURCE LINE # 13
+001C 900000      E     MOV     DPTR,#bufRX_PC
+001F E0                MOVX    A,@DPTR
+0020 B4FF02            CJNE    A,#0FFH,?C0003
+0023 D200        E     SETB    install_cahal_1
+0025         ?C0003:
+                                           ; SOURCE LINE # 14
+0025 900000      E     MOV     DPTR,#bufRX_PC+01H
+0028 E0                MOVX    A,@DPTR
+0029 B4FF02            CJNE    A,#0FFH,?C0004
+002C D200        E     SETB    install_cahal_2
+002E         ?C0004:
+                                           ; SOURCE LINE # 15
+002E 900000      E     MOV     DPTR,#bufRX_PC+02H
+0031 E0                MOVX    A,@DPTR
+0032 B4FF02            CJNE    A,#0FFH,?C0005
+0035 D200        E     SETB    install_cahal_3
+0037         ?C0005:
+                                           ; SOURCE LINE # 16
+0037 900000      E     MOV     DPTR,#bufRX_PC+03H
+003A E0                MOVX    A,@DPTR
+003B B4FF02            CJNE    A,#0FFH,?C0006
+003E D200        E     SETB    install_cahal_4
+0040         ?C0006:
+                                           ; SOURCE LINE # 19
+0040 120000      E     LCALL   install_SL
+                                           ; SOURCE LINE # 22
+0043 750001      E     MOV     Tx_command_PC,#01H
+                                           ; SOURCE LINE # 23
+0046 75000C      E     MOV     n_byte_Tx_PC,#0CH
+                                           ; SOURCE LINE # 25
+0049 AF00        E     MOV     R7,n_byte_Tx_PC
+004B 7E00              MOV     R6,#00H
+004D 7800        E     MOV     R0,#LOW bufTX_PC
+004F 7C00        E     MOV     R4,#HIGH bufTX_PC
+0051 7D01              MOV     R5,#01H
+0053 7B00              MOV     R3,#00H
+0055 7A00        E     MOV     R2,#HIGH Status_SL
+0057 7900        E     MOV     R1,#LOW Status_SL
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 5   
+
+0059 120000      E     LCALL   ?C?COPY
+                                           ; SOURCE LINE # 26
+005C 750002      E     MOV     st_Tx_PC,#02H
+                                           ; SOURCE LINE # 27
+005F 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
+                                           ; SOURCE LINE # 29
+0062 759923            MOV     SBUF0,#023H
+                                           ; SOURCE LINE # 31
+0065 E4                CLR     A
+0066 F500        E     MOV     Status_SL+01H,A
+0068 F500        E     MOV     Status_SL+02H,A
+006A F500        E     MOV     Status_SL,A
+                                           ; SOURCE LINE # 32
+006C F500        E     MOV     Status_SL+04H,A
+006E F500        E     MOV     Status_SL+05H,A
+0070 F500        E     MOV     Status_SL+03H,A
+                                           ; SOURCE LINE # 33
+0072 F500        E     MOV     Status_SL+07H,A
+0074 F500        E     MOV     Status_SL+08H,A
+0076 F500        E     MOV     Status_SL+06H,A
+                                           ; SOURCE LINE # 34
+                                           ; SOURCE LINE # 35
+0078 8059              SJMP    ?C0031
+                                           ; SOURCE LINE # 36
+007A         ?C0007:
+                                           ; SOURCE LINE # 37
+007A 900000      E     MOV     DPTR,#bufRX_PC
+007D E0                MOVX    A,@DPTR
+007E F500        E     MOV     set_canal_test,A
+                                           ; SOURCE LINE # 38
+0080 A3                INC     DPTR
+0081 E0                MOVX    A,@DPTR
+0082 F500        E     MOV     set_canal_test+01H,A
+                                           ; SOURCE LINE # 39
+0084 A3                INC     DPTR
+0085 E0                MOVX    A,@DPTR
+0086 F500        E     MOV     set_canal_test+02H,A
+                                           ; SOURCE LINE # 40
+0088 A3                INC     DPTR
+0089 E0                MOVX    A,@DPTR
+008A F500        E     MOV     set_canal_test+03H,A
+                                           ; SOURCE LINE # 43
+008C 750002      E     MOV     Tx_command_PC,#02H
+                                           ; SOURCE LINE # 44
+008F 75000C      E     MOV     n_byte_Tx_PC,#0CH
+                                           ; SOURCE LINE # 46
+0092 AF00        E     MOV     R7,n_byte_Tx_PC
+0094 7E00              MOV     R6,#00H
+0096 7800        E     MOV     R0,#LOW bufTX_PC
+0098 7C00        E     MOV     R4,#HIGH bufTX_PC
+009A 7D01              MOV     R5,#01H
+009C 7B00              MOV     R3,#00H
+009E 7A00        E     MOV     R2,#HIGH Status_SL
+00A0 7900        E     MOV     R1,#LOW Status_SL
+00A2 120000      E     LCALL   ?C?COPY
+                                           ; SOURCE LINE # 47
+00A5 750002      E     MOV     st_Tx_PC,#02H
+                                           ; SOURCE LINE # 48
+00A8 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
+                                           ; SOURCE LINE # 50
+00AB 759923            MOV     SBUF0,#023H
+                                           ; SOURCE LINE # 53
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 6   
+
+00AE E500        E     MOV     A,set_canal_test
+00B0 7006              JNZ     ?C0008
+00B2 F500        E     MOV     Status_SL+01H,A
+00B4 F500        E     MOV     Status_SL+02H,A
+00B6 F500        E     MOV     Status_SL,A
+00B8         ?C0008:
+                                           ; SOURCE LINE # 54
+00B8 E500        E     MOV     A,set_canal_test+01H
+00BA 7006              JNZ     ?C0009
+00BC F500        E     MOV     Status_SL+04H,A
+00BE F500        E     MOV     Status_SL+05H,A
+00C0 F500        E     MOV     Status_SL+03H,A
+00C2         ?C0009:
+                                           ; SOURCE LINE # 55
+00C2 E500        E     MOV     A,set_canal_test+02H
+00C4 7006              JNZ     ?C0010
+00C6 F500        E     MOV     Status_SL+07H,A
+00C8 F500        E     MOV     Status_SL+08H,A
+00CA F500        E     MOV     Status_SL+06H,A
+00CC         ?C0010:
+                                           ; SOURCE LINE # 56
+00CC E500        E     MOV     A,set_canal_test+03H
+00CE 6003              JZ      $ + 5H
+00D0 020000      R     LJMP    ?C0030
+00D3         ?C0031:
+00D3 F500        E     MOV     Status_SL+0AH,A
+00D5 F500        E     MOV     Status_SL+0BH,A
+00D7 F500        E     MOV     Status_SL+09H,A
+                                           ; SOURCE LINE # 57
+00D9 22                RET     
+                                           ; SOURCE LINE # 58
+00DA         ?C0012:
+                                           ; SOURCE LINE # 59
+00DA 900000      E     MOV     DPTR,#bufRX_PC
+00DD E0                MOVX    A,@DPTR
+00DE B4FF1B            CJNE    A,#0FFH,?C0013
+                                           ; SOURCE LINE # 60
+00E1 7500FF      E     MOV     set_rele,#0FFH
+                                           ; SOURCE LINE # 61
+00E4 E4                CLR     A
+00E5 F500        E     MOV     set_canal_test,A
+                                           ; SOURCE LINE # 62
+00E7 D200        E     SETB    rele_L1
+                                           ; SOURCE LINE # 64
+00E9 300015      E     JNB     F_run_test,?C0016
+                                           ; SOURCE LINE # 65
+00EC E500        E     MOV     A,canal_test
+00EE B40110            CJNE    A,#01H,?C0016
+                                           ; SOURCE LINE # 66
+00F1 C200        E     CLR     idac_L1
+                                           ; SOURCE LINE # 67
+00F3 C200        E     CLR     F_run_test
+                                           ; SOURCE LINE # 69
+00F5 E4                CLR     A
+00F6 F596              MOV     IDA0L,A
+                                           ; SOURCE LINE # 70
+00F8 F597              MOV     IDA0H,A
+                                           ; SOURCE LINE # 71
+                                           ; SOURCE LINE # 72
+                                           ; SOURCE LINE # 73
+00FA 8005              SJMP    ?C0016
+00FC         ?C0013:
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 7   
+
+                                           ; SOURCE LINE # 74
+                                           ; SOURCE LINE # 75
+00FC E4                CLR     A
+00FD F500        E     MOV     set_rele,A
+                                           ; SOURCE LINE # 76
+00FF C200        E     CLR     rele_L1
+                                           ; SOURCE LINE # 77
+0101         ?C0016:
+                                           ; SOURCE LINE # 78
+0101 900000      E     MOV     DPTR,#bufRX_PC+01H
+0104 E0                MOVX    A,@DPTR
+0105 B4FF1B            CJNE    A,#0FFH,?C0017
+                                           ; SOURCE LINE # 79
+0108 7500FF      E     MOV     set_rele+01H,#0FFH
+                                           ; SOURCE LINE # 80
+010B E4                CLR     A
+010C F500        E     MOV     set_canal_test+01H,A
+                                           ; SOURCE LINE # 81
+010E D200        E     SETB    rele_L2
+                                           ; SOURCE LINE # 83
+0110 300015      E     JNB     F_run_test,?C0020
+                                           ; SOURCE LINE # 84
+0113 E500        E     MOV     A,canal_test
+0115 B40210            CJNE    A,#02H,?C0020
+                                           ; SOURCE LINE # 85
+0118 C200        E     CLR     idac_L2
+                                           ; SOURCE LINE # 86
+011A C200        E     CLR     F_run_test
+                                           ; SOURCE LINE # 88
+011C E4                CLR     A
+011D F596              MOV     IDA0L,A
+                                           ; SOURCE LINE # 89
+011F F597              MOV     IDA0H,A
+                                           ; SOURCE LINE # 90
+                                           ; SOURCE LINE # 91
+                                           ; SOURCE LINE # 92
+0121 8005              SJMP    ?C0020
+0123         ?C0017:
+                                           ; SOURCE LINE # 93
+                                           ; SOURCE LINE # 94
+0123 E4                CLR     A
+0124 F500        E     MOV     set_rele+01H,A
+                                           ; SOURCE LINE # 95
+0126 C200        E     CLR     rele_L2
+                                           ; SOURCE LINE # 96
+0128         ?C0020:
+                                           ; SOURCE LINE # 97
+0128 900000      E     MOV     DPTR,#bufRX_PC+02H
+012B E0                MOVX    A,@DPTR
+012C B4FF1B            CJNE    A,#0FFH,?C0021
+                                           ; SOURCE LINE # 98
+012F 7500FF      E     MOV     set_rele+02H,#0FFH
+                                           ; SOURCE LINE # 99
+0132 E4                CLR     A
+0133 F500        E     MOV     set_canal_test+02H,A
+                                           ; SOURCE LINE # 100
+0135 D200        E     SETB    rele_L3
+                                           ; SOURCE LINE # 102
+0137 300015      E     JNB     F_run_test,?C0024
+                                           ; SOURCE LINE # 103
+013A E500        E     MOV     A,canal_test
+013C B40310            CJNE    A,#03H,?C0024
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 8   
+
+                                           ; SOURCE LINE # 104
+013F C200        E     CLR     idac_L3
+                                           ; SOURCE LINE # 105
+0141 C200        E     CLR     F_run_test
+                                           ; SOURCE LINE # 107
+0143 E4                CLR     A
+0144 F596              MOV     IDA0L,A
+                                           ; SOURCE LINE # 108
+0146 F597              MOV     IDA0H,A
+                                           ; SOURCE LINE # 109
+                                           ; SOURCE LINE # 110
+                                           ; SOURCE LINE # 111
+0148 8005              SJMP    ?C0024
+014A         ?C0021:
+                                           ; SOURCE LINE # 112
+                                           ; SOURCE LINE # 113
+014A E4                CLR     A
+014B F500        E     MOV     set_rele+02H,A
+                                           ; SOURCE LINE # 114
+014D C200        E     CLR     rele_L3
+                                           ; SOURCE LINE # 115
+014F         ?C0024:
+                                           ; SOURCE LINE # 116
+014F 900000      E     MOV     DPTR,#bufRX_PC+03H
+0152 E0                MOVX    A,@DPTR
+0153 B4FF1B            CJNE    A,#0FFH,?C0025
+                                           ; SOURCE LINE # 117
+0156 7500FF      E     MOV     set_rele+03H,#0FFH
+                                           ; SOURCE LINE # 118
+0159 E4                CLR     A
+015A F500        E     MOV     set_canal_test+03H,A
+                                           ; SOURCE LINE # 119
+015C D200        E     SETB    rele_L4
+                                           ; SOURCE LINE # 121
+015E 300015      E     JNB     F_run_test,?C0028
+                                           ; SOURCE LINE # 122
+0161 E500        E     MOV     A,canal_test
+0163 B40410            CJNE    A,#04H,?C0028
+                                           ; SOURCE LINE # 123
+0166 C200        E     CLR     idac_L4
+                                           ; SOURCE LINE # 124
+0168 C200        E     CLR     F_run_test
+                                           ; SOURCE LINE # 126
+016A E4                CLR     A
+016B F596              MOV     IDA0L,A
+                                           ; SOURCE LINE # 127
+016D F597              MOV     IDA0H,A
+                                           ; SOURCE LINE # 128
+                                           ; SOURCE LINE # 129
+                                           ; SOURCE LINE # 130
+016F 8005              SJMP    ?C0028
+0171         ?C0025:
+                                           ; SOURCE LINE # 131
+                                           ; SOURCE LINE # 132
+0171 E4                CLR     A
+0172 F500        E     MOV     set_rele+03H,A
+                                           ; SOURCE LINE # 133
+0174 C200        E     CLR     rele_L4
+                                           ; SOURCE LINE # 134
+0176         ?C0028:
+                                           ; SOURCE LINE # 136
+0176 750003      E     MOV     Tx_command_PC,#03H
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 9   
+
+                                           ; SOURCE LINE # 137
+0179 750004      E     MOV     n_byte_Tx_PC,#04H
+                                           ; SOURCE LINE # 139
+017C 900000      E     MOV     DPTR,#bufTX_PC
+017F E500        E     MOV     A,set_rele
+0181 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 140
+0182 A3                INC     DPTR
+0183 E500        E     MOV     A,set_rele+01H
+0185 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 141
+0186 A3                INC     DPTR
+0187 E500        E     MOV     A,set_rele+02H
+0189 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 142
+018A A3                INC     DPTR
+018B E500        E     MOV     A,set_rele+03H
+018D F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 143
+018E 750002      E     MOV     st_Tx_PC,#02H
+                                           ; SOURCE LINE # 144
+0191 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
+                                           ; SOURCE LINE # 146
+0194 759923            MOV     SBUF0,#023H
+                                           ; SOURCE LINE # 149
+0197 E4                CLR     A
+0198 F5EC              MOV     PCA0CPH2,A
+                                           ; SOURCE LINE # 150
+019A 120000      E     LCALL   set_tpic1
+                                           ; SOURCE LINE # 151
+019D 020000      E     LJMP    set_tpic2
+                                           ; SOURCE LINE # 153
+                                           ; SOURCE LINE # 154
+01A0         ?C0029:
+                                           ; SOURCE LINE # 156
+01A0 750004      E     MOV     Tx_command_PC,#04H
+                                           ; SOURCE LINE # 157
+01A3 750004      E     MOV     n_byte_Tx_PC,#04H
+                                           ; SOURCE LINE # 159
+01A6 900000      E     MOV     DPTR,#bufTX_PC
+01A9 E500        E     MOV     A,set_rele
+01AB F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 160
+01AC A3                INC     DPTR
+01AD E500        E     MOV     A,set_rele+01H
+01AF F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 161
+01B0 A3                INC     DPTR
+01B1 E500        E     MOV     A,set_rele+02H
+01B3 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 162
+01B4 A3                INC     DPTR
+01B5 E500        E     MOV     A,set_rele+03H
+01B7 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 163
+01B8 750002      E     MOV     st_Tx_PC,#02H
+                                           ; SOURCE LINE # 164
+01BB 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
+                                           ; SOURCE LINE # 166
+01BE 759923            MOV     SBUF0,#023H
+                                           ; SOURCE LINE # 167
+                                           ; SOURCE LINE # 169
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 10  
+
+                                           ; SOURCE LINE # 171
+01C1         ?C0030:
+01C1 22                RET     
+             ; FUNCTION work_PC (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    450    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
