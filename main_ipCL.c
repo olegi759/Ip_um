@@ -47,9 +47,11 @@ EA=1;                  // Global Interrupt Enable
 	
 	
 	
-
+Rx_command_PC = CMD_PC_READ_RELE_SL;
+F_run_com_PC = 1;
 //++	
-while(1){	
+while(1){
+	
 //++
 
 PCA0CPH2  = 0;//reset wdt
@@ -60,6 +62,8 @@ if(F_run_com_PC){
 }
 //
 
+delay_ipCL(1000);
+//SBUF0 = 0xDA;
 
 
 //выплонение шага тестирования

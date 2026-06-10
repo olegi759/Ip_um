@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/09/2026 08:34:03 PAGE 1   
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/10/2026 15:35:58 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIMERS_IPCL
@@ -62,7 +62,7 @@ line level    source
   52   2                      div_f_start_dac=0;
   53   2                      F_load_idac=1;
   54   2                      
-C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/09/2026 08:34:03 PAGE 2   
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/10/2026 15:35:58 PAGE 2   
 
   55   2              }
   56   1      
@@ -76,7 +76,7 @@ line level    source
   64   1      */              
   65   1                              
   66   1      }
-C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/09/2026 08:34:03 PAGE 3   
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/10/2026 15:35:58 PAGE 3   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -140,7 +140,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
              ; FUNCTION INT_Timer_2 (END)
 
              ; FUNCTION INT_Timer_3 (BEGIN)
-C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/09/2026 08:34:03 PAGE 4   
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/10/2026 15:35:58 PAGE 4   
 
 0000 C0E0              PUSH    ACC
 0002 C0D0              PUSH    PSW

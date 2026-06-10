@@ -6,7 +6,7 @@
 
 void uart_0(void) interrupt 4{
 
-
+	P1 ^= 0x80;
 
 	if( RI0 ) {	// //פכאד ןנטולא
 
@@ -133,6 +133,7 @@ void uart_0(void) interrupt 4{
 			
 				case TX_CRC_2:
 					 SBUF0 =CRC_Tx_PC.b[0];
+					F_run_com_PC = 1;
 					 st_Tx_PC=TX_END;
 					 return;
 				break;

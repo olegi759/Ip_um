@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 1   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/10/2026 15:35:58 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE WORK_PC_IPCL
@@ -62,7 +62,7 @@ line level    source
   52   2                      //сброс старых
   53   2                      if(set_canal_test[0]==0){Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;}
   54   2                      if(set_canal_test[1]==0){Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;}
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 2   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/10/2026 15:35:58 PAGE 2   
 
   55   2                      if(set_canal_test[2]==0){Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;}
   56   2                      if(set_canal_test[3]==0){Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;}            
@@ -126,7 +126,7 @@ line level    source
  114   3                              RELE_L3_OFF;                                            
  115   3                      }
  116   2                      if(bufRX_PC[3]==0xFF){
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 3   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/10/2026 15:35:58 PAGE 3   
 
  117   3                              set_rele[3]=0xFF;
  118   3                              set_canal_test[3]=0;
@@ -185,7 +185,7 @@ line level    source
  171   1      }
  172          
  173          
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 4   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/10/2026 15:35:58 PAGE 4   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -249,7 +249,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0053 7B00              MOV     R3,#00H
 0055 7A00        E     MOV     R2,#HIGH Status_SL
 0057 7900        E     MOV     R1,#LOW Status_SL
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 5   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/10/2026 15:35:58 PAGE 5   
 
 0059 120000      E     LCALL   ?C?COPY
                                            ; SOURCE LINE # 26
@@ -313,7 +313,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 50
 00AB 759923            MOV     SBUF0,#023H
                                            ; SOURCE LINE # 53
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 6   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/10/2026 15:35:58 PAGE 6   
 
 00AE E500        E     MOV     A,set_canal_test
 00B0 7006              JNZ     ?C0008
@@ -377,7 +377,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 73
 00FA 8005              SJMP    ?C0016
 00FC         ?C0013:
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 7   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/10/2026 15:35:58 PAGE 7   
 
                                            ; SOURCE LINE # 74
                                            ; SOURCE LINE # 75
@@ -441,7 +441,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 103
 013A E500        E     MOV     A,canal_test
 013C B40310            CJNE    A,#03H,?C0024
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 8   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/10/2026 15:35:58 PAGE 8   
 
                                            ; SOURCE LINE # 104
 013F C200        E     CLR     idac_L3
@@ -505,7 +505,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0176         ?C0028:
                                            ; SOURCE LINE # 136
 0176 750003      E     MOV     Tx_command_PC,#03H
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 9   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/10/2026 15:35:58 PAGE 9   
 
                                            ; SOURCE LINE # 137
 0179 750004      E     MOV     n_byte_Tx_PC,#04H
@@ -569,7 +569,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 01BE 759923            MOV     SBUF0,#023H
                                            ; SOURCE LINE # 167
                                            ; SOURCE LINE # 169
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/09/2026 08:34:02 PAGE 10  
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/10/2026 15:35:58 PAGE 10  
 
                                            ; SOURCE LINE # 171
 01C1         ?C0030:
