@@ -44,11 +44,11 @@ P_tpic2_G=0;
 	
 EA=1;                  // Global Interrupt Enable	
 	
+//set_canal_test[0] = 1;	
 	
 	
-	
-Rx_command_PC = CMD_PC_READ_RELE_SL;
-F_run_com_PC = 1;
+//Rx_command_PC = CMD_PC_READ_RELE_SL;
+//F_run_com_PC = 1;
 //++	
 while(1){
 	
@@ -119,6 +119,9 @@ if(F_end_test){
 			}
 			IDAC_L1_OFF;
 			set_tpic1();
+			TMR2CN = 0;
+			set_canal_test[0] = 0;	
+			//тест линии конец
 		}			
 		else if(canal_test==2){
 			if(F_hold_data_idac){//1-выполнено запоминание

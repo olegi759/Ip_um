@@ -64,4 +64,6 @@
 #define CMD_PC_SET_RELE_SL		0x03	//управление реле трансл
 #define CMD_PC_READ_RELE_SL 		0x04	//ЗАПРОС состоян реле трансл
 
+#define CMD_PC_DEBUG_SL 		0xDD	
+
 

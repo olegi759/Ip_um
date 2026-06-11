@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 1   
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TEST_SL_IPCL
@@ -62,7 +62,7 @@ line level    source
   52   1      hold_code_IDAC=0;//код срабатывания
   53   1      //c_add_code_IDAC=0;//дополнительный подъем после срабатывания
   54   1      c_in_comp1=0;
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 2   
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 2   
 
   55   1      c_in_comp_total=0;
   56   1      F_run_sum=0;//1-выполняем суммирование
@@ -126,7 +126,7 @@ line level    source
  114   1      code_IDAC=0;    
  115   1      //IDA0=
  116   1      IDA0L=0;        
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 3   
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 3   
 
  117   1      IDA0H=0;
  118   1      set_tpic1();
@@ -190,7 +190,7 @@ line level    source
  176   1      WORD v_in_comp;
  177   1      
  178   1      //для сброса неполных
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 4   
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 4   
 
  179   1      if(F_first_step){
  180   2              F_first_step=0;
@@ -254,7 +254,7 @@ line level    source
  238   2      }
  239   1      else {
  240   2              c_in_comp_total=0;
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 5   
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 5   
 
  241   2              c_in_comp1=0;
  242   2              c_in_comp2=0;
@@ -318,7 +318,7 @@ line level    source
  300   3                      if(code_IDAC >63){
  301   4                              code_IDAC -=64;
  302   4                              //IDA0=code_IDAC;
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 6   
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 6   
 
  303   4                              Hi_code_IDAC=(code_IDAC >>8);   
  304   4                              IDA0L=code_IDAC & 0xFF;
@@ -382,7 +382,7 @@ line level    source
  362   4                                      sum_code_IDAC+=(code_IDAC>>6);//IDAC для интегрирования
  363   4                                      c_sum_code++;
  364   4                                      //F_run_sum=1;//1-выполняем суммирование
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 7   
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 7   
 
  365   4                                      F_rise_step_idac=0;//вниз
  366   4                                      code_IDAC -=64;
@@ -446,7 +446,7 @@ line level    source
  424   2              if(F_hold_data_idac){//1-выполнено запоминание
  425   3                      install_code_IDAC_1=hold_code_IDAC;
  426   3                      
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 8   
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 8   
 
  427   3                      //смотрим 2 диапазон
  428   3                      set_canal_test[0]=2;
@@ -510,7 +510,7 @@ line level    source
  486   3                      set_test_L2();
  487   3                      while(1){
  488   4                              test_in_comp();         
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 9   
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 9   
 
  489   4                              if(F_load_idac){//флаг на загрузку ступеньки
  490   5                                      F_load_idac=0;//флаг на загрузку ступеньки
@@ -574,7 +574,7 @@ line level    source
  548   5                                      step_test_L();
  549   5                                      PCA0CPH2  = 0;//reset wdt
  550   5                              }               
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 10  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 10  
 
  551   4                              //закончили тест одной линии
  552   4                              if(F_end_test)break;
@@ -638,7 +638,7 @@ line level    source
  610   4                      }               
  611   3                      
  612   3                      if(F_hold_data_idac){//1-выполнено запоминание
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 11  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 11  
 
  613   4                              install_code_IDAC_2=hold_code_IDAC;             
  614   4                              //выбираем значение
@@ -693,7 +693,7 @@ line level    source
  663   1      else return 1;  
  664   1      }
  665          
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 12  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 12  
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -757,7 +757,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0047 E0                MOVX    A,@DPTR
 0048 04                INC     A
 0049 F0                MOVX    @DPTR,A
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 13  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 13  
 
 004A 7006              JNZ     ?C0148
 004C 900000      E     MOV     DPTR,#c_in_comp_total
@@ -821,7 +821,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 49
 003E D200        E     SETB    F_rise_step_idac
                                            ; SOURCE LINE # 51
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 14  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 14  
 
 0040 C200        E     CLR     F_hold_data_idac
                                            ; SOURCE LINE # 52
@@ -885,7 +885,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0023 C200        E     CLR     idac_L1
                                            ; SOURCE LINE # 73
 0025 D200        E     SETB    idac_L2
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 15  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 15  
 
                                            ; SOURCE LINE # 74
 0027 C200        E     CLR     idac_L3
@@ -949,7 +949,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0000 E500        E     MOV     A,set_canal_test+02H
 0002 B40107            CJNE    A,#01H,?C0016
 0005 750001      E     MOV     range,#01H
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 16  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 16  
 
 0008 C200        E     CLR     gain_L3
 000A 8014              SJMP    ?C0017
@@ -1013,7 +1013,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0051 A3                INC     DPTR
 0052 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 129
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 17  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 17  
 
 0053 C200        E     CLR     F_run_sum
                                            ; SOURCE LINE # 130
@@ -1077,7 +1077,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0034 120000      E     LCALL   set_tpic1
                                            ; SOURCE LINE # 155
 0037 120000      E     LCALL   set_tpic2
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 18  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 18  
 
                                            ; SOURCE LINE # 156
 003A D200        E     SETB    F_run_test
@@ -1141,7 +1141,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0012 900000      E     MOV     DPTR,#c_in_comp2
 0015 F0                MOVX    @DPTR,A
 0016 A3                INC     DPTR
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 19  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 19  
 
 0017 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 185
@@ -1205,7 +1205,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 005D 9D                SUBB    A,R5
 005E EA                MOV     A,R2
 005F 9C                SUBB    A,R4
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 20  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 20  
 
 0060 4003              JC      $ + 5H
 0062 020000      R     LJMP    ?C0034
@@ -1269,7 +1269,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 00A8 FB                MOV     R3,A
 00A9 D3                SETB    C
 00AA 9F                SUBB    A,R7
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 21  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 21  
 
 00AB EA                MOV     A,R2
 00AC 9E                SUBB    A,R6
@@ -1333,7 +1333,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 00F2 4028              JC      ?C0043
                                            ; SOURCE LINE # 218
 00F4 EB                MOV     A,R3
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 22  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 22  
 
 00F5 9D                SUBB    A,R5
 00F6 FF                MOV     R7,A
@@ -1397,7 +1397,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 013A CE                XCH     A,R6
 013B C3                CLR     C
 013C 13                RRC     A
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 23  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 23  
 
 013D CE                XCH     A,R6
 013E 13                RRC     A
@@ -1461,7 +1461,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 238
 017D         ?C0049:
                                            ; SOURCE LINE # 239
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 24  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 24  
 
                                            ; SOURCE LINE # 240
 017D E4                CLR     A
@@ -1525,7 +1525,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 258
 01C1 30004A      E     JNB     F_rise_step_idac,?C0057
                                            ; SOURCE LINE # 260
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 25  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 25  
 
 01C4 30002E      E     JNB     F_in_comp_on,?C0058
                                            ; SOURCE LINE # 262
@@ -1589,7 +1589,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 288
 0200 020000      R     LJMP    ?C0164
 0203         ?C0062:
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 26  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 26  
 
                                            ; SOURCE LINE # 289
                                            ; SOURCE LINE # 291
@@ -1653,7 +1653,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0239 2500        E     ADD     A,sum_code_IDAC+01H
 023B F500        E     MOV     sum_code_IDAC+01H,A
 023D EE                MOV     A,R6
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 27  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 27  
 
 023E 3500        E     ADDC    A,sum_code_IDAC
 0240 F500        E     MOV     sum_code_IDAC,A
@@ -1717,7 +1717,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 341
 027B 22                RET     
 027C         ?C0073:
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 28  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 28  
 
                                            ; SOURCE LINE # 342
                                            ; SOURCE LINE # 343
@@ -1781,7 +1781,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 02B2 2500        E     ADD     A,code_IDAC+01H
 02B4 F500        E     MOV     code_IDAC+01H,A
 02B6 E4                CLR     A
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 29  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 29  
 
 02B7         ?C0169:
 02B7 3500        E     ADDC    A,code_IDAC
@@ -1845,7 +1845,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0021 120000      R     LCALL   set_test_L1
 0024         ?C0081:
                                            ; SOURCE LINE # 413
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 30  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 30  
 
                                            ; SOURCE LINE # 414
 0024 120000      R     LCALL   test_in_comp
@@ -1909,7 +1909,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 450
 0069 E500        E     MOV     A,install_code_IDAC_1
 006B F500        E     MOV     install_code_IDAC_1+01H,A
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 31  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 31  
 
 006D 750000      E     MOV     install_code_IDAC_1,#00H
                                            ; SOURCE LINE # 451
@@ -1973,7 +1973,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 00B0 850000      E     MOV     install_code_IDAC_1+01H,hold_code_IDAC+01H
                                            ; SOURCE LINE # 485
 00B3 750002      E     MOV     set_canal_test+01H,#02H
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 32  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 32  
 
                                            ; SOURCE LINE # 486
 00B6 120000      R     LCALL   set_test_L2
@@ -2037,7 +2037,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0100 F500        E     MOV     Status_SL+05H,A
                                            ; SOURCE LINE # 515
                                            ; SOURCE LINE # 517
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 33  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 33  
 
                                            ; SOURCE LINE # 518
                                            ; SOURCE LINE # 520
@@ -2101,7 +2101,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 555
 013F 300035      E     JNB     F_hold_data_idac,?C0108
                                            ; SOURCE LINE # 556
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 34  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 34  
 
                                            ; SOURCE LINE # 560
 0142 120000      R     LCALL   L?0171
@@ -2165,7 +2165,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 018B 120000      R     LCALL   step_test_L
                                            ; SOURCE LINE # 589
 018E E4                CLR     A
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 35  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 35  
 
 018F F5EC              MOV     PCA0CPH2,A
                                            ; SOURCE LINE # 590
@@ -2229,7 +2229,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 624
 01D5 E500        E     MOV     A,v_test
 01D7 B40212            CJNE    A,#02H,?C0122
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 36  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 36  
 
                                            ; SOURCE LINE # 625
 01DA 750002      E     MOV     Status_SL+09H,#02H
@@ -2293,7 +2293,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0009 9400              SUBB    A,#00H
 000B E500        E     MOV     A,install_code_IDAC_1
 000D 9402              SUBB    A,#02H
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 37  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 37  
 
 000F 400D              JC      ?C0137
 0011 E4                CLR     A
@@ -2357,7 +2357,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/10/2026 15:35:58 PAGE 38  
+C51 COMPILER V9.60.7.0   TEST_SL_IPCL                                                      06/11/2026 10:40:54 PAGE 38  
 
    CODE SIZE        =   1825    ----
    CONSTANT SIZE    =   ----    ----

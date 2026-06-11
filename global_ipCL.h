@@ -92,6 +92,7 @@ WORD xdata c_in_comp_total;
 
 //секундный таймер
 BYTE data c_10ms;//по 10мс до 1 сек
+int data footim;
 BYTE data c_seconds;//
 bit F_start_test_L1;
 bit F_start_test_L2;

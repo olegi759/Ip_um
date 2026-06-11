@@ -6,12 +6,12 @@
 
 void uart_0(void) interrupt 4{
 
-	P1 ^= 0x80;
 
 	if( RI0 ) {	// //флаг приема
 
 		RI0=0;		// Очистить флаг прерывания
 		v_PC = SBUF0;
+				
 		if(st_Rx_PC == RX_WAIT){//если ожидание новой посылки
 			if(v_PC == COD_START_RX_PC){				//получили Старт
 				st_Rx_PC =RX_START;
@@ -67,15 +67,17 @@ void uart_0(void) interrupt 4{
 				break;
 		   /**/
 		   case RX_CRC_1:
-				if(v_PC==CRC_Rx_PC.b[1])st_Rx_PC =RX_CRC_2;
+				//if(v_PC==CRC_Rx_PC.b[1])st_Rx_PC =RX_CRC_2;
+		   if(1)st_Rx_PC =RX_CRC_2;
 				else	st_Rx_PC = RX_WAIT;					  //ошибка суммы
 				return;
 
 			/**/
 			case RX_CRC_2:
-				if(v_PC==CRC_Rx_PC.b[0]){
-					F_run_com_PC=1;						//флаг на обработку команды компа
-				}
+//				if(v_PC==CRC_Rx_PC.b[0]){
+//					F_run_com_PC=1;						//флаг на обработку команды компа
+//				}
+			F_run_com_PC=1;
 				st_Rx_PC = RX_WAIT;				   //посылка получена
 				return;
 
@@ -133,7 +135,7 @@ void uart_0(void) interrupt 4{
 			
 				case TX_CRC_2:
 					 SBUF0 =CRC_Tx_PC.b[0];
-					F_run_com_PC = 1;
+					//F_run_com_PC = 1;
 					 st_Tx_PC=TX_END;
 					 return;
 				break;

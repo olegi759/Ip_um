@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/10/2026 15:35:58 PAGE 1   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/11/2026 10:40:53 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE INIT_IPCL
@@ -62,7 +62,7 @@ line level    source
   52   1      }
   53          
   54          //T1-8b,sis,uart 115200
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/10/2026 15:35:58 PAGE 2   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/11/2026 10:40:53 PAGE 2   
 
   55          //T2-16b,sis/12, 10ms
   56          //T3 16b,sis,500us dac//для смирнова 4ms(2ms прерыв *2 в прерывании)
@@ -126,7 +126,7 @@ line level    source
  114          {
  115   1          int i = 0;
  116   1          VDM0CN    = 0x80;
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/10/2026 15:35:58 PAGE 3   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/11/2026 10:40:53 PAGE 3   
 
  117   1          for (i = 0; i < 350; i++);  // Wait 100us for initialization
  118   1          RSTSRC    = 0x02;
@@ -176,44 +176,45 @@ line level    source
  162   1      c_in_comp3=0;
  163   1      c_in_comp4=0;
  164   1      c_10ms=0;//по 10мс до 1 сек
- 165   1      c_seconds=0;//
- 166   1      F_start_test_L1=0;
- 167   1      F_start_test_L2=0;
- 168   1      F_start_test_L3=0;
- 169   1      F_start_test_L4=0;
- 170   1      st_Rx_PC=0;
- 171   1      st_Tx_PC=0;
- 172   1      F_run_com_PC=0;
- 173   1      Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
- 174   1      Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
- 175   1      Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
- 176   1      Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;
- 177   1      F_div_f_start_dac=0;//для получения 4ms в прерывании
- 178   1      div_f_start_dac=0;
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/10/2026 15:35:58 PAGE 4   
+ 165   1      footim = 0;
+ 166   1      c_seconds=0;//
+ 167   1      F_start_test_L1=0;
+ 168   1      F_start_test_L2=0;
+ 169   1      F_start_test_L3=0;
+ 170   1      F_start_test_L4=0;
+ 171   1      st_Rx_PC=0;
+ 172   1      st_Tx_PC=0;
+ 173   1      F_run_com_PC=0;
+ 174   1      Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
+ 175   1      Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
+ 176   1      Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
+ 177   1      Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;
+ 178   1      F_div_f_start_dac=0;//для получения 4ms в прерывании
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/11/2026 10:40:53 PAGE 4   
 
- 179   1      
- 180   1      }
- 181          
- 182          //
- 183          void init_ipCL(void)
- 184          {
- 185   1              Oscillator_Init();
- 186   1              PCA_Init();
- 187   1              Timer_Init();
- 188   1              UART_Init();
- 189   1              Port_IO_Init();
- 190   1              DAC_Init();//??????
- 191   1              Reset_Sources_Init();
- 192   1              init_v();
- 193   1              Interrupts_Init();
- 194   1      }
- 195          
+ 179   1      div_f_start_dac=0;
+ 180   1      
+ 181   1      }
+ 182          
+ 183          //
+ 184          void init_ipCL(void)
+ 185          {
+ 186   1              Oscillator_Init();
+ 187   1              PCA_Init();
+ 188   1              Timer_Init();
+ 189   1              UART_Init();
+ 190   1              Port_IO_Init();
+ 191   1              DAC_Init();//??????
+ 192   1              Reset_Sources_Init();
+ 193   1              init_v();
+ 194   1              Interrupts_Init();
+ 195   1      }
  196          
  197          
  198          
  199          
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/10/2026 15:35:58 PAGE 5   
+ 200          
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/11/2026 10:40:53 PAGE 5   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -277,7 +278,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0008 C28B              CLR     IE1
                                            ; SOURCE LINE # 66
 000A C28A              CLR     IT1
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/10/2026 15:35:58 PAGE 6   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/11/2026 10:40:53 PAGE 6   
 
                                            ; SOURCE LINE # 67
 000C C289              CLR     IE0
@@ -341,7 +342,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 104
                                            ; SOURCE LINE # 105
 0000 53D9BF            ANL     PCA0MD,#0BFH
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/10/2026 15:35:58 PAGE 7   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/11/2026 10:40:53 PAGE 7   
 
                                            ; SOURCE LINE # 106
 0003 E4                CLR     A
@@ -405,7 +406,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 136
 0013 22                RET     
              ; FUNCTION Interrupts_Init (END)
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/10/2026 15:35:58 PAGE 8   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/11/2026 10:40:53 PAGE 8   
 
 
              ; FUNCTION init_v (BEGIN)
@@ -469,77 +470,80 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0044 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 164
 0045 F500        E     MOV     c_10ms,A
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/10/2026 15:35:58 PAGE 9   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/11/2026 10:40:53 PAGE 9   
 
                                            ; SOURCE LINE # 165
-0047 F500        E     MOV     c_seconds,A
+0047 F500        E     MOV     footim,A
+0049 F500        E     MOV     footim+01H,A
                                            ; SOURCE LINE # 166
-0049 C200        E     CLR     F_start_test_L1
+004B F500        E     MOV     c_seconds,A
                                            ; SOURCE LINE # 167
-004B C200        E     CLR     F_start_test_L2
+004D C200        E     CLR     F_start_test_L1
                                            ; SOURCE LINE # 168
-004D C200        E     CLR     F_start_test_L3
+004F C200        E     CLR     F_start_test_L2
                                            ; SOURCE LINE # 169
-004F C200        E     CLR     F_start_test_L4
+0051 C200        E     CLR     F_start_test_L3
                                            ; SOURCE LINE # 170
-0051 F500        E     MOV     st_Rx_PC,A
+0053 C200        E     CLR     F_start_test_L4
                                            ; SOURCE LINE # 171
-0053 F500        E     MOV     st_Tx_PC,A
+0055 F500        E     MOV     st_Rx_PC,A
                                            ; SOURCE LINE # 172
-0055 C200        E     CLR     F_run_com_PC
+0057 F500        E     MOV     st_Tx_PC,A
                                            ; SOURCE LINE # 173
-0057 F500        E     MOV     Status_SL+01H,A
-0059 F500        E     MOV     Status_SL+02H,A
-005B F500        E     MOV     Status_SL,A
+0059 C200        E     CLR     F_run_com_PC
                                            ; SOURCE LINE # 174
-005D F500        E     MOV     Status_SL+04H,A
-005F F500        E     MOV     Status_SL+05H,A
-0061 F500        E     MOV     Status_SL+03H,A
+005B F500        E     MOV     Status_SL+01H,A
+005D F500        E     MOV     Status_SL+02H,A
+005F F500        E     MOV     Status_SL,A
                                            ; SOURCE LINE # 175
-0063 F500        E     MOV     Status_SL+07H,A
-0065 F500        E     MOV     Status_SL+08H,A
-0067 F500        E     MOV     Status_SL+06H,A
+0061 F500        E     MOV     Status_SL+04H,A
+0063 F500        E     MOV     Status_SL+05H,A
+0065 F500        E     MOV     Status_SL+03H,A
                                            ; SOURCE LINE # 176
-0069 F500        E     MOV     Status_SL+0AH,A
-006B F500        E     MOV     Status_SL+0BH,A
-006D F500        E     MOV     Status_SL+09H,A
+0067 F500        E     MOV     Status_SL+07H,A
+0069 F500        E     MOV     Status_SL+08H,A
+006B F500        E     MOV     Status_SL+06H,A
                                            ; SOURCE LINE # 177
-006F C200        E     CLR     F_div_f_start_dac
+006D F500        E     MOV     Status_SL+0AH,A
+006F F500        E     MOV     Status_SL+0BH,A
+0071 F500        E     MOV     Status_SL+09H,A
                                            ; SOURCE LINE # 178
-0071 F500        E     MOV     div_f_start_dac,A
-                                           ; SOURCE LINE # 180
-0073 22                RET     
+0073 C200        E     CLR     F_div_f_start_dac
+                                           ; SOURCE LINE # 179
+0075 F500        E     MOV     div_f_start_dac,A
+                                           ; SOURCE LINE # 181
+0077 22                RET     
              ; FUNCTION init_v (END)
 
              ; FUNCTION init_ipCL (BEGIN)
-                                           ; SOURCE LINE # 183
                                            ; SOURCE LINE # 184
                                            ; SOURCE LINE # 185
-0000 120000      R     LCALL   Oscillator_Init
                                            ; SOURCE LINE # 186
-0003 120000      R     LCALL   PCA_Init
+0000 120000      R     LCALL   Oscillator_Init
                                            ; SOURCE LINE # 187
-0006 120000      R     LCALL   Timer_Init
+0003 120000      R     LCALL   PCA_Init
                                            ; SOURCE LINE # 188
-0009 120000      R     LCALL   UART_Init
+0006 120000      R     LCALL   Timer_Init
                                            ; SOURCE LINE # 189
-000C 120000      R     LCALL   Port_IO_Init
+0009 120000      R     LCALL   UART_Init
                                            ; SOURCE LINE # 190
-000F 120000      R     LCALL   DAC_Init
+000C 120000      R     LCALL   Port_IO_Init
                                            ; SOURCE LINE # 191
-0012 120000      R     LCALL   Reset_Sources_Init
+000F 120000      R     LCALL   DAC_Init
                                            ; SOURCE LINE # 192
-0015 120000      R     LCALL   init_v
+0012 120000      R     LCALL   Reset_Sources_Init
                                            ; SOURCE LINE # 193
+0015 120000      R     LCALL   init_v
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/11/2026 10:40:53 PAGE 10  
+
+                                           ; SOURCE LINE # 194
 0018 020000      R     LJMP    Interrupts_Init
              ; FUNCTION init_ipCL (END)
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/10/2026 15:35:58 PAGE 10  
-
 
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    307    ----
+   CODE SIZE        =    311    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

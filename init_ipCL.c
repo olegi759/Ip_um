@@ -162,6 +162,7 @@ c_in_comp2=0;
 c_in_comp3=0;
 c_in_comp4=0;
 c_10ms=0;//по 10мс до 1 сек
+footim = 0;
 c_seconds=0;//
 F_start_test_L1=0;
 F_start_test_L2=0;
