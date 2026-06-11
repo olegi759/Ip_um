@@ -44,7 +44,7 @@ P_tpic2_G=0;
 	
 EA=1;                  // Global Interrupt Enable	
 	
-//set_canal_test[0] = 1;	
+set_canal_test[0] = 1;	
 	
 	
 //Rx_command_PC = CMD_PC_READ_RELE_SL;
@@ -61,8 +61,6 @@ if(F_run_com_PC){
 	work_PC();	
 }
 //
-
-delay_ipCL(1000);
 //SBUF0 = 0xDA;
 
 

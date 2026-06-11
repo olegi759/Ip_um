@@ -166,14 +166,18 @@ void work_PC(void){
 		SBUF0 =COD_START_TX_PC;
 	break;
 	case CMD_PC_DEBUG_SL:
+		
+		 /*загружаем данные в буф передачи*/
+		 memcpy(&bufTX_PC[0],&Status_SL,n_byte_Tx_PC);
 		//ответ
 		 Tx_command_PC=CMD_PC_DEBUG_SL;
-		 n_byte_Tx_PC=4;
+		 n_byte_Tx_PC=4 + sizeof(struct _Status_SL);
 		 /*загружаем данные в буф передачи*/
 		 bufTX_PC[0]=(BYTE)(footim >> 8);
 		 bufTX_PC[1]=(BYTE)footim;
 		 bufTX_PC[2]=c_10ms;
 		 bufTX_PC[3]=c_seconds;
+		 memcpy(&bufTX_PC[4], &Status_SL, sizeof(struct _Status_SL));
 		 st_Tx_PC=TX_ADDRESS;
 		 Tx_counter_or_error=n_byte_Tx_PC;
 

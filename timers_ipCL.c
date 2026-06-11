@@ -18,7 +18,7 @@ void INT_Timer_2( void ) interrupt 5
 
 	TF2H=0;
 	
-	footim++;
+	
 	
 	if(c_10ms==0){
 		c_10ms=99;
@@ -48,7 +48,7 @@ void INT_Timer_3( void ) interrupt 14
 {
 
 	TMR3CN &=0x7F;//TF3H=0;
-	
+	footim++;
 	div_f_start_dac++;
 	if(div_f_start_dac >3){
 		div_f_start_dac=0;

@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 1   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE WORK_PC_IPCL
@@ -62,7 +62,7 @@ line level    source
   52   2                      //сброс старых
   53   2                      if(set_canal_test[0]==0){Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;}
   54   2                      if(set_canal_test[1]==0){Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;}
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 2   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 2   
 
   55   2                      if(set_canal_test[2]==0){Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;}
   56   2                      if(set_canal_test[3]==0){Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;}            
@@ -126,7 +126,7 @@ line level    source
  114   3                              RELE_L3_OFF;                                            
  115   3                      }
  116   2                      if(bufRX_PC[3]==0xFF){
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 3   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 3   
 
  117   3                              set_rele[3]=0xFF;
  118   3                              set_canal_test[3]=0;
@@ -180,27 +180,31 @@ line level    source
  166   2                      SBUF0 =COD_START_TX_PC;
  167   2              break;
  168   2              case CMD_PC_DEBUG_SL:
- 169   2                      //ответ
- 170   2                       Tx_command_PC=CMD_PC_DEBUG_SL;
- 171   2                       n_byte_Tx_PC=4;
- 172   2                       /*загружаем данные в буф передачи*/
- 173   2                       bufTX_PC[0]=(BYTE)(footim >> 8);
- 174   2                       bufTX_PC[1]=(BYTE)footim;
- 175   2                       bufTX_PC[2]=c_10ms;
- 176   2                       bufTX_PC[3]=c_seconds;
- 177   2                       st_Tx_PC=TX_ADDRESS;
- 178   2                       Tx_counter_or_error=n_byte_Tx_PC;
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 4   
+ 169   2                      
+ 170   2                       /*загружаем данные в буф передачи*/
+ 171   2                       memcpy(&bufTX_PC[0],&Status_SL,n_byte_Tx_PC);
+ 172   2                      //ответ
+ 173   2                       Tx_command_PC=CMD_PC_DEBUG_SL;
+ 174   2                       n_byte_Tx_PC=4 + sizeof(struct _Status_SL);
+ 175   2                       /*загружаем данные в буф передачи*/
+ 176   2                       bufTX_PC[0]=(BYTE)(footim >> 8);
+ 177   2                       bufTX_PC[1]=(BYTE)footim;
+ 178   2                       bufTX_PC[2]=c_10ms;
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 4   
 
- 179   2      
- 180   2                      SBUF0 =COD_START_TX_PC;
- 181   2              break;
- 182   2         }
- 183   1         
- 184   1      }
- 185          
- 186          
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 5   
+ 179   2                       bufTX_PC[3]=c_seconds;
+ 180   2                       memcpy(&bufTX_PC[4], &Status_SL, sizeof(struct _Status_SL));
+ 181   2                       st_Tx_PC=TX_ADDRESS;
+ 182   2                       Tx_counter_or_error=n_byte_Tx_PC;
+ 183   2      
+ 184   2                      SBUF0 =COD_START_TX_PC;
+ 185   2              break;
+ 186   2         }
+ 187   1         
+ 188   1      }
+ 189          
+ 190          
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 5   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -264,7 +268,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0054 7800        E     MOV     R0,#LOW bufTX_PC
 0056 7C00        E     MOV     R4,#HIGH bufTX_PC
 0058 7D01              MOV     R5,#01H
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 6   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 6   
 
 005A 7B00              MOV     R3,#00H
 005C 7A00        E     MOV     R2,#HIGH Status_SL
@@ -328,7 +332,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 00AC 750002      E     MOV     st_Tx_PC,#02H
                                            ; SOURCE LINE # 48
 00AF 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 7   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 7   
 
                                            ; SOURCE LINE # 50
 00B2 759923            MOV     SBUF0,#023H
@@ -392,7 +396,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 00FF F597              MOV     IDA0H,A
                                            ; SOURCE LINE # 71
                                            ; SOURCE LINE # 72
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 8   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 8   
 
                                            ; SOURCE LINE # 73
 0101 8005              SJMP    ?C0016
@@ -456,7 +460,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 013C D200        E     SETB    rele_L3
                                            ; SOURCE LINE # 102
 013E 300015      E     JNB     F_run_test,?C0024
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 9   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 9   
 
                                            ; SOURCE LINE # 103
 0141 E500        E     MOV     A,canal_test
@@ -520,7 +524,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 133
 017B C200        E     CLR     rele_L4
                                            ; SOURCE LINE # 134
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 10  
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 10  
 
 017D         ?C0028:
                                            ; SOURCE LINE # 136
@@ -578,55 +582,80 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 162
 01BB A3                INC     DPTR
 01BC E500        E     MOV     A,set_rele+03H
+01BE F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 163
                                            ; SOURCE LINE # 164
                                            ; SOURCE LINE # 166
                                            ; SOURCE LINE # 167
-01BE 8019              SJMP    ?C0033
-                                           ; SOURCE LINE # 168
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 10:40:53 PAGE 11  
+01BF 8043              SJMP    ?C0033
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 11  
 
-01C0         ?C0030:
-                                           ; SOURCE LINE # 170
-01C0 7500DD      E     MOV     Tx_command_PC,#0DDH
+                                           ; SOURCE LINE # 168
+01C1         ?C0030:
                                            ; SOURCE LINE # 171
-01C3 750004      E     MOV     n_byte_Tx_PC,#04H
+01C1 AF00        E     MOV     R7,n_byte_Tx_PC
+01C3 7E00              MOV     R6,#00H
+01C5 7800        E     MOV     R0,#LOW bufTX_PC
+01C7 7C00        E     MOV     R4,#HIGH bufTX_PC
+01C9 7D01              MOV     R5,#01H
+01CB 7B00              MOV     R3,#00H
+01CD 7A00        E     MOV     R2,#HIGH Status_SL
+01CF 7900        E     MOV     R1,#LOW Status_SL
+01D1 120000      E     LCALL   ?C?COPY
                                            ; SOURCE LINE # 173
-01C6 E500        E     MOV     A,footim
-01C8 FF                MOV     R7,A
-01C9 900000      E     MOV     DPTR,#bufTX_PC
-01CC EF                MOV     A,R7
-01CD F0                MOVX    @DPTR,A
+01D4 7500DD      E     MOV     Tx_command_PC,#0DDH
                                            ; SOURCE LINE # 174
-01CE A3                INC     DPTR
-01CF E500        E     MOV     A,footim+01H
-01D1 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 175
-01D2 A3                INC     DPTR
-01D3 E500        E     MOV     A,c_10ms
-01D5 F0                MOVX    @DPTR,A
+01D7 750010      E     MOV     n_byte_Tx_PC,#010H
                                            ; SOURCE LINE # 176
-01D6 A3                INC     DPTR
-01D7 E500        E     MOV     A,c_seconds
-01D9         ?C0033:
-01D9 F0                MOVX    @DPTR,A
+01DA E500        E     MOV     A,footim
+01DC FF                MOV     R7,A
+01DD 33                RLC     A
+01DE 95E0              SUBB    A,ACC
+01E0 900000      E     MOV     DPTR,#bufTX_PC
+01E3 EF                MOV     A,R7
+01E4 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 177
-01DA 750002      E     MOV     st_Tx_PC,#02H
+01E5 A3                INC     DPTR
+01E6 E500        E     MOV     A,footim+01H
+01E8 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 178
-01DD 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
+01E9 A3                INC     DPTR
+01EA E500        E     MOV     A,c_10ms
+01EC F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 179
+01ED A3                INC     DPTR
+01EE E500        E     MOV     A,c_seconds
+01F0 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 180
-01E0 759923            MOV     SBUF0,#023H
+01F1 7800        E     MOV     R0,#LOW bufTX_PC+04H
+01F3 7C00        E     MOV     R4,#HIGH bufTX_PC+04H
+01F5 7D01              MOV     R5,#01H
+01F7 7B00              MOV     R3,#00H
+01F9 7A00        E     MOV     R2,#HIGH Status_SL
+01FB 7900        E     MOV     R1,#LOW Status_SL
+01FD 7E00              MOV     R6,#00H
+01FF 7F0C              MOV     R7,#0CH
+0201 120000      E     LCALL   ?C?COPY
                                            ; SOURCE LINE # 181
+0204         ?C0033:
+0204 750002      E     MOV     st_Tx_PC,#02H
                                            ; SOURCE LINE # 182
+0207 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
                                            ; SOURCE LINE # 184
-01E3         ?C0031:
-01E3 22                RET     
+020A 759923            MOV     SBUF0,#023H
+                                           ; SOURCE LINE # 185
+                                           ; SOURCE LINE # 186
+                                           ; SOURCE LINE # 188
+020D         ?C0031:
+020D 22                RET     
              ; FUNCTION work_PC (END)
 
 
 
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/11/2026 15:31:23 PAGE 12  
+
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    484    ----
+   CODE SIZE        =    526    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
