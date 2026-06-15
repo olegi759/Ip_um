@@ -17,7 +17,7 @@ void INT_Timer_2( void ) interrupt 5
 	
 
 	TF2H=0;
-	
+	footim++;
 	
 	
 	if(c_10ms==0){
@@ -27,10 +27,10 @@ void INT_Timer_2( void ) interrupt 5
 		}
 		else c_seconds++;
 		
-		if(c_seconds==1)F_start_test_L1=1;//2
-		else if(c_seconds==21)F_start_test_L2=1;//14		
-		else if(c_seconds==41)F_start_test_L3=1;//26		
-		else if(c_seconds==61)F_start_test_L4=1;//38		
+		//if(c_seconds==1)F_start_test_L1=1;//2
+		//else if(c_seconds==21)F_start_test_L2=1;//14		
+		//else if(c_seconds==41)F_start_test_L3=1;//26		
+		//else if(c_seconds==61)F_start_test_L4=1;//38		
 	}
 	else c_10ms--;
 }
@@ -48,7 +48,6 @@ void INT_Timer_3( void ) interrupt 14
 {
 
 	TMR3CN &=0x7F;//TF3H=0;
-	footim++;
 	div_f_start_dac++;
 	if(div_f_start_dac >3){
 		div_f_start_dac=0;

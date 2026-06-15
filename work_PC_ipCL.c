@@ -34,26 +34,23 @@ void work_PC(void){
 		Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;	
 	break;	   
 	case CMD_PC_TEST_SL:
+		
+		TMR2CN = 0x04;
+		footim = 0;
+	
+		//сброс старых
+		Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
+		Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
+		Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
+		Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;
+	
 		set_canal_test[0]=bufRX_PC[0];
 		set_canal_test[1]=bufRX_PC[1];
 		set_canal_test[2]=bufRX_PC[2];
 		set_canal_test[3]=bufRX_PC[3];
 
-		//ответ
-		 Tx_command_PC=CMD_PC_TEST_SL;
-		 n_byte_Tx_PC=sizeof(struct _Status_SL);
-		 /*загружаем данные в буф передачи*/
-		 memcpy(&bufTX_PC[0],&Status_SL,n_byte_Tx_PC);
-		 st_Tx_PC=TX_ADDRESS;
-		 Tx_counter_or_error=n_byte_Tx_PC;
-
-		SBUF0 =COD_START_TX_PC;	
-	
-		//сброс старых
-		if(set_canal_test[0]==0){Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;}
-		if(set_canal_test[1]==0){Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;}
-		if(set_canal_test[2]==0){Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;}
-		if(set_canal_test[3]==0){Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;}		
+		set_f_start_test_Lx();
+				
 	break;	   
 	case CMD_PC_SET_RELE_SL:
 		if(bufRX_PC[0]==0xFF){
@@ -171,7 +168,7 @@ void work_PC(void){
 		 memcpy(&bufTX_PC[0],&Status_SL,n_byte_Tx_PC);
 		//ответ
 		 Tx_command_PC=CMD_PC_DEBUG_SL;
-		 n_byte_Tx_PC=4 + sizeof(struct _Status_SL);
+		 n_byte_Tx_PC= 4 + sizeof(struct _Status_SL);
 		 /*загружаем данные в буф передачи*/
 		 bufTX_PC[0]=(BYTE)(footim >> 8);
 		 bufTX_PC[1]=(BYTE)footim;
@@ -187,4 +184,31 @@ void work_PC(void){
    
 }
 
+void delayed_response_PC(){
+	switch(Rx_command_PC){
+		case CMD_PC_TEST_SL:
+			
+			// если все флаги нули, значит по всем линиям измерения закончились, можно отдавать результат
+			if(set_canal_test[0] != 0 || set_canal_test[1] != 0 || set_canal_test[2] != 0 || set_canal_test[3] != 0) return;
+		
+			Rx_command_PC = 0; // сбрасываем отложенный ответ
+		
+			//ответ
+			Tx_command_PC=CMD_PC_TEST_SL;
+			n_byte_Tx_PC=sizeof(struct _Status_SL);
+			/*загружаем данные в буф передачи*/
+			memcpy(&bufTX_PC[0],&Status_SL,n_byte_Tx_PC);
+			st_Tx_PC=TX_ADDRESS;
+			Tx_counter_or_error=n_byte_Tx_PC;
+
+			SBUF0 =COD_START_TX_PC;	
+			
+			TMR2CN = 0x00;
+		
+			break;
+		default:
+			break;
+		
+	}
+}
 

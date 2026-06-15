@@ -70,7 +70,8 @@ void Timer_Init()
     TMOD      = 0x20;//T1-8b,
     CKCON     = 0x48;//T3-sis,T0T1-sis/12
     TH1       = 0x96;
-    TMR2CN    = 0x04;//T2-sis/12,16b,on
+    //TMR2CN    = 0x04;//T2-sis/12,16b,on
+	TMR2CN    = 0x00;//T2-sis/12,16b,on
     TMR2RLL   = 0x3F;
     TMR2RLH   = 0xB0;
     TMR2L     = 0x3F;

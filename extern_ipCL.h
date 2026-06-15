@@ -97,6 +97,7 @@ extern WORD xdata c_in_comp_total;
 extern int data footim;
 extern BYTE data c_10ms;//по 10мс до 1 сек
 extern BYTE data c_seconds;//
+extern BYTE bdata F_start_test;
 extern bit F_start_test_L1;
 extern bit F_start_test_L2;
 extern bit F_start_test_L3;

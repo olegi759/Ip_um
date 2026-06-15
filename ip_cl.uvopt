@@ -151,7 +151,7 @@
           <Type>0</Type>
           <LineNumber>114</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>-16774317</Address>
+          <Address>-16774336</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -165,9 +165,9 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>107</LineNumber>
+          <LineNumber>66</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>-16774337</Address>
+          <Address>-16774409</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -181,16 +181,32 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>192</LineNumber>
+          <LineNumber>67</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>-16777062</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>TEST_SL_IPCL.C</Filename>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>D:\DA\1_УМ50-120-240\IP_UM_CL_v1_00\IP_UM_CL_v1_00\main_ipCL.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>115</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>D:\DA\1_УМ50-120-240\IP_UM_CL_v1_00\IP_UM_CL_v1_00\main_ipCL.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -231,7 +247,7 @@
         <Ww>
           <count>2</count>
           <WinNumber>2</WinNumber>
-          <ItemText>footim</ItemText>
+          <ItemText>footim,0x10</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
@@ -241,7 +257,7 @@
         <Ww>
           <count>4</count>
           <WinNumber>2</WinNumber>
-          <ItemText>set_canal_test[0]</ItemText>
+          <ItemText>set_canal_test</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>

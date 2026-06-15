@@ -11,6 +11,7 @@ void set_tpic1(void);
 void set_tpic2(void);
 //обработка команды
 void work_PC(void);
+void delayed_response_PC(void);
 //проверка входов с внешн компаратора
 void test_in_comp(void);
 //запуск тестирования
@@ -25,4 +26,4 @@ void install_SL(void);
 //выбор оптимального значения
 BYTE optimal_value_selection(void);
 
-
+void set_f_start_test_Lx(void);

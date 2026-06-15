@@ -94,10 +94,12 @@ WORD xdata c_in_comp_total;
 BYTE data c_10ms;//по 10мс до 1 сек
 int data footim;
 BYTE data c_seconds;//
-bit F_start_test_L1;
-bit F_start_test_L2;
-bit F_start_test_L3;
-bit F_start_test_L4;
+
+BYTE bdata F_start_test;
+	sbit F_start_test_L1 = F_start_test ^ 0;
+	sbit F_start_test_L2 = F_start_test ^ 1;
+	sbit F_start_test_L3 = F_start_test ^ 2;
+	sbit F_start_test_L4 = F_start_test ^ 3;
 
 //
 BYTE data v_test;

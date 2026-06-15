@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/11/2026 15:31:23 PAGE 1   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/15/2026 13:17:39 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE UART0_IPCL
@@ -62,7 +62,7 @@ line level    source
   52   5                                                      c_bufRX_PC = 0;                         //счет принятых
   53   5                                                      n_byte_Rx_PC = v_PC;            //байт данных в посылке
   54   5                                                      st_Rx_PC    = RX_DATA;
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/11/2026 15:31:23 PAGE 2   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/15/2026 13:17:39 PAGE 2   
 
   55   5                                              }
   56   4                                              else {
@@ -126,7 +126,7 @@ line level    source
  114   3                                      case TX_BYTECOUNT:
  115   3                                              SBUF0 =v_PC=Tx_counter_or_error;
  116   3                                              if(n_byte_Tx_PC){
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/11/2026 15:31:23 PAGE 3   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/15/2026 13:17:39 PAGE 3   
 
  117   4                                                      st_Tx_PC=TX_DATA;
  118   4                                                      c_bufTX_PC=0;
@@ -171,7 +171,7 @@ line level    source
  157   1      
  158   1      }
 *** WARNING C294 IN LINE 72 OF uart0_ipCL.c: unreachable code
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/11/2026 15:31:23 PAGE 4   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/15/2026 13:17:39 PAGE 4   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -235,7 +235,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 32
 0057 E500        E     MOV     A,v_PC
 0059 B4100D            CJNE    A,#010H,?C0009
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/11/2026 15:31:23 PAGE 5   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/15/2026 13:17:39 PAGE 5   
 
                                            ; SOURCE LINE # 33
 005C 75005B      E     MOV     CRC_Rx_PC,#05BH
@@ -299,7 +299,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0094 3400        E     ADDC    A,#HIGH bufRX_PC
 0096 F583              MOV     DPH,A
 0098 E500        E     MOV     A,v_PC
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/11/2026 15:31:23 PAGE 6   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/15/2026 13:17:39 PAGE 6   
 
 009A F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 65
@@ -363,7 +363,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 00E6 14                DEC     A
 00E7 602C              JZ      ?C0027
 00E9 14                DEC     A
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/11/2026 15:31:23 PAGE 7   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/15/2026 13:17:39 PAGE 7   
 
 00EA 603B              JZ      ?C0030
 00EC 14                DEC     A
@@ -427,7 +427,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 126
 0139 E500        E     MOV     A,c_bufTX_PC
 013B B50015      E     CJNE    A,n_byte_Tx_PC,?C0024
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/11/2026 15:31:23 PAGE 8   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/15/2026 13:17:39 PAGE 8   
 
 013E         ?C0040:
 013E 750006      E     MOV     st_Tx_PC,#06H
@@ -491,7 +491,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    389    ----
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/11/2026 15:31:23 PAGE 9   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/15/2026 13:17:39 PAGE 9   
 
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----

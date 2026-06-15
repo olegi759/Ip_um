@@ -44,9 +44,17 @@ P_tpic2_G=0;
 	
 EA=1;                  // Global Interrupt Enable	
 	
-set_canal_test[0] = 1;	
-	
-	
+//set_canal_test[0] = 1;	
+set_canal_test[0]=0x01;
+		set_canal_test[1]=0x01;
+		set_canal_test[2]=0x01;
+		set_canal_test[3]=0x01;
+set_f_start_test_Lx();
+Rx_command_PC = 0x02;
+//		F_start_test_L1 = set_canal_test[0];
+//		F_start_test_L2 = set_canal_test[1];
+//		F_start_test_L3 = set_canal_test[2];
+//		F_start_test_L4 = set_canal_test[3];	
 //Rx_command_PC = CMD_PC_READ_RELE_SL;
 //F_run_com_PC = 1;
 //++	
@@ -60,6 +68,8 @@ if(F_run_com_PC){
 	F_run_com_PC=0;
 	work_PC();	
 }
+
+delayed_response_PC();
 //
 //SBUF0 = 0xDA;
 
@@ -117,8 +127,9 @@ if(F_end_test){
 			}
 			IDAC_L1_OFF;
 			set_tpic1();
-			TMR2CN = 0;
-			set_canal_test[0] = 0;	
+			set_canal_test[0] = 0;
+			//TMR2CN = 0;
+			//set_canal_test[0] = 0;	
 			//тест линии конец
 		}			
 		else if(canal_test==2){
@@ -136,6 +147,7 @@ if(F_end_test){
 			}			
 			IDAC_L2_OFF;
 			set_tpic1();
+			set_canal_test[1] = 0;
 		}			
 		else if(canal_test==3){
 			if(F_hold_data_idac){//1-выполнено запоминание			
@@ -152,6 +164,7 @@ if(F_end_test){
 			}			
 			IDAC_L3_OFF;
 			set_tpic2();
+			set_canal_test[2] = 0;
 		}			
 		else if(canal_test==4){
 			if(F_hold_data_idac){//1-выполнено запоминание			
@@ -168,9 +181,10 @@ if(F_end_test){
 			}			
 			IDAC_L4_OFF;
 			set_tpic2();
+			set_canal_test[3] = 0;
 		}
 				
-	
+	set_f_start_test_Lx();
 
 	F_hold_data_idac=0;
 }
