@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 13:17:39 PAGE 1   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 16:09:00 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE INIT_IPCL
@@ -62,7 +62,7 @@ line level    source
   52   1      }
   53          
   54          //T1-8b,sis,uart 115200
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 13:17:39 PAGE 2   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 16:09:00 PAGE 2   
 
   55          //T2-16b,sis/12, 10ms
   56          //T3 16b,sis,500us dac//для смирнова 4ms(2ms прерыв *2 в прерывании)
@@ -126,7 +126,7 @@ line level    source
  114          void Reset_Sources_Init()
  115          {
  116   1          int i = 0;
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 13:17:39 PAGE 3   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 16:09:00 PAGE 3   
 
  117   1          VDM0CN    = 0x80;
  118   1          for (i = 0; i < 350; i++);  // Wait 100us for initialization
@@ -190,7 +190,7 @@ line level    source
  176   1      Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
  177   1      Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
  178   1      Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 13:17:39 PAGE 4   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 16:09:00 PAGE 4   
 
  179   1      F_div_f_start_dac=0;//для получения 4ms в прерывании
  180   1      div_f_start_dac=0;
@@ -215,7 +215,7 @@ line level    source
  199          
  200          
  201          
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 13:17:39 PAGE 5   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 16:09:00 PAGE 5   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -279,7 +279,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0008 C28B              CLR     IE1
                                            ; SOURCE LINE # 66
 000A C28A              CLR     IT1
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 13:17:39 PAGE 6   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 16:09:00 PAGE 6   
 
                                            ; SOURCE LINE # 67
 000C C289              CLR     IE0
@@ -343,7 +343,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 104
                                            ; SOURCE LINE # 105
                                            ; SOURCE LINE # 106
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 13:17:39 PAGE 7   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 16:09:00 PAGE 7   
 
 0000 53D9BF            ANL     PCA0MD,#0BFH
                                            ; SOURCE LINE # 107
@@ -407,7 +407,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0010 75E680            MOV     EIE1,#080H
                                            ; SOURCE LINE # 137
 0013 22                RET     
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 13:17:39 PAGE 8   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 16:09:00 PAGE 8   
 
              ; FUNCTION Interrupts_Init (END)
 
@@ -471,7 +471,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0043 A3                INC     DPTR
 0044 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 165
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 13:17:39 PAGE 9   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 16:09:00 PAGE 9   
 
 0045 F500        E     MOV     c_10ms,A
                                            ; SOURCE LINE # 166
@@ -535,7 +535,7 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 193
 0012 120000      R     LCALL   Reset_Sources_Init
                                            ; SOURCE LINE # 194
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 13:17:39 PAGE 10  
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/15/2026 16:09:00 PAGE 10  
 
 0015 120000      R     LCALL   init_v
                                            ; SOURCE LINE # 195

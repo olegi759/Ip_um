@@ -43,14 +43,18 @@ P_tpic1_G=0;//вкл
 P_tpic2_G=0;
 	
 EA=1;                  // Global Interrupt Enable	
-	
-//set_canal_test[0] = 1;	
-set_canal_test[0]=0x01;
-		set_canal_test[1]=0x01;
-		set_canal_test[2]=0x01;
-		set_canal_test[3]=0x01;
-set_f_start_test_Lx();
-Rx_command_PC = 0x02;
+F_delaed_response = 0;	
+//set_canal_test[0] = 1;
+//Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
+//		Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
+//		Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
+//		Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;	
+//set_canal_test[0]=0x01;
+//		set_canal_test[1]=0x01;
+//		set_canal_test[2]=0x00;
+//		set_canal_test[3]=0x01;
+//set_f_start_test_Lx();
+//Rx_command_PC = CMD_PC_TEST_SL;
 //		F_start_test_L1 = set_canal_test[0];
 //		F_start_test_L2 = set_canal_test[1];
 //		F_start_test_L3 = set_canal_test[2];
@@ -70,8 +74,6 @@ if(F_run_com_PC){
 }
 
 delayed_response_PC();
-//
-//SBUF0 = 0xDA;
 
 
 //выплонение шага тестирования

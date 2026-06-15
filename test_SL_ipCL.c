@@ -663,10 +663,10 @@ else return 1;
 }
 
 BYTE i = 0;
-void set_f_start_test_Lx(){
+void set_f_start_test_Lx(){	
 	for(i = 0; i < 4; ++i){
-		if(set_canal_test[i] != 0){
-			F_start_test |= (1 << i);
+		if(set_canal_test[i] != 0){			
+			F_start_test = (1 << i);
 			return;
 		}
 	}

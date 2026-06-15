@@ -128,6 +128,8 @@ BYTE xdata bufRX_PC[25];
 BYTE	data c_bufTX_PC;		//счетчик переданнх байт
 BYTE	data c_bufRX_PC;		//счетчик принятых байт
 
+bit F_delaed_response;
+
 //структуры обмена с пк
 struct _Status_SL		Status_SL;
 struct _Status_Rele_SL	Status_Rele_SL;
