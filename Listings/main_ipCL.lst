@@ -1,9 +1,9 @@
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 09:43:37 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN_IPCL
 OBJECT MODULE PLACED IN .\Objects\main_ipCL.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main_ipCL.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\Lis
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\Lis
                     -tings\main_ipCL.lst) OBJECT(.\Objects\main_ipCL.obj)
 
 line level    source
@@ -51,166 +51,171 @@ line level    source
   41   1      set_tpic2();
   42   1      P_tpic1_G=0;//вкл
   43   1      P_tpic2_G=0;
-  44   1              
-  45   1      EA=1;                  // Global Interrupt Enable       
-  46   1      F_delaed_response = 0;  
-  47   1      //set_canal_test[0] = 1;
-  48   1      //Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
-  49   1      //              Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
-  50   1      //              Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
-  51   1      //              Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;      
-  52   1      //set_canal_test[0]=0x01;
-  53   1      //              set_canal_test[1]=0x01;
-  54   1      //              set_canal_test[2]=0x00;
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 09:43:37 PAGE 2   
+  44   1      
+  45   1              
+  46   1      EA=1;                  // Global Interrupt Enable       
+  47   1      F_delaed_response = 0;  
+  48   1      //set_canal_test[0] = 1;
+  49   1      //Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
+  50   1      //              Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
+  51   1      //              Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
+  52   1      //              Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;      
+  53   1      //set_canal_test[0]=0x01;
+  54   1      //              set_canal_test[1]=0x01;
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 2   
 
-  55   1      //              set_canal_test[3]=0x01;
-  56   1      //set_f_start_test_Lx();
-  57   1      //Rx_command_PC = CMD_PC_TEST_SL;
-  58   1      //              F_start_test_L1 = set_canal_test[0];
-  59   1      //              F_start_test_L2 = set_canal_test[1];
-  60   1      //              F_start_test_L3 = set_canal_test[2];
-  61   1      //              F_start_test_L4 = set_canal_test[3];    
-  62   1      //Rx_command_PC = CMD_PC_READ_RELE_SL;
-  63   1      //F_run_com_PC = 1;
-  64   1      //++    
-  65   1      while(1){
-  66   2              
-  67   2      //++
-  68   2      
-  69   2      PCA0CPH2  = 0;//reset wdt
-  70   2      //      
-  71   2      if(F_run_com_PC){
-  72   3              F_run_com_PC=0;
-  73   3              work_PC();      
-  74   3      }
-  75   2      
-  76   2      delayed_response_PC();
-  77   2      
+  55   1      //              set_canal_test[2]=0x00;
+  56   1      //              set_canal_test[3]=0x01;
+  57   1      //set_f_start_test_Lx();
+  58   1      //Rx_command_PC = CMD_PC_TEST_SL;
+  59   1      //              F_start_test_L1 = set_canal_test[0];
+  60   1      //              F_start_test_L2 = set_canal_test[1];
+  61   1      //              F_start_test_L3 = set_canal_test[2];
+  62   1      //              F_start_test_L4 = set_canal_test[3];    
+  63   1      //Rx_command_PC = CMD_PC_READ_RELE_SL;
+  64   1      //F_run_com_PC = 1;
+  65   1      //++    
+  66   1      while(1){
+  67   2              
+  68   2      //++
+  69   2      
+  70   2      PCA0CPH2  = 0;//reset wdt
+  71   2      //      
+  72   2      if(F_run_com_PC){
+  73   3              F_run_com_PC=0;
+  74   3              work_PC();      
+  75   3      }
+  76   2      
+  77   2      delayed_response_PC();
   78   2      
-  79   2      //выплонение шага тестирования
-  80   2      if(F_run_test){//1-идет тест
-  81   3              test_in_comp();
-  82   3      
-  83   3              if(F_load_idac){//флаг на загрузку ступеньки
-  84   4                      F_load_idac=0;//флаг на загрузку ступеньки
-  85   4                      step_test_L();
-  86   4              }
-  87   3      }
-  88   2      else{
-  89   3              //запуск тестирования
-  90   3              if(F_start_test_L1){
-  91   4                      F_start_test_L1=0;
-  92   4                      set_test_L1();
-  93   4              }
-  94   3              //запуск тестирования
-  95   3              else if(F_start_test_L2){
-  96   4                      F_start_test_L2=0;
-  97   4                      set_test_L2();
-  98   4              }
-  99   3              //запуск тестирования
- 100   3              else if(F_start_test_L3){
- 101   4                      F_start_test_L3=0;
- 102   4                      set_test_L3();
- 103   4              }
- 104   3              //запуск тестирования
- 105   3              else if(F_start_test_L4){
- 106   4                      F_start_test_L4=0;
- 107   4                      set_test_L4();
- 108   4              }       
- 109   3              
- 110   3      }
- 111   2      
- 112   2      //закончили тест одной линии
- 113   2      if(F_end_test){
- 114   3              F_end_test=0;
- 115   3              PCA0CPH2  = 0;//reset wdt
- 116   3                      //переносим в буфер передачи
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 09:43:37 PAGE 3   
+  79   2      
+  80   2      //выплонение шага тестирования
+  81   2      if(F_run_test){//1-идет тест
+  82   3              test_in_comp();
+  83   3      
+  84   3              if(F_load_idac){//флаг на загрузку ступеньки
+  85   4                      F_load_idac=0;//флаг на загрузку ступеньки
+  86   4                      step_test_L();
+  87   4              }
+  88   3      }
+  89   2      else{
+  90   3              //запуск тестирования
+  91   3              if(F_start_test_L1){
+  92   4                      F_start_test_L1=0;
+  93   4                      set_test_L1();
+  94   4                      code_IDAC = DacStartValueLines.LineDac1;
+  95   4              }
+  96   3              //запуск тестирования
+  97   3              else if(F_start_test_L2){
+  98   4                      F_start_test_L2=0;
+  99   4                      set_test_L2();
+ 100   4                      code_IDAC = DacStartValueLines.LineDac2;
+ 101   4              }
+ 102   3              //запуск тестирования
+ 103   3              else if(F_start_test_L3){
+ 104   4                      F_start_test_L3=0;
+ 105   4                      set_test_L3();
+ 106   4                      code_IDAC = DacStartValueLines.LineDac3;
+ 107   4              }
+ 108   3              //запуск тестирования
+ 109   3              else if(F_start_test_L4){
+ 110   4                      F_start_test_L4=0;
+ 111   4                      set_test_L4();
+ 112   4                      code_IDAC = DacStartValueLines.LineDac4;
+ 113   4              }       
+ 114   3              
+ 115   3      }
+ 116   2      
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 3   
 
- 117   3                      if(canal_test==1){
- 118   4                              if(F_hold_data_idac){//1-выполнено запоминание
- 119   5                                      Status_SL.NRange1=range;
- 120   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
- 121   5                                      Status_SL.Data1_Lo=(hold_code_IDAC &0xFF);
- 122   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
- 123   5                                      Status_SL.Data1_Hi=(hold_code_IDAC &0xFF);
- 124   5                              }
- 125   4                              else{
- 126   5                                      Status_SL.NRange1=0;
- 127   5                                      Status_SL.Data1_Lo=0;
- 128   5                                      Status_SL.Data1_Hi=0;                           
+ 117   2      //закончили тест одной линии
+ 118   2      if(F_end_test){
+ 119   3              F_end_test=0;
+ 120   3              PCA0CPH2  = 0;//reset wdt
+ 121   3                      //переносим в буфер передачи
+ 122   3                      if(canal_test==1){
+ 123   4                              if(F_hold_data_idac){//1-выполнено запоминание
+ 124   5                                      Status_SL.NRange1=range;
+ 125   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
+ 126   5                                      Status_SL.Data1_Lo=(hold_code_IDAC &0xFF);
+ 127   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
+ 128   5                                      Status_SL.Data1_Hi=(hold_code_IDAC &0xFF);
  129   5                              }
- 130   4                              IDAC_L1_OFF;
- 131   4                              set_tpic1();
- 132   4                              set_canal_test[0] = 0;
- 133   4                              //TMR2CN = 0;
- 134   4                              //set_canal_test[0] = 0;        
- 135   4                              //тест линии конец
- 136   4                      }                       
- 137   3                      else if(canal_test==2){
- 138   4                              if(F_hold_data_idac){//1-выполнено запоминание
- 139   5                                      Status_SL.NRange2=range;
- 140   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
- 141   5                                      Status_SL.Data2_Lo=(hold_code_IDAC &0xFF);
- 142   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
- 143   5                                      Status_SL.Data2_Hi=(hold_code_IDAC &0xFF);
- 144   5                              }
- 145   4                              else{
- 146   5                                      Status_SL.NRange2=0;
- 147   5                                      Status_SL.Data2_Lo=0;
- 148   5                                      Status_SL.Data2_Hi=0;                           
- 149   5                              }                       
- 150   4                              IDAC_L2_OFF;
- 151   4                              set_tpic1();
- 152   4                              set_canal_test[1] = 0;
- 153   4                      }                       
- 154   3                      else if(canal_test==3){
- 155   4                              if(F_hold_data_idac){//1-выполнено запоминание                  
- 156   5                                      Status_SL.NRange3=range;
- 157   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
- 158   5                                      Status_SL.Data3_Lo=(hold_code_IDAC &0xFF);
- 159   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
- 160   5                                      Status_SL.Data3_Hi=(hold_code_IDAC &0xFF);
- 161   5                              }
- 162   4                              else{
- 163   5                                      Status_SL.NRange3=0;
- 164   5                                      Status_SL.Data3_Lo=0;
- 165   5                                      Status_SL.Data3_Hi=0;                           
- 166   5                              }                       
- 167   4                              IDAC_L3_OFF;
- 168   4                              set_tpic2();
- 169   4                              set_canal_test[2] = 0;
- 170   4                      }                       
- 171   3                      else if(canal_test==4){
- 172   4                              if(F_hold_data_idac){//1-выполнено запоминание                  
- 173   5                                      Status_SL.NRange4=range;
- 174   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
- 175   5                                      Status_SL.Data4_Lo=(hold_code_IDAC &0xFF);
- 176   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
- 177   5                                      Status_SL.Data4_Hi=(hold_code_IDAC &0xFF);
- 178   5                              }
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 09:43:37 PAGE 4   
+ 130   4                              else{
+ 131   5                                      Status_SL.NRange1=0;
+ 132   5                                      Status_SL.Data1_Lo=0;
+ 133   5                                      Status_SL.Data1_Hi=0;                           
+ 134   5                              }
+ 135   4                              IDAC_L1_OFF;
+ 136   4                              set_tpic1();
+ 137   4                              set_canal_test[0] = 0;
+ 138   4                              //TMR2CN = 0;
+ 139   4                              //set_canal_test[0] = 0;        
+ 140   4                              //тест линии конец
+ 141   4                      }                       
+ 142   3                      else if(canal_test==2){
+ 143   4                              if(F_hold_data_idac){//1-выполнено запоминание
+ 144   5                                      Status_SL.NRange2=range;
+ 145   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
+ 146   5                                      Status_SL.Data2_Lo=(hold_code_IDAC &0xFF);
+ 147   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
+ 148   5                                      Status_SL.Data2_Hi=(hold_code_IDAC &0xFF);
+ 149   5                              }
+ 150   4                              else{
+ 151   5                                      Status_SL.NRange2=0;
+ 152   5                                      Status_SL.Data2_Lo=0;
+ 153   5                                      Status_SL.Data2_Hi=0;                           
+ 154   5                              }                       
+ 155   4                              IDAC_L2_OFF;
+ 156   4                              set_tpic1();
+ 157   4                              set_canal_test[1] = 0;
+ 158   4                      }                       
+ 159   3                      else if(canal_test==3){
+ 160   4                              if(F_hold_data_idac){//1-выполнено запоминание                  
+ 161   5                                      Status_SL.NRange3=range;
+ 162   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
+ 163   5                                      Status_SL.Data3_Lo=(hold_code_IDAC &0xFF);
+ 164   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
+ 165   5                                      Status_SL.Data3_Hi=(hold_code_IDAC &0xFF);
+ 166   5                              }
+ 167   4                              else{
+ 168   5                                      Status_SL.NRange3=0;
+ 169   5                                      Status_SL.Data3_Lo=0;
+ 170   5                                      Status_SL.Data3_Hi=0;                           
+ 171   5                              }                       
+ 172   4                              IDAC_L3_OFF;
+ 173   4                              set_tpic2();
+ 174   4                              set_canal_test[2] = 0;
+ 175   4                      }                       
+ 176   3                      else if(canal_test==4){
+ 177   4                              if(F_hold_data_idac){//1-выполнено запоминание                  
+ 178   5                                      Status_SL.NRange4=range;
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 4   
 
- 179   4                              else{
- 180   5                                      Status_SL.NRange4=0;
- 181   5                                      Status_SL.Data4_Lo=0;
- 182   5                                      Status_SL.Data4_Hi=0;                           
- 183   5                              }                       
- 184   4                              IDAC_L4_OFF;
- 185   4                              set_tpic2();
- 186   4                              set_canal_test[3] = 0;
- 187   4                      }
- 188   3                                      
- 189   3              set_f_start_test_Lx();
- 190   3      
- 191   3              F_hold_data_idac=0;
- 192   3      }
- 193   2      
- 194   2      
- 195   2      }
- 196   1      }
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 09:43:37 PAGE 5   
+ 179   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
+ 180   5                                      Status_SL.Data4_Lo=(hold_code_IDAC &0xFF);
+ 181   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
+ 182   5                                      Status_SL.Data4_Hi=(hold_code_IDAC &0xFF);
+ 183   5                              }
+ 184   4                              else{
+ 185   5                                      Status_SL.NRange4=0;
+ 186   5                                      Status_SL.Data4_Lo=0;
+ 187   5                                      Status_SL.Data4_Hi=0;                           
+ 188   5                              }                       
+ 189   4                              IDAC_L4_OFF;
+ 190   4                              set_tpic2();
+ 191   4                              set_canal_test[3] = 0;
+ 192   4                      }
+ 193   3                                      
+ 194   3              set_f_start_test_Lx();
+ 195   3      
+ 196   3              F_hold_data_idac=0;
+ 197   3      }
+ 198   2      
+ 199   2      
+ 200   2      }
+ 201   1      }
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 5   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -242,271 +247,282 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
 0021 C294              CLR     P_tpic1_G
                                            ; SOURCE LINE # 43
 0023 C290              CLR     P_tpic2_G
-                                           ; SOURCE LINE # 45
-0025 D2AF              SETB    EA
                                            ; SOURCE LINE # 46
+0025 D2AF              SETB    EA
+                                           ; SOURCE LINE # 47
 0027 C200        R     CLR     F_delaed_response
 0029         ?C0001:
-                                           ; SOURCE LINE # 65
-                                           ; SOURCE LINE # 69
-0029 E4                CLR     A
-002A F5EC              MOV     PCA0CPH2,A
-                                           ; SOURCE LINE # 71
-002C 300005      R     JNB     F_run_com_PC,?C0003
+                                           ; SOURCE LINE # 66
+                                           ; SOURCE LINE # 70
+0029 75EC00            MOV     PCA0CPH2,#00H
                                            ; SOURCE LINE # 72
-002F C200        R     CLR     F_run_com_PC
+002C 300005      R     JNB     F_run_com_PC,?C0003
                                            ; SOURCE LINE # 73
-0031 120000      E     LCALL   work_PC
+002F C200        R     CLR     F_run_com_PC
                                            ; SOURCE LINE # 74
+0031 120000      E     LCALL   work_PC
+                                           ; SOURCE LINE # 75
 0034         ?C0003:
-                                           ; SOURCE LINE # 76
+                                           ; SOURCE LINE # 77
 0034 120000      E     LCALL   delayed_response_PC
-                                           ; SOURCE LINE # 80
-0037 30000D      R     JNB     F_run_test,?C0004
                                            ; SOURCE LINE # 81
+0037 30000D      R     JNB     F_run_test,?C0004
+                                           ; SOURCE LINE # 82
 003A 120000      E     LCALL   test_in_comp
-                                           ; SOURCE LINE # 83
-003D 30002D      R     JNB     F_load_idac,?C0006
                                            ; SOURCE LINE # 84
-0040 C200        R     CLR     F_load_idac
+003D 300045      R     JNB     F_load_idac,?C0006
                                            ; SOURCE LINE # 85
-0042 120000      E     LCALL   step_test_L
+0040 C200        R     CLR     F_load_idac
                                            ; SOURCE LINE # 86
+0042 120000      E     LCALL   step_test_L
                                            ; SOURCE LINE # 87
-0045 8026              SJMP    ?C0006
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 09:43:37 PAGE 6   
-
-0047         ?C0004:
                                            ; SOURCE LINE # 88
-                                           ; SOURCE LINE # 90
-0047 300007      R     JNB     F_start_test_L1,?C0007
-                                           ; SOURCE LINE # 91
-004A C200        R     CLR     F_start_test_L1
-                                           ; SOURCE LINE # 92
-004C 120000      E     LCALL   set_test_L1
-                                           ; SOURCE LINE # 93
-004F 801C              SJMP    ?C0006
-0051         ?C0007:
-                                           ; SOURCE LINE # 95
-0051 300007      R     JNB     F_start_test_L2,?C0009
-                                           ; SOURCE LINE # 96
-0054 C200        R     CLR     F_start_test_L2
-                                           ; SOURCE LINE # 97
-0056 120000      E     LCALL   set_test_L2
-                                           ; SOURCE LINE # 98
-0059 8012              SJMP    ?C0006
-005B         ?C0009:
-                                           ; SOURCE LINE # 100
-005B 300007      R     JNB     F_start_test_L3,?C0011
-                                           ; SOURCE LINE # 101
-005E C200        R     CLR     F_start_test_L3
-                                           ; SOURCE LINE # 102
-0060 120000      E     LCALL   set_test_L3
-                                           ; SOURCE LINE # 103
-0063 8008              SJMP    ?C0006
-0065         ?C0011:
-                                           ; SOURCE LINE # 105
-0065 300005      R     JNB     F_start_test_L4,?C0006
-                                           ; SOURCE LINE # 106
-0068 C200        R     CLR     F_start_test_L4
-                                           ; SOURCE LINE # 107
-006A 120000      E     LCALL   set_test_L4
-                                           ; SOURCE LINE # 108
-                                           ; SOURCE LINE # 110
-006D         ?C0006:
-                                           ; SOURCE LINE # 113
-006D 3000B9      R     JNB     F_end_test,?C0001
-                                           ; SOURCE LINE # 114
-0070 C200        R     CLR     F_end_test
-                                           ; SOURCE LINE # 115
-0072 E4                CLR     A
-0073 F5EC              MOV     PCA0CPH2,A
-                                           ; SOURCE LINE # 117
-0075 E500        R     MOV     A,canal_test
-0077 6401              XRL     A,#01H
-0079 7029              JNZ     ?C0015
-                                           ; SOURCE LINE # 118
-007B 300014      R     JNB     F_hold_data_idac,?C0016
-                                           ; SOURCE LINE # 119
-007E 850000      R     MOV     Status_SL,range
-                                           ; SOURCE LINE # 121
-0081 E500        R     MOV     A,hold_code_IDAC+01H
-0083 F500        R     MOV     Status_SL+01H,A
-                                           ; SOURCE LINE # 122
-0085 E500        R     MOV     A,hold_code_IDAC
-0087 F500        R     MOV     hold_code_IDAC+01H,A
-0089 750000      R     MOV     hold_code_IDAC,#00H
-                                           ; SOURCE LINE # 123
-008C E500        R     MOV     A,hold_code_IDAC+01H
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 09:43:37 PAGE 7   
+0045 803E              SJMP    ?C0006
+0047         ?C0004:
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 6   
 
-008E F500        R     MOV     Status_SL+02H,A
+                                           ; SOURCE LINE # 89
+                                           ; SOURCE LINE # 91
+0047 30000D      R     JNB     F_start_test_L1,?C0007
+                                           ; SOURCE LINE # 92
+004A C200        R     CLR     F_start_test_L1
+                                           ; SOURCE LINE # 93
+004C 120000      E     LCALL   set_test_L1
+                                           ; SOURCE LINE # 94
+004F 850000      R     MOV     code_IDAC,DacStartValueLines
+0052 850000      R     MOV     code_IDAC+01H,DacStartValueLines+01H
+                                           ; SOURCE LINE # 95
+0055 802E              SJMP    ?C0006
+0057         ?C0007:
+                                           ; SOURCE LINE # 97
+0057 30000D      R     JNB     F_start_test_L2,?C0009
+                                           ; SOURCE LINE # 98
+005A C200        R     CLR     F_start_test_L2
+                                           ; SOURCE LINE # 99
+005C 120000      E     LCALL   set_test_L2
+                                           ; SOURCE LINE # 100
+005F 850000      R     MOV     code_IDAC,DacStartValueLines+02H
+0062 850000      R     MOV     code_IDAC+01H,DacStartValueLines+03H
+                                           ; SOURCE LINE # 101
+0065 801E              SJMP    ?C0006
+0067         ?C0009:
+                                           ; SOURCE LINE # 103
+0067 30000D      R     JNB     F_start_test_L3,?C0011
+                                           ; SOURCE LINE # 104
+006A C200        R     CLR     F_start_test_L3
+                                           ; SOURCE LINE # 105
+006C 120000      E     LCALL   set_test_L3
+                                           ; SOURCE LINE # 106
+006F 850000      R     MOV     code_IDAC,DacStartValueLines+04H
+0072 850000      R     MOV     code_IDAC+01H,DacStartValueLines+05H
+                                           ; SOURCE LINE # 107
+0075 800E              SJMP    ?C0006
+0077         ?C0011:
+                                           ; SOURCE LINE # 109
+0077 30000B      R     JNB     F_start_test_L4,?C0006
+                                           ; SOURCE LINE # 110
+007A C200        R     CLR     F_start_test_L4
+                                           ; SOURCE LINE # 111
+007C 120000      E     LCALL   set_test_L4
+                                           ; SOURCE LINE # 112
+007F 850000      R     MOV     code_IDAC,DacStartValueLines+06H
+0082 850000      R     MOV     code_IDAC+01H,DacStartValueLines+07H
+                                           ; SOURCE LINE # 113
+                                           ; SOURCE LINE # 115
+0085         ?C0006:
+                                           ; SOURCE LINE # 118
+0085 3000A1      R     JNB     F_end_test,?C0001
+                                           ; SOURCE LINE # 119
+0088 C200        R     CLR     F_end_test
+                                           ; SOURCE LINE # 120
+008A 75EC00            MOV     PCA0CPH2,#00H
+                                           ; SOURCE LINE # 122
+008D E500        R     MOV     A,canal_test
+008F 6401              XRL     A,#01H
+0091 702D              JNZ     ?C0015
+                                           ; SOURCE LINE # 123
+0093 300016      R     JNB     F_hold_data_idac,?C0016
                                            ; SOURCE LINE # 124
-0090 8007              SJMP    ?C0017
-0092         ?C0016:
-                                           ; SOURCE LINE # 125
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 7   
+
+0096 850000      R     MOV     Status_SL,range
                                            ; SOURCE LINE # 126
-0092 E4                CLR     A
-0093 F500        R     MOV     Status_SL,A
+0099 AF00        R     MOV     R7,hold_code_IDAC+01H
+009B EF                MOV     A,R7
+009C F500        R     MOV     Status_SL+01H,A
                                            ; SOURCE LINE # 127
-0095 F500        R     MOV     Status_SL+01H,A
+009E E500        R     MOV     A,hold_code_IDAC
+00A0 F500        R     MOV     hold_code_IDAC+01H,A
+00A2 750000      R     MOV     hold_code_IDAC,#00H
                                            ; SOURCE LINE # 128
-0097 F500        R     MOV     Status_SL+02H,A
+00A5 AF00        R     MOV     R7,hold_code_IDAC+01H
+00A7 EF                MOV     A,R7
+00A8 F500        R     MOV     Status_SL+02H,A
                                            ; SOURCE LINE # 129
-0099         ?C0017:
+00AA 8009              SJMP    ?C0017
+00AC         ?C0016:
                                            ; SOURCE LINE # 130
-0099 C200        R     CLR     idac_L1
                                            ; SOURCE LINE # 131
-009B 120000      E     LCALL   set_tpic1
+00AC 750000      R     MOV     Status_SL,#00H
                                            ; SOURCE LINE # 132
-009E E4                CLR     A
-009F F500        R     MOV     set_canal_test,A
+00AF 750000      R     MOV     Status_SL+01H,#00H
+                                           ; SOURCE LINE # 133
+00B2 750000      R     MOV     Status_SL+02H,#00H
+                                           ; SOURCE LINE # 134
+00B5         ?C0017:
+                                           ; SOURCE LINE # 135
+00B5 C200        R     CLR     idac_L1
                                            ; SOURCE LINE # 136
-00A1 020000      R     LJMP    ?C0018
-00A4         ?C0015:
+00B7 120000      E     LCALL   set_tpic1
                                            ; SOURCE LINE # 137
-00A4 E500        R     MOV     A,canal_test
-00A6 6402              XRL     A,#02H
-00A8 7028              JNZ     ?C0019
-                                           ; SOURCE LINE # 138
-00AA 300014      R     JNB     F_hold_data_idac,?C0020
-                                           ; SOURCE LINE # 139
-00AD 850000      R     MOV     Status_SL+03H,range
+00BA 750000      R     MOV     set_canal_test,#00H
                                            ; SOURCE LINE # 141
-00B0 E500        R     MOV     A,hold_code_IDAC+01H
-00B2 F500        R     MOV     Status_SL+04H,A
+00BD 020000      R     LJMP    ?C0018
+00C0         ?C0015:
                                            ; SOURCE LINE # 142
-00B4 E500        R     MOV     A,hold_code_IDAC
-00B6 F500        R     MOV     hold_code_IDAC+01H,A
-00B8 750000      R     MOV     hold_code_IDAC,#00H
+00C0 E500        R     MOV     A,canal_test
+00C2 6402              XRL     A,#02H
+00C4 702C              JNZ     ?C0019
                                            ; SOURCE LINE # 143
-00BB E500        R     MOV     A,hold_code_IDAC+01H
-00BD F500        R     MOV     Status_SL+05H,A
+00C6 300016      R     JNB     F_hold_data_idac,?C0020
                                            ; SOURCE LINE # 144
-00BF 8007              SJMP    ?C0021
-00C1         ?C0020:
-                                           ; SOURCE LINE # 145
+00C9 850000      R     MOV     Status_SL+03H,range
                                            ; SOURCE LINE # 146
-00C1 E4                CLR     A
-00C2 F500        R     MOV     Status_SL+03H,A
+00CC AF00        R     MOV     R7,hold_code_IDAC+01H
+00CE EF                MOV     A,R7
+00CF F500        R     MOV     Status_SL+04H,A
                                            ; SOURCE LINE # 147
-00C4 F500        R     MOV     Status_SL+04H,A
+00D1 E500        R     MOV     A,hold_code_IDAC
+00D3 F500        R     MOV     hold_code_IDAC+01H,A
+00D5 750000      R     MOV     hold_code_IDAC,#00H
                                            ; SOURCE LINE # 148
-00C6 F500        R     MOV     Status_SL+05H,A
+00D8 AF00        R     MOV     R7,hold_code_IDAC+01H
+00DA EF                MOV     A,R7
+00DB F500        R     MOV     Status_SL+05H,A
                                            ; SOURCE LINE # 149
-00C8         ?C0021:
+00DD 8009              SJMP    ?C0021
+00DF         ?C0020:
                                            ; SOURCE LINE # 150
-00C8 C200        R     CLR     idac_L2
                                            ; SOURCE LINE # 151
-00CA 120000      E     LCALL   set_tpic1
+00DF 750000      R     MOV     Status_SL+03H,#00H
                                            ; SOURCE LINE # 152
-00CD E4                CLR     A
-00CE F500        R     MOV     set_canal_test+01H,A
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 09:43:37 PAGE 8   
+00E2 750000      R     MOV     Status_SL+04H,#00H
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 8   
 
                                            ; SOURCE LINE # 153
-00D0 805A              SJMP    ?C0018
-00D2         ?C0019:
+00E5 750000      R     MOV     Status_SL+05H,#00H
                                            ; SOURCE LINE # 154
-00D2 E500        R     MOV     A,canal_test
-00D4 6403              XRL     A,#03H
-00D6 7028              JNZ     ?C0023
+00E8         ?C0021:
                                            ; SOURCE LINE # 155
-00D8 300014      R     JNB     F_hold_data_idac,?C0024
+00E8 C200        R     CLR     idac_L2
                                            ; SOURCE LINE # 156
-00DB 850000      R     MOV     Status_SL+06H,range
+00EA 120000      E     LCALL   set_tpic1
+                                           ; SOURCE LINE # 157
+00ED 750000      R     MOV     set_canal_test+01H,#00H
                                            ; SOURCE LINE # 158
-00DE E500        R     MOV     A,hold_code_IDAC+01H
-00E0 F500        R     MOV     Status_SL+07H,A
+00F0 8062              SJMP    ?C0018
+00F2         ?C0019:
                                            ; SOURCE LINE # 159
-00E2 E500        R     MOV     A,hold_code_IDAC
-00E4 F500        R     MOV     hold_code_IDAC+01H,A
-00E6 750000      R     MOV     hold_code_IDAC,#00H
+00F2 E500        R     MOV     A,canal_test
+00F4 6403              XRL     A,#03H
+00F6 702C              JNZ     ?C0023
                                            ; SOURCE LINE # 160
-00E9 E500        R     MOV     A,hold_code_IDAC+01H
-00EB F500        R     MOV     Status_SL+08H,A
+00F8 300016      R     JNB     F_hold_data_idac,?C0024
                                            ; SOURCE LINE # 161
-00ED 8007              SJMP    ?C0025
-00EF         ?C0024:
-                                           ; SOURCE LINE # 162
+00FB 850000      R     MOV     Status_SL+06H,range
                                            ; SOURCE LINE # 163
-00EF E4                CLR     A
-00F0 F500        R     MOV     Status_SL+06H,A
+00FE AF00        R     MOV     R7,hold_code_IDAC+01H
+0100 EF                MOV     A,R7
+0101 F500        R     MOV     Status_SL+07H,A
                                            ; SOURCE LINE # 164
-00F2 F500        R     MOV     Status_SL+07H,A
+0103 E500        R     MOV     A,hold_code_IDAC
+0105 F500        R     MOV     hold_code_IDAC+01H,A
+0107 750000      R     MOV     hold_code_IDAC,#00H
                                            ; SOURCE LINE # 165
-00F4 F500        R     MOV     Status_SL+08H,A
+010A AF00        R     MOV     R7,hold_code_IDAC+01H
+010C EF                MOV     A,R7
+010D F500        R     MOV     Status_SL+08H,A
                                            ; SOURCE LINE # 166
-00F6         ?C0025:
+010F 8009              SJMP    ?C0025
+0111         ?C0024:
                                            ; SOURCE LINE # 167
-00F6 C200        R     CLR     idac_L3
                                            ; SOURCE LINE # 168
-00F8 120000      E     LCALL   set_tpic2
+0111 750000      R     MOV     Status_SL+06H,#00H
                                            ; SOURCE LINE # 169
-00FB E4                CLR     A
-00FC F500        R     MOV     set_canal_test+02H,A
+0114 750000      R     MOV     Status_SL+07H,#00H
                                            ; SOURCE LINE # 170
-00FE 802C              SJMP    ?C0018
-0100         ?C0023:
+0117 750000      R     MOV     Status_SL+08H,#00H
                                            ; SOURCE LINE # 171
-0100 E500        R     MOV     A,canal_test
-0102 6404              XRL     A,#04H
-0104 7026              JNZ     ?C0018
+011A         ?C0025:
                                            ; SOURCE LINE # 172
-0106 300014      R     JNB     F_hold_data_idac,?C0028
+011A C200        R     CLR     idac_L3
                                            ; SOURCE LINE # 173
-0109 850000      R     MOV     Status_SL+09H,range
+011C 120000      E     LCALL   set_tpic2
+                                           ; SOURCE LINE # 174
+011F 750000      R     MOV     set_canal_test+02H,#00H
                                            ; SOURCE LINE # 175
-010C E500        R     MOV     A,hold_code_IDAC+01H
-010E F500        R     MOV     Status_SL+0AH,A
+0122 8030              SJMP    ?C0018
+0124         ?C0023:
                                            ; SOURCE LINE # 176
-0110 E500        R     MOV     A,hold_code_IDAC
-0112 F500        R     MOV     hold_code_IDAC+01H,A
-0114 750000      R     MOV     hold_code_IDAC,#00H
+0124 E500        R     MOV     A,canal_test
+0126 6404              XRL     A,#04H
+0128 702A              JNZ     ?C0018
                                            ; SOURCE LINE # 177
-0117 E500        R     MOV     A,hold_code_IDAC+01H
-0119 F500        R     MOV     Status_SL+0BH,A
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 09:43:37 PAGE 9   
-
+012A 300016      R     JNB     F_hold_data_idac,?C0028
                                            ; SOURCE LINE # 178
-011B 8007              SJMP    ?C0029
-011D         ?C0028:
-                                           ; SOURCE LINE # 179
+012D 850000      R     MOV     Status_SL+09H,range
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 9   
+
                                            ; SOURCE LINE # 180
-011D E4                CLR     A
-011E F500        R     MOV     Status_SL+09H,A
+0130 AF00        R     MOV     R7,hold_code_IDAC+01H
+0132 EF                MOV     A,R7
+0133 F500        R     MOV     Status_SL+0AH,A
                                            ; SOURCE LINE # 181
-0120 F500        R     MOV     Status_SL+0AH,A
+0135 E500        R     MOV     A,hold_code_IDAC
+0137 F500        R     MOV     hold_code_IDAC+01H,A
+0139 750000      R     MOV     hold_code_IDAC,#00H
                                            ; SOURCE LINE # 182
-0122 F500        R     MOV     Status_SL+0BH,A
+013C AF00        R     MOV     R7,hold_code_IDAC+01H
+013E EF                MOV     A,R7
+013F F500        R     MOV     Status_SL+0BH,A
                                            ; SOURCE LINE # 183
-0124         ?C0029:
+0141 8009              SJMP    ?C0029
+0143         ?C0028:
                                            ; SOURCE LINE # 184
-0124 C200        R     CLR     idac_L4
                                            ; SOURCE LINE # 185
-0126 120000      E     LCALL   set_tpic2
+0143 750000      R     MOV     Status_SL+09H,#00H
                                            ; SOURCE LINE # 186
-0129 E4                CLR     A
-012A F500        R     MOV     set_canal_test+03H,A
+0146 750000      R     MOV     Status_SL+0AH,#00H
                                            ; SOURCE LINE # 187
-012C         ?C0018:
+0149 750000      R     MOV     Status_SL+0BH,#00H
+                                           ; SOURCE LINE # 188
+014C         ?C0029:
                                            ; SOURCE LINE # 189
-012C 120000      E     LCALL   set_f_start_test_Lx
+014C C200        R     CLR     idac_L4
+                                           ; SOURCE LINE # 190
+014E 120000      E     LCALL   set_tpic2
                                            ; SOURCE LINE # 191
-012F C200        R     CLR     F_hold_data_idac
+0151 750000      R     MOV     set_canal_test+03H,#00H
                                            ; SOURCE LINE # 192
-                                           ; SOURCE LINE # 195
-0131 020000      R     LJMP    ?C0001
+0154         ?C0018:
+                                           ; SOURCE LINE # 194
+0154 120000      E     LCALL   set_f_start_test_Lx
+                                           ; SOURCE LINE # 196
+0157 C200        R     CLR     F_hold_data_idac
+                                           ; SOURCE LINE # 197
+                                           ; SOURCE LINE # 200
+0159 020000      R     LJMP    ?C0001
+015C 22                RET     
              ; FUNCTION main (END)
 
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    308    ----
+   CODE SIZE        =    349    ----
    CONSTANT SIZE    =    512    ----
    XDATA SIZE       =     60    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     67    ----
+   DATA SIZE        =     75    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =     11    ----
 END OF MODULE INFORMATION.

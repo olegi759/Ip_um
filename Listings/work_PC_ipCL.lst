@@ -1,9 +1,9 @@
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 1   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE WORK_PC_IPCL
 OBJECT MODULE PLACED IN .\Objects\work_PC_ipCL.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE work_PC_ipCL.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE work_PC_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\
                     -Listings\work_PC_ipCL.lst) OBJECT(.\Objects\work_PC_ipCL.obj)
 
 line level    source
@@ -62,7 +62,7 @@ line level    source
   52   2                      F_delaed_response = 1;
   53   2              
   54   2                      set_f_start_test_Lx();
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 2   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 2   
 
   55   2              
   56   2                      
@@ -126,7 +126,7 @@ line level    source
  114   3                              set_rele[2]=0;
  115   3                              RELE_L3_OFF;                                            
  116   3                      }
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 3   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 3   
 
  117   2                      if(bufRX_PC[3]==0xFF){
  118   3                              set_rele[3]=0xFF;
@@ -190,7 +190,7 @@ line level    source
  176   2                       bufTX_PC[0]=footim >> 8;
  177   2                       bufTX_PC[1]=footim & 0xFF;
  178   2                       bufTX_PC[2]=1;
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 4   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 4   
 
  179   2                       bufTX_PC[3]=5;
  180   2                       st_Tx_PC=TX_ADDRESS;
@@ -230,7 +230,7 @@ line level    source
  213   1              
  214   1      }
  215          
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 5   
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 5   
 
 ASSEMBLY LISTING OF GENERATED OBJECT CODE
 
@@ -239,453 +239,475 @@ ASSEMBLY LISTING OF GENERATED OBJECT CODE
                                            ; SOURCE LINE # 8
                                            ; SOURCE LINE # 10
 0000 E500        E     MOV     A,Rx_command_PC
-0002 24FE              ADD     A,#0FEH
-0004 7003              JNZ     $ + 5H
-0006 020000      R     LJMP    ?C0007
-0009 14                DEC     A
-000A 7003              JNZ     $ + 5H
-000C 020000      R     LJMP    ?C0008
-000F 14                DEC     A
-0010 7003              JNZ     $ + 5H
-0012 020000      R     LJMP    ?C0025
-0015 2427              ADD     A,#027H
-0017 7003              JNZ     $ + 5H
-0019 020000      R     LJMP    ?C0026
-001C 24DC              ADD     A,#0DCH
-001E 6003              JZ      $ + 5H
-0020 020000      R     LJMP    ?C0028
+0002 120000      E     LCALL   ?C?CCASE
+0005 0000        R     DW      ?C0002
+0007 01                DB      01H
+0008 0000        R     DW      ?C0007
+000A 02                DB      02H
+000B 0000        R     DW      ?C0008
+000D 03                DB      03H
+000E 0000        R     DW      ?C0025
+0010 04                DB      04H
+0011 0000        R     DW      ?C0026
+0013 DD                DB      0DDH
+0014 0000              DW      00H
+0016 0000        R     DW      ?C0028
                                            ; SOURCE LINE # 11
-0023         ?C0002:
+0018         ?C0002:
                                            ; SOURCE LINE # 12
-0023 E4                CLR     A
-0024 F500        E     MOV     set_install,A
+0018 750000      E     MOV     set_install,#00H
                                            ; SOURCE LINE # 13
-0026 900000      E     MOV     DPTR,#bufRX_PC
-0029 E0                MOVX    A,@DPTR
-002A B4FF02            CJNE    A,#0FFH,?C0003
-002D D200        E     SETB    install_cahal_1
-002F         ?C0003:
+001B 900000      E     MOV     DPTR,#bufRX_PC
+001E E0                MOVX    A,@DPTR
+001F FF                MOV     R7,A
+0020 B4FF02            CJNE    A,#0FFH,?C0003
+0023 D200        E     SETB    install_cahal_1
+0025         ?C0003:
                                            ; SOURCE LINE # 14
-002F 900000      E     MOV     DPTR,#bufRX_PC+01H
-0032 E0                MOVX    A,@DPTR
-0033 B4FF02            CJNE    A,#0FFH,?C0004
-0036 D200        E     SETB    install_cahal_2
-0038         ?C0004:
+0025 900000      E     MOV     DPTR,#bufRX_PC+01H
+0028 E0                MOVX    A,@DPTR
+0029 FF                MOV     R7,A
+002A B4FF02            CJNE    A,#0FFH,?C0004
+002D D200        E     SETB    install_cahal_2
+002F         ?C0004:
                                            ; SOURCE LINE # 15
-0038 900000      E     MOV     DPTR,#bufRX_PC+02H
-003B E0                MOVX    A,@DPTR
-003C B4FF02            CJNE    A,#0FFH,?C0005
-003F D200        E     SETB    install_cahal_3
-0041         ?C0005:
+002F 900000      E     MOV     DPTR,#bufRX_PC+02H
+0032 E0                MOVX    A,@DPTR
+0033 FF                MOV     R7,A
+0034 B4FF02            CJNE    A,#0FFH,?C0005
+0037 D200        E     SETB    install_cahal_3
+0039         ?C0005:
                                            ; SOURCE LINE # 16
-0041 900000      E     MOV     DPTR,#bufRX_PC+03H
-0044 E0                MOVX    A,@DPTR
-0045 B4FF02            CJNE    A,#0FFH,?C0006
-0048 D200        E     SETB    install_cahal_4
-004A         ?C0006:
+0039 900000      E     MOV     DPTR,#bufRX_PC+03H
+003C E0                MOVX    A,@DPTR
+003D FF                MOV     R7,A
+003E B4FF02            CJNE    A,#0FFH,?C0006
+0041 D200        E     SETB    install_cahal_4
+0043         ?C0006:
                                            ; SOURCE LINE # 19
-004A 120000      E     LCALL   install_SL
+0043 120000      E     LCALL   install_SL
                                            ; SOURCE LINE # 22
-004D 750001      E     MOV     Tx_command_PC,#01H
+0046 750001      E     MOV     Tx_command_PC,#01H
                                            ; SOURCE LINE # 23
-0050 75000C      E     MOV     n_byte_Tx_PC,#0CH
+0049 75000C      E     MOV     n_byte_Tx_PC,#0CH
                                            ; SOURCE LINE # 25
-0053 AF00        E     MOV     R7,n_byte_Tx_PC
-0055 7E00              MOV     R6,#00H
-0057 7800        E     MOV     R0,#LOW bufTX_PC
-0059 7C00        E     MOV     R4,#HIGH bufTX_PC
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 6   
+004C AF00        E     MOV     R7,n_byte_Tx_PC
+004E 7E00              MOV     R6,#00H
+0050 7B00              MOV     R3,#00H
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 6   
 
-005B 7D01              MOV     R5,#01H
-005D 7B00              MOV     R3,#00H
-005F 7A00        E     MOV     R2,#HIGH Status_SL
-0061 7900        E     MOV     R1,#LOW Status_SL
-0063 120000      E     LCALL   ?C?COPY
+0052 7A00        E     MOV     R2,#HIGH Status_SL
+0054 7900        E     MOV     R1,#LOW Status_SL
+0056 C003              PUSH    AR3
+0058 C002              PUSH    AR2
+005A C001              PUSH    AR1
+005C 0B                INC     R3
+005D 7A00        E     MOV     R2,#HIGH bufTX_PC
+005F 7900        E     MOV     R1,#LOW bufTX_PC
+0061 A801              MOV     R0,AR1
+0063 AC02              MOV     R4,AR2
+0065 7D01              MOV     R5,#01H
+0067 D001              POP     AR1
+0069 D002              POP     AR2
+006B D003              POP     AR3
+006D 120000      E     LCALL   ?C?COPY
                                            ; SOURCE LINE # 26
-0066 750002      E     MOV     st_Tx_PC,#02H
+0070 750002      E     MOV     st_Tx_PC,#02H
                                            ; SOURCE LINE # 27
-0069 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
+0073 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
                                            ; SOURCE LINE # 29
-006C 759923            MOV     SBUF0,#023H
+0076 759923            MOV     SBUF0,#023H
                                            ; SOURCE LINE # 31
-006F 750001      E     MOV     Status_SL+01H,#01H
-0072 750001      E     MOV     Status_SL+02H,#01H
-0075 750001      E     MOV     Status_SL,#01H
+0079 750001      E     MOV     Status_SL+01H,#01H
+007C 750001      E     MOV     Status_SL+02H,#01H
+007F 750001      E     MOV     Status_SL,#01H
                                            ; SOURCE LINE # 32
-0078 E4                CLR     A
-0079 F500        E     MOV     Status_SL+04H,A
-007B F500        E     MOV     Status_SL+05H,A
-007D F500        E     MOV     Status_SL+03H,A
+0082 750000      E     MOV     Status_SL+04H,#00H
+0085 750000      E     MOV     Status_SL+05H,#00H
+0088 750000      E     MOV     Status_SL+03H,#00H
                                            ; SOURCE LINE # 33
-007F F500        E     MOV     Status_SL+07H,A
-0081 F500        E     MOV     Status_SL+08H,A
-0083 F500        E     MOV     Status_SL+06H,A
+008B 750000      E     MOV     Status_SL+07H,#00H
+008E 750000      E     MOV     Status_SL+08H,#00H
+0091 750000      E     MOV     Status_SL+06H,#00H
                                            ; SOURCE LINE # 34
-0085 F500        E     MOV     Status_SL+0AH,A
-0087 F500        E     MOV     Status_SL+0BH,A
-0089 F500        E     MOV     Status_SL+09H,A
+0094 750000      E     MOV     Status_SL+0AH,#00H
+0097 750000      E     MOV     Status_SL+0BH,#00H
+009A 750000      E     MOV     Status_SL+09H,#00H
                                            ; SOURCE LINE # 35
-008B 22                RET     
+009D 22                RET     
                                            ; SOURCE LINE # 36
-008C         ?C0007:
+009E         ?C0007:
                                            ; SOURCE LINE # 38
-008C 75C804            MOV     TMR2CN,#04H
+009E 75C804            MOV     TMR2CN,#04H
                                            ; SOURCE LINE # 39
-008F E4                CLR     A
-0090 F500        E     MOV     footim,A
-0092 F500        E     MOV     footim+01H,A
+00A1 750000      E     MOV     footim,#00H
+00A4 750000      E     MOV     footim+01H,#00H
                                            ; SOURCE LINE # 42
-0094 F500        E     MOV     Status_SL+01H,A
-0096 F500        E     MOV     Status_SL+02H,A
-0098 F500        E     MOV     Status_SL,A
+00A7 750000      E     MOV     Status_SL+01H,#00H
+00AA 750000      E     MOV     Status_SL+02H,#00H
+00AD 750000      E     MOV     Status_SL,#00H
                                            ; SOURCE LINE # 43
-009A F500        E     MOV     Status_SL+04H,A
-009C F500        E     MOV     Status_SL+05H,A
-009E F500        E     MOV     Status_SL+03H,A
+00B0 750000      E     MOV     Status_SL+04H,#00H
+00B3 750000      E     MOV     Status_SL+05H,#00H
+00B6 750000      E     MOV     Status_SL+03H,#00H
                                            ; SOURCE LINE # 44
-00A0 F500        E     MOV     Status_SL+07H,A
-00A2 F500        E     MOV     Status_SL+08H,A
-00A4 F500        E     MOV     Status_SL+06H,A
+00B9 750000      E     MOV     Status_SL+07H,#00H
+00BC 750000      E     MOV     Status_SL+08H,#00H
+00BF 750000      E     MOV     Status_SL+06H,#00H
                                            ; SOURCE LINE # 45
-00A6 F500        E     MOV     Status_SL+0AH,A
-00A8 F500        E     MOV     Status_SL+0BH,A
-00AA F500        E     MOV     Status_SL+09H,A
-                                           ; SOURCE LINE # 47
-00AC 900000      E     MOV     DPTR,#bufRX_PC
-00AF E0                MOVX    A,@DPTR
-00B0 F500        E     MOV     set_canal_test,A
-                                           ; SOURCE LINE # 48
-00B2 A3                INC     DPTR
-00B3 E0                MOVX    A,@DPTR
-00B4 F500        E     MOV     set_canal_test+01H,A
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 7   
+00C2 750000      E     MOV     Status_SL+0AH,#00H
+00C5 750000      E     MOV     Status_SL+0BH,#00H
+00C8 750000      E     MOV     Status_SL+09H,#00H
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 7   
 
+                                           ; SOURCE LINE # 47
+00CB 900000      E     MOV     DPTR,#bufRX_PC
+00CE E0                MOVX    A,@DPTR
+00CF FF                MOV     R7,A
+00D0 F500        E     MOV     set_canal_test,A
+                                           ; SOURCE LINE # 48
+00D2 A3                INC     DPTR
+00D3 E0                MOVX    A,@DPTR
+00D4 FF                MOV     R7,A
+00D5 F500        E     MOV     set_canal_test+01H,A
                                            ; SOURCE LINE # 49
-00B6 A3                INC     DPTR
-00B7 E0                MOVX    A,@DPTR
-00B8 F500        E     MOV     set_canal_test+02H,A
+00D7 A3                INC     DPTR
+00D8 E0                MOVX    A,@DPTR
+00D9 FF                MOV     R7,A
+00DA F500        E     MOV     set_canal_test+02H,A
                                            ; SOURCE LINE # 50
-00BA A3                INC     DPTR
-00BB E0                MOVX    A,@DPTR
-00BC F500        E     MOV     set_canal_test+03H,A
+00DC A3                INC     DPTR
+00DD E0                MOVX    A,@DPTR
+00DE FF                MOV     R7,A
+00DF F500        E     MOV     set_canal_test+03H,A
                                            ; SOURCE LINE # 52
-00BE D200        E     SETB    F_delaed_response
+00E1 D200        E     SETB    F_delaed_response
                                            ; SOURCE LINE # 54
-00C0 020000      E     LJMP    set_f_start_test_Lx
+00E3 120000      E     LCALL   set_f_start_test_Lx
                                            ; SOURCE LINE # 58
+00E6 22                RET     
                                            ; SOURCE LINE # 59
-00C3         ?C0008:
+00E7         ?C0008:
                                            ; SOURCE LINE # 60
-00C3 900000      E     MOV     DPTR,#bufRX_PC
-00C6 E0                MOVX    A,@DPTR
-00C7 B4FF1B            CJNE    A,#0FFH,?C0009
+00E7 900000      E     MOV     DPTR,#bufRX_PC
+00EA E0                MOVX    A,@DPTR
+00EB FF                MOV     R7,A
+00EC B4FF1C            CJNE    A,#0FFH,?C0009
                                            ; SOURCE LINE # 61
-00CA 7500FF      E     MOV     set_rele,#0FFH
+00EF 7500FF      E     MOV     set_rele,#0FFH
                                            ; SOURCE LINE # 62
-00CD E4                CLR     A
-00CE F500        E     MOV     set_canal_test,A
+00F2 750000      E     MOV     set_canal_test,#00H
                                            ; SOURCE LINE # 63
-00D0 D200        E     SETB    rele_L1
+00F5 D200        E     SETB    rele_L1
                                            ; SOURCE LINE # 65
-00D2 300015      E     JNB     F_run_test,?C0012
+00F7 300016      E     JNB     F_run_test,?C0012
                                            ; SOURCE LINE # 66
-00D5 E500        E     MOV     A,canal_test
-00D7 B40110            CJNE    A,#01H,?C0012
+00FA E500        E     MOV     A,canal_test
+00FC B40111            CJNE    A,#01H,?C0012
                                            ; SOURCE LINE # 67
-00DA C200        E     CLR     idac_L1
+00FF C200        E     CLR     idac_L1
                                            ; SOURCE LINE # 68
-00DC C200        E     CLR     F_run_test
+0101 C200        E     CLR     F_run_test
                                            ; SOURCE LINE # 70
-00DE E4                CLR     A
-00DF F596              MOV     IDA0L,A
+0103 759600            MOV     IDA0L,#00H
                                            ; SOURCE LINE # 71
-00E1 F597              MOV     IDA0H,A
+0106 759700            MOV     IDA0H,#00H
                                            ; SOURCE LINE # 72
                                            ; SOURCE LINE # 73
                                            ; SOURCE LINE # 74
-00E3 8005              SJMP    ?C0012
-00E5         ?C0009:
+0109 8005              SJMP    ?C0012
+010B         ?C0009:
                                            ; SOURCE LINE # 75
                                            ; SOURCE LINE # 76
-00E5 E4                CLR     A
-00E6 F500        E     MOV     set_rele,A
+010B 750000      E     MOV     set_rele,#00H
                                            ; SOURCE LINE # 77
-00E8 C200        E     CLR     rele_L1
-                                           ; SOURCE LINE # 78
-00EA         ?C0012:
-                                           ; SOURCE LINE # 79
-00EA 900000      E     MOV     DPTR,#bufRX_PC+01H
-00ED E0                MOVX    A,@DPTR
-00EE B4FF1B            CJNE    A,#0FFH,?C0013
-                                           ; SOURCE LINE # 80
-00F1 7500FF      E     MOV     set_rele+01H,#0FFH
-                                           ; SOURCE LINE # 81
-00F4 E4                CLR     A
-00F5 F500        E     MOV     set_canal_test+01H,A
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 8   
+010E C200        E     CLR     rele_L1
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 8   
 
+                                           ; SOURCE LINE # 78
+0110         ?C0012:
+                                           ; SOURCE LINE # 79
+0110 900000      E     MOV     DPTR,#bufRX_PC+01H
+0113 E0                MOVX    A,@DPTR
+0114 FF                MOV     R7,A
+0115 B4FF1C            CJNE    A,#0FFH,?C0013
+                                           ; SOURCE LINE # 80
+0118 7500FF      E     MOV     set_rele+01H,#0FFH
+                                           ; SOURCE LINE # 81
+011B 750000      E     MOV     set_canal_test+01H,#00H
                                            ; SOURCE LINE # 82
-00F7 D200        E     SETB    rele_L2
+011E D200        E     SETB    rele_L2
                                            ; SOURCE LINE # 84
-00F9 300015      E     JNB     F_run_test,?C0016
+0120 300016      E     JNB     F_run_test,?C0016
                                            ; SOURCE LINE # 85
-00FC E500        E     MOV     A,canal_test
-00FE B40210            CJNE    A,#02H,?C0016
+0123 E500        E     MOV     A,canal_test
+0125 B40211            CJNE    A,#02H,?C0016
                                            ; SOURCE LINE # 86
-0101 C200        E     CLR     idac_L2
+0128 C200        E     CLR     idac_L2
                                            ; SOURCE LINE # 87
-0103 C200        E     CLR     F_run_test
+012A C200        E     CLR     F_run_test
                                            ; SOURCE LINE # 89
-0105 E4                CLR     A
-0106 F596              MOV     IDA0L,A
+012C 759600            MOV     IDA0L,#00H
                                            ; SOURCE LINE # 90
-0108 F597              MOV     IDA0H,A
+012F 759700            MOV     IDA0H,#00H
                                            ; SOURCE LINE # 91
                                            ; SOURCE LINE # 92
                                            ; SOURCE LINE # 93
-010A 8005              SJMP    ?C0016
-010C         ?C0013:
+0132 8005              SJMP    ?C0016
+0134         ?C0013:
                                            ; SOURCE LINE # 94
                                            ; SOURCE LINE # 95
-010C E4                CLR     A
-010D F500        E     MOV     set_rele+01H,A
+0134 750000      E     MOV     set_rele+01H,#00H
                                            ; SOURCE LINE # 96
-010F C200        E     CLR     rele_L2
+0137 C200        E     CLR     rele_L2
                                            ; SOURCE LINE # 97
-0111         ?C0016:
+0139         ?C0016:
                                            ; SOURCE LINE # 98
-0111 900000      E     MOV     DPTR,#bufRX_PC+02H
-0114 E0                MOVX    A,@DPTR
-0115 B4FF1B            CJNE    A,#0FFH,?C0017
+0139 900000      E     MOV     DPTR,#bufRX_PC+02H
+013C E0                MOVX    A,@DPTR
+013D FF                MOV     R7,A
+013E B4FF1C            CJNE    A,#0FFH,?C0017
                                            ; SOURCE LINE # 99
-0118 7500FF      E     MOV     set_rele+02H,#0FFH
+0141 7500FF      E     MOV     set_rele+02H,#0FFH
                                            ; SOURCE LINE # 100
-011B E4                CLR     A
-011C F500        E     MOV     set_canal_test+02H,A
+0144 750000      E     MOV     set_canal_test+02H,#00H
                                            ; SOURCE LINE # 101
-011E D200        E     SETB    rele_L3
+0147 D200        E     SETB    rele_L3
                                            ; SOURCE LINE # 103
-0120 300015      E     JNB     F_run_test,?C0020
+0149 300016      E     JNB     F_run_test,?C0020
                                            ; SOURCE LINE # 104
-0123 E500        E     MOV     A,canal_test
-0125 B40310            CJNE    A,#03H,?C0020
+014C E500        E     MOV     A,canal_test
+014E B40311            CJNE    A,#03H,?C0020
                                            ; SOURCE LINE # 105
-0128 C200        E     CLR     idac_L3
+0151 C200        E     CLR     idac_L3
                                            ; SOURCE LINE # 106
-012A C200        E     CLR     F_run_test
+0153 C200        E     CLR     F_run_test
                                            ; SOURCE LINE # 108
-012C E4                CLR     A
-012D F596              MOV     IDA0L,A
+0155 759600            MOV     IDA0L,#00H
                                            ; SOURCE LINE # 109
-012F F597              MOV     IDA0H,A
+0158 759700            MOV     IDA0H,#00H
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 9   
+
                                            ; SOURCE LINE # 110
                                            ; SOURCE LINE # 111
                                            ; SOURCE LINE # 112
-0131 8005              SJMP    ?C0020
-0133         ?C0017:
+015B 8005              SJMP    ?C0020
+015D         ?C0017:
                                            ; SOURCE LINE # 113
                                            ; SOURCE LINE # 114
-0133 E4                CLR     A
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 9   
-
-0134 F500        E     MOV     set_rele+02H,A
+015D 750000      E     MOV     set_rele+02H,#00H
                                            ; SOURCE LINE # 115
-0136 C200        E     CLR     rele_L3
+0160 C200        E     CLR     rele_L3
                                            ; SOURCE LINE # 116
-0138         ?C0020:
+0162         ?C0020:
                                            ; SOURCE LINE # 117
-0138 900000      E     MOV     DPTR,#bufRX_PC+03H
-013B E0                MOVX    A,@DPTR
-013C B4FF1B            CJNE    A,#0FFH,?C0021
+0162 900000      E     MOV     DPTR,#bufRX_PC+03H
+0165 E0                MOVX    A,@DPTR
+0166 FF                MOV     R7,A
+0167 B4FF1C            CJNE    A,#0FFH,?C0021
                                            ; SOURCE LINE # 118
-013F 7500FF      E     MOV     set_rele+03H,#0FFH
+016A 7500FF      E     MOV     set_rele+03H,#0FFH
                                            ; SOURCE LINE # 119
-0142 E4                CLR     A
-0143 F500        E     MOV     set_canal_test+03H,A
+016D 750000      E     MOV     set_canal_test+03H,#00H
                                            ; SOURCE LINE # 120
-0145 D200        E     SETB    rele_L4
+0170 D200        E     SETB    rele_L4
                                            ; SOURCE LINE # 122
-0147 300015      E     JNB     F_run_test,?C0024
+0172 300016      E     JNB     F_run_test,?C0024
                                            ; SOURCE LINE # 123
-014A E500        E     MOV     A,canal_test
-014C B40410            CJNE    A,#04H,?C0024
+0175 E500        E     MOV     A,canal_test
+0177 B40411            CJNE    A,#04H,?C0024
                                            ; SOURCE LINE # 124
-014F C200        E     CLR     idac_L4
+017A C200        E     CLR     idac_L4
                                            ; SOURCE LINE # 125
-0151 C200        E     CLR     F_run_test
+017C C200        E     CLR     F_run_test
                                            ; SOURCE LINE # 127
-0153 E4                CLR     A
-0154 F596              MOV     IDA0L,A
+017E 759600            MOV     IDA0L,#00H
                                            ; SOURCE LINE # 128
-0156 F597              MOV     IDA0H,A
+0181 759700            MOV     IDA0H,#00H
                                            ; SOURCE LINE # 129
                                            ; SOURCE LINE # 130
                                            ; SOURCE LINE # 131
-0158 8005              SJMP    ?C0024
-015A         ?C0021:
+0184 8005              SJMP    ?C0024
+0186         ?C0021:
                                            ; SOURCE LINE # 132
                                            ; SOURCE LINE # 133
-015A E4                CLR     A
-015B F500        E     MOV     set_rele+03H,A
+0186 750000      E     MOV     set_rele+03H,#00H
                                            ; SOURCE LINE # 134
-015D C200        E     CLR     rele_L4
+0189 C200        E     CLR     rele_L4
                                            ; SOURCE LINE # 135
-015F         ?C0024:
+018B         ?C0024:
                                            ; SOURCE LINE # 137
-015F 750003      E     MOV     Tx_command_PC,#03H
+018B 750003      E     MOV     Tx_command_PC,#03H
                                            ; SOURCE LINE # 138
-0162 750004      E     MOV     n_byte_Tx_PC,#04H
+018E 750004      E     MOV     n_byte_Tx_PC,#04H
                                            ; SOURCE LINE # 140
-0165 900000      E     MOV     DPTR,#bufTX_PC
-0168 E500        E     MOV     A,set_rele
-016A F0                MOVX    @DPTR,A
+0191 900000      E     MOV     DPTR,#bufTX_PC
+0194 E500        E     MOV     A,set_rele
+0196 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 141
-016B A3                INC     DPTR
-016C E500        E     MOV     A,set_rele+01H
-016E F0                MOVX    @DPTR,A
+0197 A3                INC     DPTR
+0198 E500        E     MOV     A,set_rele+01H
+019A F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 142
-016F A3                INC     DPTR
-0170 E500        E     MOV     A,set_rele+02H
-0172 F0                MOVX    @DPTR,A
+019B A3                INC     DPTR
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 10  
+
+019C E500        E     MOV     A,set_rele+02H
+019E F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 143
-0173 A3                INC     DPTR
-0174 E500        E     MOV     A,set_rele+03H
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 10  
-
-0176 F0                MOVX    @DPTR,A
+019F A3                INC     DPTR
+01A0 E500        E     MOV     A,set_rele+03H
+01A2 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 144
-0177 750002      E     MOV     st_Tx_PC,#02H
+01A3 750002      E     MOV     st_Tx_PC,#02H
                                            ; SOURCE LINE # 145
-017A 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
+01A6 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
                                            ; SOURCE LINE # 147
-017D 759923            MOV     SBUF0,#023H
+01A9 759923            MOV     SBUF0,#023H
                                            ; SOURCE LINE # 150
-0180 E4                CLR     A
-0181 F5EC              MOV     PCA0CPH2,A
+01AC 75EC00            MOV     PCA0CPH2,#00H
                                            ; SOURCE LINE # 151
-0183 120000      E     LCALL   set_tpic1
+01AF 120000      E     LCALL   set_tpic1
                                            ; SOURCE LINE # 152
-0186 020000      E     LJMP    set_tpic2
+01B2 120000      E     LCALL   set_tpic2
                                            ; SOURCE LINE # 154
+01B5 22                RET     
                                            ; SOURCE LINE # 155
-0189         ?C0025:
+01B6         ?C0025:
                                            ; SOURCE LINE # 157
-0189 750004      E     MOV     Tx_command_PC,#04H
+01B6 750004      E     MOV     Tx_command_PC,#04H
                                            ; SOURCE LINE # 158
-018C 750004      E     MOV     n_byte_Tx_PC,#04H
+01B9 750004      E     MOV     n_byte_Tx_PC,#04H
                                            ; SOURCE LINE # 160
-018F 900000      E     MOV     DPTR,#bufTX_PC
-0192 E500        E     MOV     A,set_rele
-0194 F0                MOVX    @DPTR,A
+01BC 900000      E     MOV     DPTR,#bufTX_PC
+01BF E500        E     MOV     A,set_rele
+01C1 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 161
-0195 A3                INC     DPTR
-0196 E500        E     MOV     A,set_rele+01H
-0198 F0                MOVX    @DPTR,A
+01C2 A3                INC     DPTR
+01C3 E500        E     MOV     A,set_rele+01H
+01C5 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 162
-0199 A3                INC     DPTR
-019A E500        E     MOV     A,set_rele+02H
-019C F0                MOVX    @DPTR,A
+01C6 A3                INC     DPTR
+01C7 E500        E     MOV     A,set_rele+02H
+01C9 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 163
-019D A3                INC     DPTR
-019E E500        E     MOV     A,set_rele+03H
+01CA A3                INC     DPTR
+01CB E500        E     MOV     A,set_rele+03H
+01CD F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 164
+01CE 750002      E     MOV     st_Tx_PC,#02H
                                            ; SOURCE LINE # 165
+01D1 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
                                            ; SOURCE LINE # 167
+01D4 759923            MOV     SBUF0,#023H
                                            ; SOURCE LINE # 168
-01A0 8019              SJMP    ?C0033
+01D7 22                RET     
                                            ; SOURCE LINE # 169
-01A2         ?C0026:
+01D8         ?C0026:
                                            ; SOURCE LINE # 171
-01A2 750004      E     MOV     n_byte_Tx_PC,#04H
+01D8 750004      E     MOV     n_byte_Tx_PC,#04H
                                            ; SOURCE LINE # 173
-01A5 7500DD      E     MOV     Tx_command_PC,#0DDH
+01DB 7500DD      E     MOV     Tx_command_PC,#0DDH
                                            ; SOURCE LINE # 176
-01A8 E500        E     MOV     A,footim
-01AA FF                MOV     R7,A
-01AB 900000      E     MOV     DPTR,#bufTX_PC
-01AE EF                MOV     A,R7
-01AF F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 177
-01B0 E500        E     MOV     A,footim+01H
-01B2 A3                INC     DPTR
-01B3 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 178
-01B4 A3                INC     DPTR
-01B5 7401              MOV     A,#01H
-01B7 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 179
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 11  
+01DE E500        E     MOV     A,footim
+01E0 FF                MOV     R7,A
+01E1 33                RLC     A
+01E2 95E0              SUBB    A,ACC
+01E4 FE                MOV     R6,A
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 11  
 
-01B8 A3                INC     DPTR
-01B9 7405              MOV     A,#05H
-01BB         ?C0033:
-01BB F0                MOVX    @DPTR,A
+01E5 900000      E     MOV     DPTR,#bufTX_PC
+01E8 EF                MOV     A,R7
+01E9 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 177
+01EA AF00        E     MOV     R7,footim+01H
+01EC EF                MOV     A,R7
+01ED A3                INC     DPTR
+01EE F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 178
+01EF A3                INC     DPTR
+01F0 7401              MOV     A,#01H
+01F2 F0                MOVX    @DPTR,A
+                                           ; SOURCE LINE # 179
+01F3 A3                INC     DPTR
+01F4 7405              MOV     A,#05H
+01F6 F0                MOVX    @DPTR,A
                                            ; SOURCE LINE # 180
-01BC 750002      E     MOV     st_Tx_PC,#02H
+01F7 750002      E     MOV     st_Tx_PC,#02H
                                            ; SOURCE LINE # 181
-01BF 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
+01FA 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
                                            ; SOURCE LINE # 183
-01C2 759923            MOV     SBUF0,#023H
+01FD 759923            MOV     SBUF0,#023H
                                            ; SOURCE LINE # 184
                                            ; SOURCE LINE # 185
                                            ; SOURCE LINE # 186
                                            ; SOURCE LINE # 187
                                            ; SOURCE LINE # 189
-01C5         ?C0028:
-01C5 22                RET     
+0200         ?C0028:
+0200 22                RET     
              ; FUNCTION work_PC (END)
 
              ; FUNCTION delayed_response_PC (BEGIN)
                                            ; SOURCE LINE # 191
                                            ; SOURCE LINE # 192
-0000 300035      E     JNB     F_delaed_response,?C0032
+0000 300049      E     JNB     F_delaed_response,?C0032
                                            ; SOURCE LINE # 194
 0003 E500        E     MOV     A,set_canal_test
-0005 7031              JNZ     ?C0032
+0005 7045              JNZ     ?C0032
 0007 E500        E     MOV     A,set_canal_test+01H
-0009 702D              JNZ     ?C0032
+0009 7041              JNZ     ?C0032
 000B E500        E     MOV     A,set_canal_test+02H
-000D 7029              JNZ     ?C0032
+000D 703D              JNZ     ?C0032
 000F E500        E     MOV     A,set_canal_test+03H
-0011 7025              JNZ     ?C0032
+0011 6001              JZ      ?C0030
+0013 22                RET     
                                            ; SOURCE LINE # 196
+0014         ?C0030:
                                            ; SOURCE LINE # 199
-0013 C200        E     CLR     F_delaed_response
+0014 C200        E     CLR     F_delaed_response
                                            ; SOURCE LINE # 202
-0015 750002      E     MOV     Tx_command_PC,#02H
+0016 750002      E     MOV     Tx_command_PC,#02H
                                            ; SOURCE LINE # 203
-0018 75000C      E     MOV     n_byte_Tx_PC,#0CH
+0019 75000C      E     MOV     n_byte_Tx_PC,#0CH
                                            ; SOURCE LINE # 205
-001B 7800        E     MOV     R0,#LOW bufTX_PC
-001D 7C00        E     MOV     R4,#HIGH bufTX_PC
-001F 7D01              MOV     R5,#01H
-0021 FB                MOV     R3,A
-0022 7A00        E     MOV     R2,#HIGH Status_SL
-0024 7900        E     MOV     R1,#LOW Status_SL
-0026 FE                MOV     R6,A
-0027 7F0C              MOV     R7,#0CH
-0029 120000      E     LCALL   ?C?COPY
+001C 7B00              MOV     R3,#00H
+001E 7A00        E     MOV     R2,#HIGH Status_SL
+0020 7900        E     MOV     R1,#LOW Status_SL
+0022 C003              PUSH    AR3
+0024 C002              PUSH    AR2
+0026 C001              PUSH    AR1
+0028 0B                INC     R3
+0029 7A00        E     MOV     R2,#HIGH bufTX_PC
+C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 13:51:18 PAGE 12  
+
+002B 7900        E     MOV     R1,#LOW bufTX_PC
+002D A801              MOV     R0,AR1
+002F AC02              MOV     R4,AR2
+0031 7D01              MOV     R5,#01H
+0033 D001              POP     AR1
+0035 D002              POP     AR2
+0037 D003              POP     AR3
+0039 7E00              MOV     R6,#00H
+003B 7F0C              MOV     R7,#0CH
+003D 120000      E     LCALL   ?C?COPY
                                            ; SOURCE LINE # 206
-002C 750002      E     MOV     st_Tx_PC,#02H
+0040 750002      E     MOV     st_Tx_PC,#02H
                                            ; SOURCE LINE # 207
-002F 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
+0043 850000      E     MOV     Tx_counter_or_error,n_byte_Tx_PC
                                            ; SOURCE LINE # 209
-0032 759923            MOV     SBUF0,#023H
+0046 759923            MOV     SBUF0,#023H
                                            ; SOURCE LINE # 211
-0035 E4                CLR     A
-0036 F5C8              MOV     TMR2CN,A
+0049 75C800            MOV     TMR2CN,#00H
                                            ; SOURCE LINE # 212
                                            ; SOURCE LINE # 214
-0038         ?C0032:
-0038 22                RET     
-C51 COMPILER V9.60.7.0   WORK_PC_IPCL                                                      06/23/2026 09:43:38 PAGE 12  
-
+004C         ?C0032:
+004C 22                RET     
              ; FUNCTION delayed_response_PC (END)
 
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    511    ----
+   CODE SIZE        =    590    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

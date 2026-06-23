@@ -129,6 +129,7 @@ BYTE	data c_bufTX_PC;		//счетчик переданнх байт
 BYTE	data c_bufRX_PC;		//счетчик принятых байт
 
 bit F_delaed_response;
+struct _DacStartValueLines DacStartValueLines;
 
 //структуры обмена с пк
 struct _Status_SL		Status_SL;

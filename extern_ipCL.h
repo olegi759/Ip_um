@@ -138,6 +138,8 @@ extern struct _Status_Rele_SL		Status_Rele_SL;
 
 extern WORD code wCRCTable[];
 
+extern struct _DacStartValueLines DacStartValueLines;
+
 extern bit F_delaed_response;
 
 

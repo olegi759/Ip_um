@@ -41,6 +41,7 @@ set_tpic1();
 set_tpic2();
 P_tpic1_G=0;//вкл
 P_tpic2_G=0;
+
 	
 EA=1;                  // Global Interrupt Enable	
 F_delaed_response = 0;	
@@ -90,21 +91,25 @@ else{
 	if(F_start_test_L1){
 		F_start_test_L1=0;
 		set_test_L1();
+		code_IDAC = DacStartValueLines.LineDac1;
 	}
 	//запуск тестирования
 	else if(F_start_test_L2){
 		F_start_test_L2=0;
 		set_test_L2();
+		code_IDAC = DacStartValueLines.LineDac2;
 	}
 	//запуск тестирования
 	else if(F_start_test_L3){
 		F_start_test_L3=0;
 		set_test_L3();
+		code_IDAC = DacStartValueLines.LineDac3;
 	}
 	//запуск тестирования
 	else if(F_start_test_L4){
 		F_start_test_L4=0;
 		set_test_L4();
+		code_IDAC = DacStartValueLines.LineDac4;
 	}	
 	
 }

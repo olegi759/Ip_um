@@ -24,6 +24,6 @@ void step_test_L(void);
 //инстал€ци€ звуковых линий
 void install_SL(void);
 //выбор оптимального значени€
-BYTE optimal_value_selection(void);
+BYTE optimal_value_selection(BYTE chNumber);
 
 void set_f_start_test_Lx(void);

@@ -10,13 +10,21 @@ void test_in_comp(void){
 
 //1
 //P_in_L1==1 сработал!	
-if(P_in_L1==1)c_in_comp1++;	
+if(P_in_L1==1){
+	c_in_comp1++;	
+}
 //2
-if(P_in_L2==1)c_in_comp2++;
+if(P_in_L2==1){
+	c_in_comp2++;
+}
 //3
-if(P_in_L3==1)c_in_comp3++;
+if(P_in_L3==1){
+	c_in_comp3++;
+}
 //4
-if(P_in_L4==1)c_in_comp4++;
+if(P_in_L4==1){
+	c_in_comp4++;
+}
 
 c_in_comp_total++;
 }
@@ -190,9 +198,14 @@ if(F_first_step){
 if(canal_test==1){
 	v_in_comp=c_in_comp_total>>2;
 	if(v_in_comp>0){
-		// что за ебанутое условие я так и не понял
-		if(c_in_comp1 >(c_in_comp_total-v_in_comp))F_in_comp_on=1;
-		else if(c_in_comp1 <v_in_comp)F_in_comp_on=0;
+		//если компаратор срабатывает то c_in_comp1 и c_in_comp_total накапливаются
+		//хз зачем так сложно
+		if(c_in_comp1 >(c_in_comp_total-v_in_comp)){
+			F_in_comp_on = 1;
+		}
+		else if(c_in_comp1 <v_in_comp){
+			F_in_comp_on=0;
+		}
 	}
 	else{
 		c_in_comp_total=0;
@@ -266,6 +279,7 @@ if(F_run_sum==0){//не выполняем суммирование
 				F_end_test=1;//1-
 			}
 			else{
+								
 				sum_code_IDAC = (code_IDAC>>6);//IDAC для интегрирования
 				c_sum_code = 1;
 				F_run_sum = 1;//1-выполняем суммирование
@@ -445,7 +459,7 @@ if(install_cahal_1){
 			//выбираем значение
 			//install_code_IDAC_1=(install_code_IDAC_1 >>6);
 			//install_code_IDAC_2=(install_code_IDAC_2 >>6);
-			v_test=optimal_value_selection();
+			v_test=optimal_value_selection(1);
 			if(v_test==1){
 				Status_SL.NRange1=1;
 				Status_SL.Data1_Lo=(install_code_IDAC_1 &0xFF);
@@ -501,7 +515,7 @@ if(install_cahal_2){
 			//выбираем значение
 			//install_code_IDAC_1=(install_code_IDAC_1 >>6);
 			//install_code_IDAC_2=(install_code_IDAC_2 >>6);
-			v_test=optimal_value_selection();
+			v_test=optimal_value_selection(2);
 			if(v_test==1){
 				Status_SL.NRange2=1;
 				Status_SL.Data2_Lo=(install_code_IDAC_1 &0xFF);
@@ -558,7 +572,7 @@ if(install_cahal_3){
 			//выбираем значение
 			//install_code_IDAC_1=(install_code_IDAC_1 >>6);
 			//install_code_IDAC_2=(install_code_IDAC_2 >>6);
-			v_test=optimal_value_selection();
+			v_test=optimal_value_selection(3);
 			if(v_test==1){
 				Status_SL.NRange3=1;
 				Status_SL.Data3_Lo=(install_code_IDAC_1 &0xFF);
@@ -615,7 +629,7 @@ if(install_cahal_4){
 			//выбираем значение
 			//install_code_IDAC_1=(install_code_IDAC_1 >>6);
 			//install_code_IDAC_2=(install_code_IDAC_2 >>6);
-			v_test=optimal_value_selection();
+			v_test=optimal_value_selection(4);
 			if(v_test==1){
 				Status_SL.NRange4=1;
 				Status_SL.Data4_Lo=(install_code_IDAC_1 &0xFF);
@@ -652,16 +666,22 @@ F_start_test_L1=F_start_test_L2=F_start_test_L3=F_start_test_L4=0;
 //--------------------------
 //выбор оптимального значения
 //------------------------------
-BYTE optimal_value_selection(void){
+BYTE optimal_value_selection(BYTE chNumber){
 
 if(install_code_IDAC_1 > 512) test1_install = install_code_IDAC_1 - 512;
 else test1_install = 512 - install_code_IDAC_1;
 	
-if(install_code_IDAC_2 > 512)test2_install=install_code_IDAC_2 -512;
+if(install_code_IDAC_2 > 512)test2_install=install_code_IDAC_2 - 512;
 else test2_install = 512 -install_code_IDAC_2;	
-
-if(test1_install > test2_install) return 2;
-else return 1;	
+	
+if(test1_install > test2_install) {
+	((WORD*)&DacStartValueLines)[chNumber - 1] = test2_install << 6;	
+	return 2;
+}
+else {
+	((WORD*)&DacStartValueLines)[chNumber - 1] = test1_install << 6;
+	return 1;		
+}	
 }
 
 //--------------------------
