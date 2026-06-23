@@ -52,6 +52,11 @@ struct _Status_Rele_SL{
 	BYTE Canal_4;	
 };
 
-
+struct _DacStartValueLine{
+	WORD LineDac1;
+	WORD LineDac2;
+	WORD LineDac3;
+	WORD LineDac4;
+};
 
 

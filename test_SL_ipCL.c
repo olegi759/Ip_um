@@ -190,6 +190,7 @@ if(F_first_step){
 if(canal_test==1){
 	v_in_comp=c_in_comp_total>>2;
 	if(v_in_comp>0){
+		// что за ебанутое условие я так и не понял
 		if(c_in_comp1 >(c_in_comp_total-v_in_comp))F_in_comp_on=1;
 		else if(c_in_comp1 <v_in_comp)F_in_comp_on=0;
 	}
@@ -265,19 +266,20 @@ if(F_run_sum==0){//не выполняем суммирование
 				F_end_test=1;//1-
 			}
 			else{
-				sum_code_IDAC=(code_IDAC>>6);//IDAC для интегрирования
-				c_sum_code=1;
-				F_run_sum=1;//1-выполняем суммирование
-				F_rise_step_idac=0;//вниз
-				code_IDAC -=64;
+				sum_code_IDAC = (code_IDAC>>6);//IDAC для интегрирования
+				c_sum_code = 1;
+				F_run_sum = 1;//1-выполняем суммирование
+				F_rise_step_idac = 0;//вниз
+				code_IDAC -= 64;
 				//IDA0=code_IDAC;
-				Hi_code_IDAC=(code_IDAC >>8);	
-				IDA0L=code_IDAC & 0xFF;
-				IDA0H=Hi_code_IDAC;
+				Hi_code_IDAC = (code_IDAC >>8);	
+				IDA0L = code_IDAC & 0xFF;
+				IDA0H = Hi_code_IDAC;
 			}
 			
 		}
 		else{
+			//первоначально здесь растет ЦАП
 			if(code_IDAC <0xFFC0){
 				code_IDAC +=64;
 				//IDA0=code_IDAC;
@@ -371,7 +373,8 @@ else{
 			
 		}
 		else{
-			if(code_IDAC <0xFFC0){
+			//вот здесь идет увеличение кода ЦАПА 
+			if(code_IDAC <0xFFC0){//0xFFC0 - максимальное значение кода ЦАПА (если сденуть на 6 единиц врпаво)
 				code_IDAC +=64;
 				//IDA0=code_IDAC;
 				Hi_code_IDAC=(code_IDAC >>8);	
@@ -454,8 +457,7 @@ if(install_cahal_1){
 				Status_SL.Data1_Lo=(install_code_IDAC_2 &0xFF);
 				install_code_IDAC_2=(install_code_IDAC_2 >>8);
 				Status_SL.Data1_Hi=(install_code_IDAC_2 &0xFF);
-			}			
-			
+			}						
 		}
 	}
 	
@@ -652,16 +654,19 @@ F_start_test_L1=F_start_test_L2=F_start_test_L3=F_start_test_L4=0;
 //------------------------------
 BYTE optimal_value_selection(void){
 
-if(install_code_IDAC_1 >512)test1_install=install_code_IDAC_1 -512;
-else test1_install=512 -install_code_IDAC_1;
+if(install_code_IDAC_1 > 512) test1_install = install_code_IDAC_1 - 512;
+else test1_install = 512 - install_code_IDAC_1;
 	
-if(install_code_IDAC_2 >512)test2_install=install_code_IDAC_2 -512;
-else test2_install=512 -install_code_IDAC_2;	
+if(install_code_IDAC_2 > 512)test2_install=install_code_IDAC_2 -512;
+else test2_install = 512 -install_code_IDAC_2;	
 
-if(test1_install >test2_install)return 2;
+if(test1_install > test2_install) return 2;
 else return 1;	
 }
 
+//--------------------------
+//выбор следующего канала участвующего в тесте 
+//------------------------------
 BYTE i = 0;
 void set_f_start_test_Lx(){	
 	for(i = 0; i < 4; ++i){

@@ -176,7 +176,7 @@ void work_PC(void){
 		 bufTX_PC[0]=footim >> 8;
 		 bufTX_PC[1]=footim & 0xFF;
 		 bufTX_PC[2]=1;
-		 bufTX_PC[3]=2;
+		 bufTX_PC[3]=5;
 		 st_Tx_PC=TX_ADDRESS;
 		 Tx_counter_or_error=n_byte_Tx_PC;
 

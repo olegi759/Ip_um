@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  DATAPAGE                                                             06/15/2026 16:09:01 PAGE     1
+A51 MACRO ASSEMBLER  DATAPAGE                                                             06/23/2026 09:43:38 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -16,10 +16,10 @@ LOC  OBJ            LINE     SOURCE
                        6     ;****************************************************************************** 
 ----                   7             CSEG    AT      0x1DFF
                        8     
-1DFF F1                9             DB      0xF1    ; 14
+1DFF FF                9             DB      0xFF    ; 14
                       10     
                       11     END
-A51 MACRO ASSEMBLER  DATAPAGE                                                             06/15/2026 16:09:01 PAGE     2
+A51 MACRO ASSEMBLER  DATAPAGE                                                             06/23/2026 09:43:38 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
