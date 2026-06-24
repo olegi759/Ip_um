@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 17:17:03 PAGE 1   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 08:46:59 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE UART0_IPCL
@@ -62,7 +62,7 @@ line level    source
   52   5                                                      c_bufRX_PC = 0;                         //счет принятых
   53   5                                                      n_byte_Rx_PC = v_PC;            //байт данных в посылке
   54   5                                                      st_Rx_PC    = RX_DATA;
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 17:17:03 PAGE 2   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 08:46:59 PAGE 2   
 
   55   5                                              }
   56   4                                              else {
@@ -126,7 +126,7 @@ line level    source
  114   3                                      case TX_BYTECOUNT:
  115   3                                              SBUF0 =v_PC=Tx_counter_or_error;
  116   3                                              if(n_byte_Tx_PC){
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 17:17:03 PAGE 3   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 08:46:59 PAGE 3   
 
  117   4                                                      st_Tx_PC=TX_DATA;
  118   4                                                      c_bufTX_PC=0;
