@@ -1,7 +1,7 @@
 //параметры проведения теста линий 
 #define CODE_DAC_CORESPONDING_ZERO        128
 #define MAX_CODE_DAC_REG                  0xFFC0
-#define INTEGRATION_COUNT                 32
+#define INTEGRATION_COUNT                 8
 
 
 //упавление выходными сигналами tpic

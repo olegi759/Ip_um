@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/24/2026 10:05:54 PAGE 1   
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/24/2026 14:07:28 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIMERS_IPCL
 OBJECT MODULE PLACED IN .\Objects\timers_ipCL.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE timers_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
-                    -gs\timers_ipCL.lst) OBJECT(.\Objects\timers_ipCL.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE timers_ipCL.c LARGE OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\
+                    -Listings\timers_ipCL.lst) OBJECT(.\Objects\timers_ipCL.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   1              if(div_f_start_dac >3){
   53   2                      div_f_start_dac=0;
   54   2                      F_load_idac=1;
-C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/24/2026 10:05:54 PAGE 2   
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/24/2026 14:07:28 PAGE 2   
 
   55   2                      
   56   2              }

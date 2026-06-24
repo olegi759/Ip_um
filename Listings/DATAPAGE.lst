@@ -1,9 +1,9 @@
-A51 MACRO ASSEMBLER  DATAPAGE                                                             06/24/2026 10:05:55 PAGE     1
+A51 MACRO ASSEMBLER  DATAPAGE                                                             06/24/2026 12:38:42 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
 OBJECT MODULE PLACED IN .\Objects\DATAPAGE.obj
-ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE DATAPAGE.ASM SET(SMALL) DEBUG PRINT(.\Listings\DATAPAGE.lst) OBJECT(.\O
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE DATAPAGE.ASM SET(LARGE) DEBUG PRINT(.\Listings\DATAPAGE.lst) OBJECT(.\O
                       bjects\DATAPAGE.obj) EP
 
 LOC  OBJ            LINE     SOURCE
@@ -19,7 +19,7 @@ LOC  OBJ            LINE     SOURCE
 1DFF FF                9             DB      0xFF    ; 14
                       10     
                       11     END
-A51 MACRO ASSEMBLER  DATAPAGE                                                             06/24/2026 10:05:55 PAGE     2
+A51 MACRO ASSEMBLER  DATAPAGE                                                             06/24/2026 12:38:42 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------

@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/24/2026 10:05:54 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/24/2026 14:07:27 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN_IPCL
 OBJECT MODULE PLACED IN .\Objects\main_ipCL.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
-                    -\main_ipCL.lst) OBJECT(.\Objects\main_ipCL.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main_ipCL.c LARGE OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\main_ipCL.lst) OBJECT(.\Objects\main_ipCL.obj)
 
 line level    source
 
@@ -55,174 +55,165 @@ line level    source
   45   1              
   46   1      EA=1;                  // Global Interrupt Enable       
   47   1      F_delaed_response = 0;  
-  48   1      //set_canal_test[0] = 1;
-  49   1      //Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
-  50   1      //              Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
-  51   1      //              Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
-  52   1      //              Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;      
-  53   1      //set_canal_test[0]=0x01;
-  54   1      //              set_canal_test[1]=0x01;
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/24/2026 10:05:54 PAGE 2   
+  48   1      
+  49   1      //++    
+  50   1      while(1){
+  51   2              
+  52   2      //++
+  53   2      
+  54   2      PCA0CPH2  = 0;//reset wdt
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/24/2026 14:07:27 PAGE 2   
 
-  55   1      //              set_canal_test[2]=0x00;
-  56   1      //              set_canal_test[3]=0x01;
-  57   1      //set_f_start_test_Lx();
-  58   1      //Rx_command_PC = CMD_PC_TEST_SL;
-  59   1      //              F_start_test_L1 = set_canal_test[0];
-  60   1      //              F_start_test_L2 = set_canal_test[1];
-  61   1      //              F_start_test_L3 = set_canal_test[2];
-  62   1      //              F_start_test_L4 = set_canal_test[3];    
-  63   1      //Rx_command_PC = CMD_PC_READ_RELE_SL;
-  64   1      //F_run_com_PC = 1;
-  65   1      //++    
-  66   1      while(1){
-  67   2              
-  68   2      //++
-  69   2      
-  70   2      PCA0CPH2  = 0;//reset wdt
-  71   2      //      
-  72   2      if(F_run_com_PC){
-  73   3              F_run_com_PC=0;
-  74   3              work_PC();      
-  75   3      }
-  76   2      
-  77   2      delayed_response_PC();
-  78   2      
-  79   2      
-  80   2      //выплонение шага тестирования
-  81   2      if(F_run_test){//1-идет тест
-  82   3              test_in_comp();
-  83   3      
-  84   3              if(F_load_idac){//флаг на загрузку ступеньки
-  85   4                      F_load_idac=0;//флаг на загрузку ступеньки
-  86   4                      step_test_L();
+  55   2      //      
+  56   2      if(F_run_com_PC){
+  57   3              F_run_com_PC=0;
+  58   3              work_PC();      
+  59   3      }
+  60   2      
+  61   2      delayed_response_PC();
+  62   2      
+  63   2      
+  64   2      //выплонение шага тестирования
+  65   2      if(F_run_test){//1-идет тест
+  66   3              test_in_comp();
+  67   3      
+  68   3              if(F_load_idac){//флаг на загрузку ступеньки
+  69   4                      F_load_idac=0;//флаг на загрузку ступеньки
+  70   4                      step_test_L();
+  71   4              }
+  72   3      }
+  73   2      else{
+  74   3              //запуск тестирования
+  75   3              if(F_start_test_L1){
+  76   4                      F_start_test_L1=0;
+  77   4                      set_test_L1();
+  78   4                      code_IDAC = DacStartValueLines.LineDac1 << 6;
+  79   4                      UlogParam("start test at line1 ", footim);
+  80   4              }
+  81   3              //запуск тестирования
+  82   3              else if(F_start_test_L2){
+  83   4                      F_start_test_L2=0;
+  84   4                      set_test_L2();
+  85   4                      code_IDAC = DacStartValueLines.LineDac2 << 6;
+  86   4                      UlogParam("start test at line2 ", footim);
   87   4              }
-  88   3      }
-  89   2      else{
-  90   3              //запуск тестирования
-  91   3              if(F_start_test_L1){
-  92   4                      F_start_test_L1=0;
-  93   4                      set_test_L1();
-  94   4                      code_IDAC = DacStartValueLines.LineDac1 << 6;
-  95   4              }
-  96   3              //запуск тестирования
-  97   3              else if(F_start_test_L2){
-  98   4                      F_start_test_L2=0;
-  99   4                      set_test_L2();
- 100   4                      code_IDAC = DacStartValueLines.LineDac2 << 6;
- 101   4              }
- 102   3              //запуск тестирования
- 103   3              else if(F_start_test_L3){
- 104   4                      F_start_test_L3=0;
- 105   4                      set_test_L3();
- 106   4                      code_IDAC = DacStartValueLines.LineDac3 << 6;
- 107   4              }
- 108   3              //запуск тестирования
- 109   3              else if(F_start_test_L4){
- 110   4                      F_start_test_L4=0;
- 111   4                      set_test_L4();
- 112   4                      code_IDAC = DacStartValueLines.LineDac4 << 6;
- 113   4              }       
- 114   3              
- 115   3      }
- 116   2      
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/24/2026 10:05:54 PAGE 3   
+  88   3              //запуск тестирования
+  89   3              else if(F_start_test_L3){
+  90   4                      F_start_test_L3=0;
+  91   4                      set_test_L3();
+  92   4                      code_IDAC = DacStartValueLines.LineDac3 << 6;
+  93   4                      UlogParam("start test at line3 ", footim);
+  94   4              }
+  95   3              //запуск тестирования
+  96   3              else if(F_start_test_L4){
+  97   4                      F_start_test_L4=0;
+  98   4                      set_test_L4();
+  99   4                      code_IDAC = DacStartValueLines.LineDac4 << 6;
+ 100   4                      UlogParam("start test at line4", footim);
+ 101   4              }       
+ 102   3              
+ 103   3      }
+ 104   2      
+ 105   2      //закончили тест одной линии
+ 106   2      if(F_end_test){
+ 107   3              UlogParam("in end test", footim);
+ 108   3              F_end_test=0;
+ 109   3              PCA0CPH2  = 0;//reset wdt
+ 110   3                      //переносим в буфер передачи
+ 111   3                      if(canal_test==1){
+ 112   4                              if(F_hold_data_idac){//1-выполнено запоминание
+ 113   5                                      Status_SL.NRange1=range;
+ 114   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
+ 115   5                                      Status_SL.Data1_Lo=(hold_code_IDAC &0xFF);
+ 116   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/24/2026 14:07:27 PAGE 3   
 
- 117   2      //закончили тест одной линии
- 118   2      if(F_end_test){
- 119   3              F_end_test=0;
- 120   3              PCA0CPH2  = 0;//reset wdt
- 121   3                      //переносим в буфер передачи
- 122   3                      if(canal_test==1){
- 123   4                              if(F_hold_data_idac){//1-выполнено запоминание
- 124   5                                      Status_SL.NRange1=range;
- 125   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
- 126   5                                      Status_SL.Data1_Lo=(hold_code_IDAC &0xFF);
- 127   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
- 128   5                                      Status_SL.Data1_Hi=(hold_code_IDAC &0xFF);
- 129   5                              }
- 130   4                              else{
- 131   5                                      Status_SL.NRange1=0;
- 132   5                                      Status_SL.Data1_Lo=0;
- 133   5                                      Status_SL.Data1_Hi=0;                           
- 134   5                              }
- 135   4                              IDAC_L1_OFF;
- 136   4                              set_tpic1();
- 137   4                              set_canal_test[0] = 0;
- 138   4                              //TMR2CN = 0;
- 139   4                              //set_canal_test[0] = 0;        
- 140   4                              //тест линии конец
- 141   4                      }                       
- 142   3                      else if(canal_test==2){
- 143   4                              if(F_hold_data_idac){//1-выполнено запоминание
- 144   5                                      Status_SL.NRange2=range;
- 145   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
- 146   5                                      Status_SL.Data2_Lo=(hold_code_IDAC &0xFF);
- 147   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
- 148   5                                      Status_SL.Data2_Hi=(hold_code_IDAC &0xFF);
- 149   5                              }
- 150   4                              else{
- 151   5                                      Status_SL.NRange2=0;
- 152   5                                      Status_SL.Data2_Lo=0;
- 153   5                                      Status_SL.Data2_Hi=0;                           
- 154   5                              }                       
- 155   4                              IDAC_L2_OFF;
- 156   4                              set_tpic1();
- 157   4                              set_canal_test[1] = 0;
- 158   4                      }                       
- 159   3                      else if(canal_test==3){
- 160   4                              if(F_hold_data_idac){//1-выполнено запоминание                  
- 161   5                                      Status_SL.NRange3=range;
- 162   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
- 163   5                                      Status_SL.Data3_Lo=(hold_code_IDAC &0xFF);
- 164   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
- 165   5                                      Status_SL.Data3_Hi=(hold_code_IDAC &0xFF);
- 166   5                              }
- 167   4                              else{
- 168   5                                      Status_SL.NRange3=0;
- 169   5                                      Status_SL.Data3_Lo=0;
- 170   5                                      Status_SL.Data3_Hi=0;                           
- 171   5                              }                       
- 172   4                              IDAC_L3_OFF;
- 173   4                              set_tpic2();
- 174   4                              set_canal_test[2] = 0;
- 175   4                      }                       
- 176   3                      else if(canal_test==4){
- 177   4                              if(F_hold_data_idac){//1-выполнено запоминание                  
- 178   5                                      Status_SL.NRange4=range;
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/24/2026 10:05:54 PAGE 4   
+ 117   5                                      Status_SL.Data1_Hi=(hold_code_IDAC &0xFF);
+ 118   5                              }
+ 119   4                              else{
+ 120   5                                      Status_SL.NRange1=0;
+ 121   5                                      Status_SL.Data1_Lo=0;
+ 122   5                                      Status_SL.Data1_Hi=0;                           
+ 123   5                              }
+ 124   4                              IDAC_L1_OFF;
+ 125   4                              set_tpic1();
+ 126   4                              set_canal_test[0] = 0;
+ 127   4                              //TMR2CN = 0;
+ 128   4                              //set_canal_test[0] = 0;        
+ 129   4                              //тест линии конец
+ 130   4                              UlogParam("end", footim);
+ 131   4                      }                       
+ 132   3                      else if(canal_test==2){
+ 133   4                              if(F_hold_data_idac){//1-выполнено запоминание
+ 134   5                                      Status_SL.NRange2=range;
+ 135   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
+ 136   5                                      Status_SL.Data2_Lo=(hold_code_IDAC &0xFF);
+ 137   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
+ 138   5                                      Status_SL.Data2_Hi=(hold_code_IDAC &0xFF);
+ 139   5                              }
+ 140   4                              else{
+ 141   5                                      Status_SL.NRange2=0;
+ 142   5                                      Status_SL.Data2_Lo=0;
+ 143   5                                      Status_SL.Data2_Hi=0;                           
+ 144   5                              }                       
+ 145   4                              IDAC_L2_OFF;
+ 146   4                              set_tpic1();
+ 147   4                              set_canal_test[1] = 0;
+ 148   4                      }                       
+ 149   3                      else if(canal_test==3){
+ 150   4                              if(F_hold_data_idac){//1-выполнено запоминание                  
+ 151   5                                      Status_SL.NRange3=range;
+ 152   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
+ 153   5                                      Status_SL.Data3_Lo=(hold_code_IDAC &0xFF);
+ 154   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
+ 155   5                                      Status_SL.Data3_Hi=(hold_code_IDAC &0xFF);
+ 156   5                              }
+ 157   4                              else{
+ 158   5                                      Status_SL.NRange3=0;
+ 159   5                                      Status_SL.Data3_Lo=0;
+ 160   5                                      Status_SL.Data3_Hi=0;                           
+ 161   5                              }                       
+ 162   4                              IDAC_L3_OFF;
+ 163   4                              set_tpic2();
+ 164   4                              set_canal_test[2] = 0;
+ 165   4                      }                       
+ 166   3                      else if(canal_test==4){
+ 167   4                              if(F_hold_data_idac){//1-выполнено запоминание                  
+ 168   5                                      Status_SL.NRange4=range;
+ 169   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
+ 170   5                                      Status_SL.Data4_Lo=(hold_code_IDAC &0xFF);
+ 171   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
+ 172   5                                      Status_SL.Data4_Hi=(hold_code_IDAC &0xFF);
+ 173   5                              }
+ 174   4                              else{
+ 175   5                                      Status_SL.NRange4=0;
+ 176   5                                      Status_SL.Data4_Lo=0;
+ 177   5                                      Status_SL.Data4_Hi=0;                           
+ 178   5                              }                       
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/24/2026 14:07:27 PAGE 4   
 
- 179   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
- 180   5                                      Status_SL.Data4_Lo=(hold_code_IDAC &0xFF);
- 181   5                                      hold_code_IDAC=(hold_code_IDAC >>8);
- 182   5                                      Status_SL.Data4_Hi=(hold_code_IDAC &0xFF);
- 183   5                              }
- 184   4                              else{
- 185   5                                      Status_SL.NRange4=0;
- 186   5                                      Status_SL.Data4_Lo=0;
- 187   5                                      Status_SL.Data4_Hi=0;                           
- 188   5                              }                       
- 189   4                              IDAC_L4_OFF;
- 190   4                              set_tpic2();
- 191   4                              set_canal_test[3] = 0;
- 192   4                      }
- 193   3                                      
- 194   3              set_f_start_test_Lx();
- 195   3      
- 196   3              F_hold_data_idac=0;
- 197   3      }
- 198   2      
- 199   2      
- 200   2      }
- 201   1      }
+ 179   4                              IDAC_L4_OFF;
+ 180   4                              set_tpic2();
+ 181   4                              set_canal_test[3] = 0;
+ 182   4                              UlogParam("end", footim);
+ 183   4                      }
+ 184   3                                      
+ 185   3              set_f_start_test_Lx();
+ 186   3      
+ 187   3              F_hold_data_idac=0;
+ 188   3      }
+ 189   2      
+ 190   2      
+ 191   2      }
+ 192   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    396    ----
-   CONSTANT SIZE    =    512    ----
-   XDATA SIZE       =     85    ----
+   CODE SIZE        =    427    ----
+   CONSTANT SIZE    =    611    ----
+   XDATA SIZE       =    117    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     75    ----
+   DATA SIZE        =     43    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =     11    ----
 END OF MODULE INFORMATION.

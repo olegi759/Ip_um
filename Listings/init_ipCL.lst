@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/24/2026 10:05:54 PAGE 1   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/24/2026 14:07:28 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE INIT_IPCL
 OBJECT MODULE PLACED IN .\Objects\init_ipCL.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE init_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
-                    -\init_ipCL.lst) OBJECT(.\Objects\init_ipCL.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE init_ipCL.c LARGE OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\init_ipCL.lst) OBJECT(.\Objects\init_ipCL.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   1      }
   53          
   54          //T1-8b,sis,uart 115200
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/24/2026 10:05:54 PAGE 2   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/24/2026 14:07:28 PAGE 2   
 
   55          //T2-16b,sis/12, 10ms
   56          //T3 16b,sis,500us dac//для смирнова 4ms(2ms прерыв *2 в прерывании)
@@ -126,7 +126,7 @@ line level    source
  114          void Reset_Sources_Init()
  115          {
  116   1          int i = 0;
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/24/2026 10:05:54 PAGE 3   
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/24/2026 14:07:28 PAGE 3   
 
  117   1          VDM0CN    = 0x80;
  118   1          for (i = 0; i < 350; i++);  // Wait 100us for initialization
@@ -153,72 +153,74 @@ line level    source
  139          //
  140          void init_v(void){
  141   1      
- 142   1      set_install=0;  
- 143   1      set_canal_test[0]=set_canal_test[1]=set_canal_test[2]=set_canal_test[3]=0;      
- 144   1      set_rele[0]=set_rele[1]=set_rele[2]=set_rele[3]=0;      
- 145   1      code_IDAC=0;
- 146   1      hold_code_IDAC=0;
- 147   1      F_load_idac=0;
- 148   1      F_run_test=0;//1-идет тест
- 149   1      F_end_test=0;//1-
- 150   1      F_rise_step_idac=0;//1- растет
- 151   1      //F_end_step_idac=0;//1-конец диапазона
- 152   1      F_hold_data_idac=0;//1-выполнено запоминание
- 153   1      F_run_sum=0;//1-выполняем суммирование
- 154   1      range=0;
- 155   1      canal_test=0;
- 156   1      //c_add_code_IDAC=0;
- 157   1      F_in_comp_on=0;//1-сработал
- 158   1      //F_in_comp2_on=0;//1-сработал
- 159   1      //F_in_comp3_on=0;//1-сработал
- 160   1      //F_in_comp4_on=0;//1-сработал
- 161   1      c_in_comp1=0;
- 162   1      c_in_comp2=0;
- 163   1      c_in_comp3=0;
- 164   1      c_in_comp4=0;
- 165   1      c_10ms=0;//по 10мс до 1 сек
- 166   1      footim = 0;
- 167   1      c_seconds=0;//
- 168   1      F_start_test_L1=0;
- 169   1      F_start_test_L2=0;
- 170   1      F_start_test_L3=0;
- 171   1      F_start_test_L4=0;
- 172   1      st_Rx_PC=0;
- 173   1      st_Tx_PC=0;
- 174   1      F_run_com_PC=0;
- 175   1      Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
- 176   1      Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
- 177   1      Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
- 178   1      Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;
-C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/24/2026 10:05:54 PAGE 4   
+ 142   1      DacStartValueLines.LineDac1 = DacStartValueLines.LineDac2 = DacStartValueLines.LineDac3 = DacStartValueLin
+             -es.LineDac4 = 0;
+ 143   1      set_install=0;  
+ 144   1      set_canal_test[0]=set_canal_test[1]=set_canal_test[2]=set_canal_test[3]=0;      
+ 145   1      set_rele[0]=set_rele[1]=set_rele[2]=set_rele[3]=0;      
+ 146   1      code_IDAC=0;
+ 147   1      hold_code_IDAC=0;
+ 148   1      F_load_idac=0;
+ 149   1      F_run_test=0;//1-идет тест
+ 150   1      F_end_test=0;//1-
+ 151   1      F_rise_step_idac=0;//1- растет
+ 152   1      //F_end_step_idac=0;//1-конец диапазона
+ 153   1      F_hold_data_idac=0;//1-выполнено запоминание
+ 154   1      F_run_sum=0;//1-выполняем суммирование
+ 155   1      range=0;
+ 156   1      canal_test=0;
+ 157   1      //c_add_code_IDAC=0;
+ 158   1      F_in_comp_on=0;//1-сработал
+ 159   1      //F_in_comp2_on=0;//1-сработал
+ 160   1      //F_in_comp3_on=0;//1-сработал
+ 161   1      //F_in_comp4_on=0;//1-сработал
+ 162   1      c_in_comp1=0;
+ 163   1      c_in_comp2=0;
+ 164   1      c_in_comp3=0;
+ 165   1      c_in_comp4=0;
+ 166   1      c_10ms=0;//по 10мс до 1 сек
+ 167   1      footim = 0;
+ 168   1      c_seconds=0;//
+ 169   1      F_start_test_L1=0;
+ 170   1      F_start_test_L2=0;
+ 171   1      F_start_test_L3=0;
+ 172   1      F_start_test_L4=0;
+ 173   1      st_Rx_PC=0;
+ 174   1      st_Tx_PC=0;
+ 175   1      F_run_com_PC=0;
+ 176   1      Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
+ 177   1      Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
+C51 COMPILER V9.60.7.0   INIT_IPCL                                                         06/24/2026 14:07:28 PAGE 4   
 
- 179   1      F_div_f_start_dac=0;//для получения 4ms в прерывании
- 180   1      div_f_start_dac=0;
- 181   1      
- 182   1      }
- 183          
- 184          //
- 185          void init_ipCL(void)
- 186          {
- 187   1              Oscillator_Init();
- 188   1              PCA_Init();
- 189   1              Timer_Init();
- 190   1              UART_Init();
- 191   1              Port_IO_Init();
- 192   1              DAC_Init();//??????
- 193   1              Reset_Sources_Init();
- 194   1              init_v();
- 195   1              Interrupts_Init();
- 196   1      }
- 197          
+ 178   1      Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
+ 179   1      Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;
+ 180   1      F_div_f_start_dac=0;//для получения 4ms в прерывании
+ 181   1      div_f_start_dac=0;
+ 182   1      
+ 183   1      }
+ 184          
+ 185          //
+ 186          void init_ipCL(void)
+ 187          {
+ 188   1              Oscillator_Init();
+ 189   1              PCA_Init();
+ 190   1              Timer_Init();
+ 191   1              UART_Init();
+ 192   1              Port_IO_Init();
+ 193   1              DAC_Init();//??????
+ 194   1              Reset_Sources_Init();
+ 195   1              init_v();
+ 196   1              Interrupts_Init();
+ 197   1      }
+ 198          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    350    ----
+   CODE SIZE        =    367    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2    ----
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

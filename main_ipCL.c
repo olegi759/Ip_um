@@ -45,23 +45,7 @@ P_tpic2_G=0;
 	
 EA=1;                  // Global Interrupt Enable	
 F_delaed_response = 0;	
-//set_canal_test[0] = 1;
-//Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
-//		Status_SL.NRange2=Status_SL.Data2_Hi=Status_SL.Data2_Lo=0;
-//		Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
-//		Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;	
-//set_canal_test[0]=0x01;
-//		set_canal_test[1]=0x01;
-//		set_canal_test[2]=0x00;
-//		set_canal_test[3]=0x01;
-//set_f_start_test_Lx();
-//Rx_command_PC = CMD_PC_TEST_SL;
-//		F_start_test_L1 = set_canal_test[0];
-//		F_start_test_L2 = set_canal_test[1];
-//		F_start_test_L3 = set_canal_test[2];
-//		F_start_test_L4 = set_canal_test[3];	
-//Rx_command_PC = CMD_PC_READ_RELE_SL;
-//F_run_com_PC = 1;
+
 //++	
 while(1){
 	
@@ -92,30 +76,35 @@ else{
 		F_start_test_L1=0;
 		set_test_L1();
 		code_IDAC = DacStartValueLines.LineDac1 << 6;
+		UlogParam("start test at line1 ", footim);
 	}
 	//запуск тестирования
 	else if(F_start_test_L2){
 		F_start_test_L2=0;
 		set_test_L2();
 		code_IDAC = DacStartValueLines.LineDac2 << 6;
+		UlogParam("start test at line2 ", footim);
 	}
 	//запуск тестирования
 	else if(F_start_test_L3){
 		F_start_test_L3=0;
 		set_test_L3();
 		code_IDAC = DacStartValueLines.LineDac3 << 6;
+		UlogParam("start test at line3 ", footim);
 	}
 	//запуск тестирования
 	else if(F_start_test_L4){
 		F_start_test_L4=0;
 		set_test_L4();
 		code_IDAC = DacStartValueLines.LineDac4 << 6;
+		UlogParam("start test at line4", footim);
 	}	
 	
 }
 
 //закончили тест одной линии
 if(F_end_test){
+	UlogParam("in end test", footim);
 	F_end_test=0;
 	PCA0CPH2  = 0;//reset wdt
 		//переносим в буфер передачи
@@ -138,6 +127,7 @@ if(F_end_test){
 			//TMR2CN = 0;
 			//set_canal_test[0] = 0;	
 			//тест линии конец
+			UlogParam("end", footim);
 		}			
 		else if(canal_test==2){
 			if(F_hold_data_idac){//1-выполнено запоминание
@@ -189,6 +179,7 @@ if(F_end_test){
 			IDAC_L4_OFF;
 			set_tpic2();
 			set_canal_test[3] = 0;
+			UlogParam("end", footim);
 		}
 				
 	set_f_start_test_Lx();

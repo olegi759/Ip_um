@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 10:05:54 PAGE 1   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 14:07:28 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE UART0_IPCL
 OBJECT MODULE PLACED IN .\Objects\uart0_ipCL.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE uart0_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
-                    -s\uart0_ipCL.lst) OBJECT(.\Objects\uart0_ipCL.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE uart0_ipCL.c LARGE OPTIMIZE(9,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\L
+                    -istings\uart0_ipCL.lst) OBJECT(.\Objects\uart0_ipCL.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   5                                                      c_bufRX_PC = 0;                         //счет принятых
   53   5                                                      n_byte_Rx_PC = v_PC;            //байт данных в посылке
   54   5                                                      st_Rx_PC    = RX_DATA;
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 10:05:54 PAGE 2   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 14:07:28 PAGE 2   
 
   55   5                                              }
   56   4                                              else {
@@ -126,7 +126,7 @@ line level    source
  114   3                                      case TX_BYTECOUNT:
  115   3                                              SBUF0 =v_PC=Tx_counter_or_error;
  116   3                                              if(n_byte_Tx_PC){
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 10:05:54 PAGE 3   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 14:07:28 PAGE 3   
 
  117   4                                                      st_Tx_PC=TX_DATA;
  118   4                                                      c_bufTX_PC=0;
@@ -155,42 +155,42 @@ line level    source
  141   3                                      break;
  142   3                                      
  143   3                                      case TX_DEBUG_BEGIN:{
- 144   4                                              SBUF0 = bufTX_PC[0];
- 145   4                                              c_bufTX_PC = 1;
- 146   4                                              return;
- 147   4                                      }
- 148   3                                                                      
- 149   3                                      case TX_DEBUG: {
- 150   4                                              SBUF0 = bufTX_PC[c_bufTX_PC];
- 151   4                                              c_bufTX_PC++;
- 152   4                                              if(c_bufTX_PC==n_byte_Tx_PC) st_Tx_PC = TX_END;
- 153   4                                              return;
- 154   4                                      }
- 155   3                                      
- 156   3                                      default:
- 157   3                                              //OFF_TX_PC;            //Выкл передатчик 485
- 158   3                                              //SCON1 |= 0x10;                           //разреш прием
- 159   3                                              return;
- 160   3                              
- 161   3                              }       
- 162   2              
- 163   2                              /*считаем сумму*/
- 164   2                              v_PC = v_PC ^ CRC_Tx_PC.b[1];           // | UART1_CRC.w = CRC16(UART1_CRC.w, UART1_b);
- 165   2                              CRC_Tx_PC.b[1] = CRC_Tx_PC.b[0];                        // |
- 166   2                              CRC_Tx_PC.b[0] = 0;                                     // |
- 167   2                              CRC_Tx_PC.w ^= wCRCTable[v_PC];         // |
- 168   2                      
- 169   2              }
- 170   1      
- 171   1      }
-*** WARNING C294 IN LINE 72 OF uart0_ipCL.c: unreachable code
+ 144   4                                              c_bufTX_PC = 2;
+ 145   4                                              st_Tx_PC = TX_DEBUG;
+ 146   4                                              SBUF0 = bufTX_PC[1];                                    
+ 147   4                                              return;
+ 148   4                                      }
+ 149   3                                                                      
+ 150   3                                      case TX_DEBUG: {
+ 151   4                                              SBUF0 = bufTX_PC[c_bufTX_PC];
+ 152   4                                              c_bufTX_PC++;
+ 153   4                                              if(c_bufTX_PC==n_byte_Tx_PC + 1) st_Tx_PC = TX_END;
+ 154   4                                              return;
+ 155   4                                      }
+ 156   3                                      
+ 157   3                                      default:
+ 158   3                                              //OFF_TX_PC;            //Выкл передатчик 485
+ 159   3                                              //SCON1 |= 0x10;                           //разреш прием
+ 160   3                                              return;
+ 161   3                              
+ 162   3                              }       
+ 163   2              
+ 164   2                              /*считаем сумму*/
+ 165   2                              v_PC = v_PC ^ CRC_Tx_PC.b[1];           // | UART1_CRC.w = CRC16(UART1_CRC.w, UART1_b);
+ 166   2                              CRC_Tx_PC.b[1] = CRC_Tx_PC.b[0];                        // |
+ 167   2                              CRC_Tx_PC.b[0] = 0;                                     // |
+ 168   2                              CRC_Tx_PC.w ^= wCRCTable[v_PC];         // |
+ 169   2                      
+ 170   2              }
+ 171   1      
+ 172   1      }
 *** WARNING C294 IN LINE 72 OF uart0_ipCL.c: unreachable code
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    476    ----
+   CODE SIZE        =    440    ----
    CONSTANT SIZE    =   ----    ----
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 10:05:54 PAGE 4   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/24/2026 14:07:28 PAGE 4   
 
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -200,4 +200,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

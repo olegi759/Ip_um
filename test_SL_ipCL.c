@@ -279,7 +279,9 @@ if(F_run_sum==0){//не выполняем суммирование
 				F_end_test=1;//1-
 			}
 			else{
-								
+					
+				UlogParam("first", footim);
+				
 				sum_code_IDAC = (code_IDAC>>6);//IDAC для интегрирования
 				c_sum_code = 1;
 				F_run_sum = 1;//1-выполняем суммирование
@@ -297,7 +299,7 @@ if(F_run_sum==0){//не выполняем суммирование
 			if(code_IDAC < MAX_CODE_DAC_REG){
 				code_IDAC +=64;
 				//IDA0=code_IDAC;
-				Hi_code_IDAC=(MAX_CODE_DAC_REG >>8);	
+				Hi_code_IDAC=(code_IDAC >>8);	
 				IDA0L=code_IDAC & 0xFF;
 				IDA0H=Hi_code_IDAC;				
 			}
@@ -330,29 +332,35 @@ if(F_run_sum==0){//не выполняем суммирование
 else{
 	if(F_rise_step_idac == 0){//вниз
 		if(F_in_comp_on == 0){//отпустил
-			sum_code_IDAC += ((code_IDAC>>6) -1);//????????IDAC для интегрирования
+			UlogParam("down; comp = 0", footim);
+			sum_code_IDAC += ((code_IDAC>>6) - 1);//????????IDAC для интегрирования
 			c_sum_code++;
 			if(c_sum_code >= INTEGRATION_COUNT){//64  усе
+				
+				UlogParam("finish", footim);
+				
 				//запоминаем
 				hold_code_IDAC = sum_code_IDAC / INTEGRATION_COUNT;//64
 				F_hold_data_idac = 1;//1-выполнено запоминание
 				F_run_sum = 0;//1-выполняем суммирование
 			}
-			else{//разворот вверх
+			else{//разворот вверх				
 				F_rise_step_idac=1;//
 				code_IDAC +=64;
 				//IDA0=code_IDAC;
 				Hi_code_IDAC=(code_IDAC >>8);	
 				IDA0L=code_IDAC & 0xFF;
-				IDA0H=Hi_code_IDAC;				
+				IDA0H=Hi_code_IDAC;		
+				UlogParam("down; comp = 0; change, go up", footim);
 			}
 		}
 		else{//еще ниже
-			if(code_IDAC < CODE_DAC_CORESPONDING_ZERO){//???64 //128
+			if(code_IDAC < CODE_DAC_CORESPONDING_ZERO){//???64 //128				
 				hold_code_IDAC = 0;//код срабатывания
 				F_hold_data_idac = 1;//1-выполнено запоминание
 				F_run_test = 0;//1-идет тест
 				F_end_test = 1;//1-
+				UlogParam("down; comp = 1; more  go down", footim);
 			}
 			else{
 				code_IDAC -=64;
@@ -382,13 +390,15 @@ else{
 				//IDA0=code_IDAC;
 				Hi_code_IDAC=(code_IDAC >>8);	
 				IDA0L=code_IDAC & 0xFF;
-				IDA0H=Hi_code_IDAC;			
+				IDA0H=Hi_code_IDAC;	
+				UlogParam("up; comp = 1; change go down", footim);			
 			//}
 			
 		}
 		else{
 			//вот здесь идет увеличение кода ЦАПА 
 			if(code_IDAC <MAX_CODE_DAC_REG){//0xFFC0 - максимальное значение кода ЦАПА (если сденуть на 6 единиц врпаво)
+				UlogParam("up; comp = 0; more up", footim);
 				code_IDAC +=64;
 				//IDA0=code_IDAC;
 				Hi_code_IDAC=(code_IDAC >> 8);	

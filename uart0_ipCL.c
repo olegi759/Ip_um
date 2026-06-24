@@ -141,15 +141,16 @@ void uart_0(void) interrupt 4{
 				break;
 				
 				case TX_DEBUG_BEGIN:{
-					SBUF0 = bufTX_PC[0];
-					c_bufTX_PC = 1;
+					c_bufTX_PC = 2;
+					st_Tx_PC = TX_DEBUG;
+					SBUF0 = bufTX_PC[1];					
 					return;
 				}
 								
 				case TX_DEBUG: {
 					SBUF0 = bufTX_PC[c_bufTX_PC];
 					c_bufTX_PC++;
-					if(c_bufTX_PC==n_byte_Tx_PC) st_Tx_PC = TX_END;
+					if(c_bufTX_PC==n_byte_Tx_PC + 1) st_Tx_PC = TX_END;
 					return;
 				}
 				

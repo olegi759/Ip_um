@@ -139,6 +139,7 @@ void Interrupts_Init()
 //
 void init_v(void){
 
+DacStartValueLines.LineDac1 = DacStartValueLines.LineDac2 = DacStartValueLines.LineDac3 = DacStartValueLines.LineDac4 = 0;
 set_install=0;	
 set_canal_test[0]=set_canal_test[1]=set_canal_test[2]=set_canal_test[3]=0;	
 set_rele[0]=set_rele[1]=set_rele[2]=set_rele[3]=0;	
