@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 13:51:18 PAGE 1   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 17:17:03 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE UART0_IPCL
 OBJECT MODULE PLACED IN .\Objects\uart0_ipCL.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE uart0_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\Li
-                    -stings\uart0_ipCL.lst) OBJECT(.\Objects\uart0_ipCL.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE uart0_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\uart0_ipCL.lst) OBJECT(.\Objects\uart0_ipCL.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   5                                                      c_bufRX_PC = 0;                         //счет принятых
   53   5                                                      n_byte_Rx_PC = v_PC;            //байт данных в посылке
   54   5                                                      st_Rx_PC    = RX_DATA;
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 13:51:18 PAGE 2   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 17:17:03 PAGE 2   
 
   55   5                                              }
   56   4                                              else {
@@ -126,7 +126,7 @@ line level    source
  114   3                                      case TX_BYTECOUNT:
  115   3                                              SBUF0 =v_PC=Tx_counter_or_error;
  116   3                                              if(n_byte_Tx_PC){
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 13:51:18 PAGE 3   
+C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 17:17:03 PAGE 3   
 
  117   4                                                      st_Tx_PC=TX_DATA;
  118   4                                                      c_bufTX_PC=0;
@@ -172,350 +172,6 @@ line level    source
  158   1      }
 *** WARNING C294 IN LINE 72 OF uart0_ipCL.c: unreachable code
 *** WARNING C294 IN LINE 72 OF uart0_ipCL.c: unreachable code
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 13:51:18 PAGE 4   
-
-ASSEMBLY LISTING OF GENERATED OBJECT CODE
-
-
-             ; FUNCTION uart_0 (BEGIN)
-0000 C0E0              PUSH    ACC
-0002 C0F0              PUSH    B
-0004 C083              PUSH    DPH
-0006 C082              PUSH    DPL
-0008 C0D0              PUSH    PSW
-000A 75D000            MOV     PSW,#00H
-000D C000              PUSH    AR0
-000F C006              PUSH    AR6
-0011 C007              PUSH    AR7
-                                           ; SOURCE LINE # 7
-                                           ; SOURCE LINE # 10
-0013 209803            JB      RI0,$ + 6H
-0016 020000      R     LJMP    ?C0001
-                                           ; SOURCE LINE # 12
-0019 C298              CLR     RI0
-                                           ; SOURCE LINE # 13
-001B 859900      E     MOV     v_PC,SBUF0
-                                           ; SOURCE LINE # 15
-001E E500        E     MOV     A,st_Rx_PC
-0020 7008              JNZ     ?C0002
-                                           ; SOURCE LINE # 16
-0022 E500        E     MOV     A,v_PC
-0024 B42403            CJNE    A,#024H,?C0002
-                                           ; SOURCE LINE # 17
-0027 750001      E     MOV     st_Rx_PC,#01H
-                                           ; SOURCE LINE # 18
-                                           ; SOURCE LINE # 20
-002A         ?C0002:
-                                           ; SOURCE LINE # 23
-002A E500        E     MOV     A,st_Rx_PC
-002C 120000      E     LCALL   ?C?CCASE
-002F 0000        R     DW      ?C0006
-0031 00                DB      00H
-0032 0000        R     DW      ?C0007
-0034 01                DB      01H
-0035 0000        R     DW      ?C0008
-0037 02                DB      02H
-0038 0000        R     DW      ?C0011
-003A 03                DB      03H
-003B 0000        R     DW      ?C0012
-003D 04                DB      04H
-003E 0000        R     DW      ?C0017
-0040 05                DB      05H
-0041 0000        R     DW      ?C0019
-0043 06                DB      06H
-0044 0000        R     DW      ?C0022
-0046 07                DB      07H
-0047 0000              DW      00H
-0049 0000        R     DW      ?C0004
-                                           ; SOURCE LINE # 25
-004B 020000      R     LJMP    ?C0006
-                                           ; SOURCE LINE # 27
-004E         ?C0007:
-                                           ; SOURCE LINE # 28
-004E 750002      E     MOV     st_Rx_PC,#02H
-0051 020000      R     LJMP    ?C0006
-                                           ; SOURCE LINE # 31
-0054         ?C0008:
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 13:51:18 PAGE 5   
-
-                                           ; SOURCE LINE # 32
-0054 E500        E     MOV     A,v_PC
-0056 B4100D            CJNE    A,#010H,?C0009
-                                           ; SOURCE LINE # 33
-0059 75005B      E     MOV     CRC_Rx_PC,#05BH
-005C 7500BF      E     MOV     CRC_Rx_PC+01H,#0BFH
-                                           ; SOURCE LINE # 34
-005F 750003      E     MOV     st_Rx_PC,#03H
-                                           ; SOURCE LINE # 35
-0062 C200        E     CLR     F_run_com_PC
-                                           ; SOURCE LINE # 36
-0064 8062              SJMP    ?C0004
-0066         ?C0009:
-                                           ; SOURCE LINE # 37
-                                           ; SOURCE LINE # 38
-0066 750000      E     MOV     st_Rx_PC,#00H
-0069 020000      R     LJMP    ?C0006
-                                           ; SOURCE LINE # 40
-                                           ; SOURCE LINE # 41
-006C 805A              SJMP    ?C0004
-                                           ; SOURCE LINE # 43
-006E         ?C0011:
-                                           ; SOURCE LINE # 44
-006E 750004      E     MOV     st_Rx_PC,#04H
-                                           ; SOURCE LINE # 45
-0071 850000      E     MOV     Rx_command_PC,v_PC
-                                           ; SOURCE LINE # 46
-0074 8052              SJMP    ?C0004
-                                           ; SOURCE LINE # 48
-0076         ?C0012:
-                                           ; SOURCE LINE # 49
-0076 E500        E     MOV     A,v_PC
-0078 7005              JNZ     ?C0013
-007A 750006      E     MOV     st_Rx_PC,#06H
-007D 8049              SJMP    ?C0004
-007F         ?C0013:
-                                           ; SOURCE LINE # 50
-                                           ; SOURCE LINE # 51
-007F E500        E     MOV     A,v_PC
-0081 D3                SETB    C
-0082 9419              SUBB    A,#019H
-0084 500B              JNC     ?C0015
-                                           ; SOURCE LINE # 52
-0086 750000      E     MOV     c_bufRX_PC,#00H
-                                           ; SOURCE LINE # 53
-0089 850000      E     MOV     n_byte_Rx_PC,v_PC
-                                           ; SOURCE LINE # 54
-008C 750005      E     MOV     st_Rx_PC,#05H
-                                           ; SOURCE LINE # 55
-008F 8037              SJMP    ?C0004
-0091         ?C0015:
-                                           ; SOURCE LINE # 56
-                                           ; SOURCE LINE # 57
-0091 750000      E     MOV     st_Rx_PC,#00H
-0094 020000      R     LJMP    ?C0006
-                                           ; SOURCE LINE # 59
-                                           ; SOURCE LINE # 60
-                                           ; SOURCE LINE # 61
-0097 802F              SJMP    ?C0004
-                                           ; SOURCE LINE # 63
-0099         ?C0017:
-                                           ; SOURCE LINE # 64
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 13:51:18 PAGE 6   
-
-0099 AF00        E     MOV     R7,c_bufRX_PC
-009B 7400        E     MOV     A,#LOW bufRX_PC
-009D 2F                ADD     A,R7
-009E F582              MOV     DPL,A
-00A0 E4                CLR     A
-00A1 3400        E     ADDC    A,#HIGH bufRX_PC
-00A3 F583              MOV     DPH,A
-00A5 E500        E     MOV     A,v_PC
-00A7 F0                MOVX    @DPTR,A
-                                           ; SOURCE LINE # 65
-00A8 0500        E     INC     c_bufRX_PC
-                                           ; SOURCE LINE # 66
-00AA E500        E     MOV     A,c_bufRX_PC
-00AC B50019      E     CJNE    A,n_byte_Rx_PC,?C0004
-00AF 750006      E     MOV     st_Rx_PC,#06H
-                                           ; SOURCE LINE # 67
-00B2 8014              SJMP    ?C0004
-                                           ; SOURCE LINE # 69
-00B4         ?C0019:
-                                           ; SOURCE LINE # 71
-00B4 750007      E     MOV     st_Rx_PC,#07H
-00B7 020000      R     LJMP    ?C0006
-                                           ; SOURCE LINE # 72
-00BA 750000      E     MOV     st_Rx_PC,#00H
-00BD 020000      R     LJMP    ?C0006
-                                           ; SOURCE LINE # 76
-00C0         ?C0022:
-                                           ; SOURCE LINE # 80
-00C0 D200        E     SETB    F_run_com_PC
-                                           ; SOURCE LINE # 81
-00C2 750000      E     MOV     st_Rx_PC,#00H
-00C5 020000      R     LJMP    ?C0006
-                                           ; SOURCE LINE # 84
-00C8         ?C0004:
-                                           ; SOURCE LINE # 87
-00C8 E500        E     MOV     A,CRC_Rx_PC+01H
-00CA 6200        E     XRL     v_PC,A
-                                           ; SOURCE LINE # 88
-00CC 850000      E     MOV     CRC_Rx_PC+01H,CRC_Rx_PC
-                                           ; SOURCE LINE # 89
-00CF 750000      E     MOV     CRC_Rx_PC,#00H
-                                           ; SOURCE LINE # 90
-00D2 AF00        E     MOV     R7,v_PC
-00D4 75F002            MOV     B,#02H
-00D7 EF                MOV     A,R7
-00D8 A4                MUL     AB
-00D9 2400        E     ADD     A,#LOW wCRCTable
-00DB F582              MOV     DPL,A
-00DD E5F0              MOV     A,B
-00DF 3400        E     ADDC    A,#HIGH wCRCTable
-00E1 F583              MOV     DPH,A
-00E3 E4                CLR     A
-00E4 93                MOVC    A,@A+DPTR
-00E5 FE                MOV     R6,A
-00E6 7401              MOV     A,#01H
-00E8 93                MOVC    A,@A+DPTR
-00E9 FF                MOV     R7,A
-00EA 6200        E     XRL     CRC_Rx_PC+01H,A
-00EC EE                MOV     A,R6
-00ED 6200        E     XRL     CRC_Rx_PC,A
-                                           ; SOURCE LINE # 94
-00EF         ?C0001:
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 13:51:18 PAGE 7   
-
-                                           ; SOURCE LINE # 98
-00EF 209903            JB      TI0,$ + 6H
-00F2 020000      R     LJMP    ?C0006
-                                           ; SOURCE LINE # 99
-00F5 C299              CLR     TI0
-                                           ; SOURCE LINE # 101
-00F7 E500        E     MOV     A,st_Tx_PC
-00F9 120000      E     LCALL   ?C?CCASE
-00FC 0000        R     DW      ?C0025
-00FE 02                DB      02H
-00FF 0000        R     DW      ?C0026
-0101 03                DB      03H
-0102 0000        R     DW      ?C0027
-0104 04                DB      04H
-0105 0000        R     DW      ?C0030
-0107 05                DB      05H
-0108 0000        R     DW      ?C0032
-010A 06                DB      06H
-010B 0000        R     DW      ?C0033
-010D 07                DB      07H
-010E 0000              DW      00H
-0110 0000        R     DW      ?C0006
-                                           ; SOURCE LINE # 103
-0112         ?C0025:
-                                           ; SOURCE LINE # 104
-0112 750010      E     MOV     v_PC,#010H
-0115 759910            MOV     SBUF0,#010H
-                                           ; SOURCE LINE # 105
-0118 750099      E     MOV     CRC_Tx_PC,#099H
-011B 7500FE      E     MOV     CRC_Tx_PC+01H,#0FEH
-                                           ; SOURCE LINE # 106
-011E 750003      E     MOV     st_Tx_PC,#03H
-                                           ; SOURCE LINE # 107
-0121 8052              SJMP    ?C0024
-                                           ; SOURCE LINE # 109
-0123         ?C0026:
-                                           ; SOURCE LINE # 110
-0123 AF00        E     MOV     R7,Tx_command_PC
-0125 8F00        E     MOV     v_PC,R7
-0127 8F99              MOV     SBUF0,R7
-                                           ; SOURCE LINE # 111
-0129 750004      E     MOV     st_Tx_PC,#04H
-                                           ; SOURCE LINE # 112
-012C 8047              SJMP    ?C0024
-                                           ; SOURCE LINE # 114
-012E         ?C0027:
-                                           ; SOURCE LINE # 115
-012E AF00        E     MOV     R7,Tx_counter_or_error
-0130 8F00        E     MOV     v_PC,R7
-0132 8F99              MOV     SBUF0,R7
-                                           ; SOURCE LINE # 116
-0134 E500        E     MOV     A,n_byte_Tx_PC
-0136 6008              JZ      ?C0028
-                                           ; SOURCE LINE # 117
-0138 750005      E     MOV     st_Tx_PC,#05H
-                                           ; SOURCE LINE # 118
-013B 750000      E     MOV     c_bufTX_PC,#00H
-                                           ; SOURCE LINE # 119
-013E 8035              SJMP    ?C0024
-0140         ?C0028:
-                                           ; SOURCE LINE # 120
-0140 750006      E     MOV     st_Tx_PC,#06H
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 13:51:18 PAGE 8   
-
-                                           ; SOURCE LINE # 121
-0143 8030              SJMP    ?C0024
-                                           ; SOURCE LINE # 123
-0145         ?C0030:
-                                           ; SOURCE LINE # 124
-0145 AF00        E     MOV     R7,c_bufTX_PC
-0147 7400        E     MOV     A,#LOW bufTX_PC
-0149 2F                ADD     A,R7
-014A F582              MOV     DPL,A
-014C E4                CLR     A
-014D 3400        E     ADDC    A,#HIGH bufTX_PC
-014F F583              MOV     DPH,A
-0151 E0                MOVX    A,@DPTR
-0152 FF                MOV     R7,A
-0153 F500        E     MOV     v_PC,A
-0155 F599              MOV     SBUF0,A
-                                           ; SOURCE LINE # 125
-0157 0500        E     INC     c_bufTX_PC
-                                           ; SOURCE LINE # 126
-0159 E500        E     MOV     A,c_bufTX_PC
-015B B50017      E     CJNE    A,n_byte_Tx_PC,?C0024
-015E 750006      E     MOV     st_Tx_PC,#06H
-                                           ; SOURCE LINE # 128
-0161 8012              SJMP    ?C0024
-                                           ; SOURCE LINE # 130
-0163         ?C0032:
-                                           ; SOURCE LINE # 131
-0163 850099      E     MOV     SBUF0,CRC_Tx_PC+01H
-                                           ; SOURCE LINE # 132
-0166 750007      E     MOV     st_Tx_PC,#07H
-0169 8031              SJMP    ?C0006
-                                           ; SOURCE LINE # 134
-                                           ; SOURCE LINE # 136
-016B         ?C0033:
-                                           ; SOURCE LINE # 137
-016B 850099      E     MOV     SBUF0,CRC_Tx_PC
-                                           ; SOURCE LINE # 139
-016E 750008      E     MOV     st_Tx_PC,#08H
-0171 8029              SJMP    ?C0006
-                                           ; SOURCE LINE # 141
-                                           ; SOURCE LINE # 143
-0173 8027              SJMP    ?C0006
-                                           ; SOURCE LINE # 148
-0175         ?C0024:
-                                           ; SOURCE LINE # 151
-0175 E500        E     MOV     A,CRC_Tx_PC+01H
-0177 6200        E     XRL     v_PC,A
-                                           ; SOURCE LINE # 152
-0179 850000      E     MOV     CRC_Tx_PC+01H,CRC_Tx_PC
-                                           ; SOURCE LINE # 153
-017C 750000      E     MOV     CRC_Tx_PC,#00H
-                                           ; SOURCE LINE # 154
-017F AF00        E     MOV     R7,v_PC
-0181 75F002            MOV     B,#02H
-0184 EF                MOV     A,R7
-0185 A4                MUL     AB
-0186 2400        E     ADD     A,#LOW wCRCTable
-0188 F582              MOV     DPL,A
-018A E5F0              MOV     A,B
-018C 3400        E     ADDC    A,#HIGH wCRCTable
-018E F583              MOV     DPH,A
-0190 E4                CLR     A
-C51 COMPILER V9.60.7.0   UART0_IPCL                                                        06/23/2026 13:51:18 PAGE 9   
-
-0191 93                MOVC    A,@A+DPTR
-0192 FE                MOV     R6,A
-0193 7401              MOV     A,#01H
-0195 93                MOVC    A,@A+DPTR
-0196 FF                MOV     R7,A
-0197 6200        E     XRL     CRC_Tx_PC+01H,A
-0199 EE                MOV     A,R6
-019A 6200        E     XRL     CRC_Tx_PC,A
-                                           ; SOURCE LINE # 156
-                                           ; SOURCE LINE # 158
-019C         ?C0006:
-019C D007              POP     AR7
-019E D006              POP     AR6
-01A0 D000              POP     AR0
-01A2 D0D0              POP     PSW
-01A4 D082              POP     DPL
-01A6 D083              POP     DPH
-01A8 D0F0              POP     B
-01AA D0E0              POP     ACC
-01AC 32                RETI    
-             ; FUNCTION uart_0 (END)
-
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

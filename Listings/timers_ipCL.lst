@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/23/2026 13:51:18 PAGE 1   
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/23/2026 17:17:04 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIMERS_IPCL
 OBJECT MODULE PLACED IN .\Objects\timers_ipCL.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE timers_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\L
-                    -istings\timers_ipCL.lst) OBJECT(.\Objects\timers_ipCL.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE timers_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\timers_ipCL.lst) OBJECT(.\Objects\timers_ipCL.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   1              if(div_f_start_dac >3){
   53   2                      div_f_start_dac=0;
   54   2                      F_load_idac=1;
-C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/23/2026 13:51:18 PAGE 2   
+C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/23/2026 17:17:04 PAGE 2   
 
   55   2                      
   56   2              }
@@ -77,79 +77,6 @@ line level    source
   65   1      */              
   66   1                              
   67   1      }
-C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/23/2026 13:51:18 PAGE 3   
-
-ASSEMBLY LISTING OF GENERATED OBJECT CODE
-
-
-             ; FUNCTION INT_Timer_2 (BEGIN)
-0000 C0E0              PUSH    ACC
-0002 C0D0              PUSH    PSW
-                                           ; SOURCE LINE # 15
-                                           ; SOURCE LINE # 19
-0004 C2CF              CLR     TF2H
-                                           ; SOURCE LINE # 20
-0006 0500        E     INC     footim+01H
-0008 E500        E     MOV     A,footim+01H
-000A 7002              JNZ     ?C0008
-000C 0500        E     INC     footim
-000E         ?C0008:
-                                           ; SOURCE LINE # 23
-000E E500        E     MOV     A,c_10ms
-0010 7013              JNZ     ?C0001
-                                           ; SOURCE LINE # 24
-0012 750063      E     MOV     c_10ms,#063H
-                                           ; SOURCE LINE # 25
-0015 E500        E     MOV     A,c_seconds
-0017 C3                CLR     C
-0018 944F              SUBB    A,#04FH
-001A 4005              JC      ?C0002
-                                           ; SOURCE LINE # 26
-001C 750000      E     MOV     c_seconds,#00H
-                                           ; SOURCE LINE # 27
-001F 8006              SJMP    ?C0005
-0021         ?C0002:
-                                           ; SOURCE LINE # 28
-0021 0500        E     INC     c_seconds
-                                           ; SOURCE LINE # 34
-0023 8002              SJMP    ?C0005
-0025         ?C0001:
-                                           ; SOURCE LINE # 35
-0025 1500        E     DEC     c_10ms
-                                           ; SOURCE LINE # 36
-0027         ?C0005:
-0027 D0D0              POP     PSW
-0029 D0E0              POP     ACC
-002B 32                RETI    
-             ; FUNCTION INT_Timer_2 (END)
-
-             ; FUNCTION INT_Timer_3 (BEGIN)
-0000 C0E0              PUSH    ACC
-0002 C0D0              PUSH    PSW
-                                           ; SOURCE LINE # 47
-                                           ; SOURCE LINE # 50
-0004 53917F            ANL     TMR3CN,#07FH
-                                           ; SOURCE LINE # 51
-0007 0500        E     INC     div_f_start_dac
-                                           ; SOURCE LINE # 52
-0009 E500        E     MOV     A,div_f_start_dac
-000B D3                SETB    C
-000C 9403              SUBB    A,#03H
-000E 4005              JC      ?C0007
-                                           ; SOURCE LINE # 53
-0010 750000      E     MOV     div_f_start_dac,#00H
-                                           ; SOURCE LINE # 54
-0013 D200        E     SETB    F_load_idac
-                                           ; SOURCE LINE # 56
-C51 COMPILER V9.60.7.0   TIMERS_IPCL                                                       06/23/2026 13:51:18 PAGE 4   
-
-                                           ; SOURCE LINE # 67
-0015         ?C0007:
-0015 D0D0              POP     PSW
-0017 D0E0              POP     ACC
-0019 32                RETI    
-             ; FUNCTION INT_Timer_3 (END)
-
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

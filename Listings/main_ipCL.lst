@@ -1,10 +1,10 @@
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 17:17:03 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN_IPCL
 OBJECT MODULE PLACED IN .\Objects\main_ipCL.obj
-COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\Lis
-                    -tings\main_ipCL.lst) OBJECT(.\Objects\main_ipCL.obj)
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main_ipCL.c OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\main_ipCL.lst) OBJECT(.\Objects\main_ipCL.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52   1      //              Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;      
   53   1      //set_canal_test[0]=0x01;
   54   1      //              set_canal_test[1]=0x01;
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 17:17:03 PAGE 2   
 
   55   1      //              set_canal_test[2]=0x00;
   56   1      //              set_canal_test[3]=0x01;
@@ -103,30 +103,30 @@ line level    source
   91   3              if(F_start_test_L1){
   92   4                      F_start_test_L1=0;
   93   4                      set_test_L1();
-  94   4                      code_IDAC = DacStartValueLines.LineDac1;
+  94   4                      code_IDAC = DacStartValueLines.LineDac1 << 6;
   95   4              }
   96   3              //запуск тестирования
   97   3              else if(F_start_test_L2){
   98   4                      F_start_test_L2=0;
   99   4                      set_test_L2();
- 100   4                      code_IDAC = DacStartValueLines.LineDac2;
+ 100   4                      code_IDAC = DacStartValueLines.LineDac2 << 6;
  101   4              }
  102   3              //запуск тестирования
  103   3              else if(F_start_test_L3){
  104   4                      F_start_test_L3=0;
  105   4                      set_test_L3();
- 106   4                      code_IDAC = DacStartValueLines.LineDac3;
+ 106   4                      code_IDAC = DacStartValueLines.LineDac3 << 6;
  107   4              }
  108   3              //запуск тестирования
  109   3              else if(F_start_test_L4){
  110   4                      F_start_test_L4=0;
  111   4                      set_test_L4();
- 112   4                      code_IDAC = DacStartValueLines.LineDac4;
+ 112   4                      code_IDAC = DacStartValueLines.LineDac4 << 6;
  113   4              }       
  114   3              
  115   3      }
  116   2      
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 3   
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 17:17:03 PAGE 3   
 
  117   2      //закончили тест одной линии
  118   2      if(F_end_test){
@@ -190,7 +190,7 @@ line level    source
  176   3                      else if(canal_test==4){
  177   4                              if(F_hold_data_idac){//1-выполнено запоминание                  
  178   5                                      Status_SL.NRange4=range;
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 4   
+C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 17:17:03 PAGE 4   
 
  179   5                                      //hold_code_IDAC=(hold_code_IDAC >>6);
  180   5                                      Status_SL.Data4_Lo=(hold_code_IDAC &0xFF);
@@ -215,310 +215,10 @@ line level    source
  199   2      
  200   2      }
  201   1      }
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 5   
-
-ASSEMBLY LISTING OF GENERATED OBJECT CODE
-
-
-             ; FUNCTION main (BEGIN)
-                                           ; SOURCE LINE # 31
-                                           ; SOURCE LINE # 34
-0000 120000      E     LCALL   init_ipCL
-                                           ; SOURCE LINE # 37
-0003 C200        R     CLR     rele_L1
-0005 C200        R     CLR     rele_L2
-0007 C200        R     CLR     rele_L3
-0009 C200        R     CLR     rele_L4
-                                           ; SOURCE LINE # 38
-000B C200        R     CLR     gain_L1
-000D C200        R     CLR     gain_L2
-000F C200        R     CLR     gain_L3
-0011 C200        R     CLR     gain_L4
-                                           ; SOURCE LINE # 39
-0013 C200        R     CLR     idac_L1
-0015 C200        R     CLR     idac_L2
-0017 C200        R     CLR     idac_L3
-0019 C200        R     CLR     idac_L4
-                                           ; SOURCE LINE # 40
-001B 120000      E     LCALL   set_tpic1
-                                           ; SOURCE LINE # 41
-001E 120000      E     LCALL   set_tpic2
-                                           ; SOURCE LINE # 42
-0021 C294              CLR     P_tpic1_G
-                                           ; SOURCE LINE # 43
-0023 C290              CLR     P_tpic2_G
-                                           ; SOURCE LINE # 46
-0025 D2AF              SETB    EA
-                                           ; SOURCE LINE # 47
-0027 C200        R     CLR     F_delaed_response
-0029         ?C0001:
-                                           ; SOURCE LINE # 66
-                                           ; SOURCE LINE # 70
-0029 75EC00            MOV     PCA0CPH2,#00H
-                                           ; SOURCE LINE # 72
-002C 300005      R     JNB     F_run_com_PC,?C0003
-                                           ; SOURCE LINE # 73
-002F C200        R     CLR     F_run_com_PC
-                                           ; SOURCE LINE # 74
-0031 120000      E     LCALL   work_PC
-                                           ; SOURCE LINE # 75
-0034         ?C0003:
-                                           ; SOURCE LINE # 77
-0034 120000      E     LCALL   delayed_response_PC
-                                           ; SOURCE LINE # 81
-0037 30000D      R     JNB     F_run_test,?C0004
-                                           ; SOURCE LINE # 82
-003A 120000      E     LCALL   test_in_comp
-                                           ; SOURCE LINE # 84
-003D 300045      R     JNB     F_load_idac,?C0006
-                                           ; SOURCE LINE # 85
-0040 C200        R     CLR     F_load_idac
-                                           ; SOURCE LINE # 86
-0042 120000      E     LCALL   step_test_L
-                                           ; SOURCE LINE # 87
-                                           ; SOURCE LINE # 88
-0045 803E              SJMP    ?C0006
-0047         ?C0004:
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 6   
-
-                                           ; SOURCE LINE # 89
-                                           ; SOURCE LINE # 91
-0047 30000D      R     JNB     F_start_test_L1,?C0007
-                                           ; SOURCE LINE # 92
-004A C200        R     CLR     F_start_test_L1
-                                           ; SOURCE LINE # 93
-004C 120000      E     LCALL   set_test_L1
-                                           ; SOURCE LINE # 94
-004F 850000      R     MOV     code_IDAC,DacStartValueLines
-0052 850000      R     MOV     code_IDAC+01H,DacStartValueLines+01H
-                                           ; SOURCE LINE # 95
-0055 802E              SJMP    ?C0006
-0057         ?C0007:
-                                           ; SOURCE LINE # 97
-0057 30000D      R     JNB     F_start_test_L2,?C0009
-                                           ; SOURCE LINE # 98
-005A C200        R     CLR     F_start_test_L2
-                                           ; SOURCE LINE # 99
-005C 120000      E     LCALL   set_test_L2
-                                           ; SOURCE LINE # 100
-005F 850000      R     MOV     code_IDAC,DacStartValueLines+02H
-0062 850000      R     MOV     code_IDAC+01H,DacStartValueLines+03H
-                                           ; SOURCE LINE # 101
-0065 801E              SJMP    ?C0006
-0067         ?C0009:
-                                           ; SOURCE LINE # 103
-0067 30000D      R     JNB     F_start_test_L3,?C0011
-                                           ; SOURCE LINE # 104
-006A C200        R     CLR     F_start_test_L3
-                                           ; SOURCE LINE # 105
-006C 120000      E     LCALL   set_test_L3
-                                           ; SOURCE LINE # 106
-006F 850000      R     MOV     code_IDAC,DacStartValueLines+04H
-0072 850000      R     MOV     code_IDAC+01H,DacStartValueLines+05H
-                                           ; SOURCE LINE # 107
-0075 800E              SJMP    ?C0006
-0077         ?C0011:
-                                           ; SOURCE LINE # 109
-0077 30000B      R     JNB     F_start_test_L4,?C0006
-                                           ; SOURCE LINE # 110
-007A C200        R     CLR     F_start_test_L4
-                                           ; SOURCE LINE # 111
-007C 120000      E     LCALL   set_test_L4
-                                           ; SOURCE LINE # 112
-007F 850000      R     MOV     code_IDAC,DacStartValueLines+06H
-0082 850000      R     MOV     code_IDAC+01H,DacStartValueLines+07H
-                                           ; SOURCE LINE # 113
-                                           ; SOURCE LINE # 115
-0085         ?C0006:
-                                           ; SOURCE LINE # 118
-0085 3000A1      R     JNB     F_end_test,?C0001
-                                           ; SOURCE LINE # 119
-0088 C200        R     CLR     F_end_test
-                                           ; SOURCE LINE # 120
-008A 75EC00            MOV     PCA0CPH2,#00H
-                                           ; SOURCE LINE # 122
-008D E500        R     MOV     A,canal_test
-008F 6401              XRL     A,#01H
-0091 702D              JNZ     ?C0015
-                                           ; SOURCE LINE # 123
-0093 300016      R     JNB     F_hold_data_idac,?C0016
-                                           ; SOURCE LINE # 124
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 7   
-
-0096 850000      R     MOV     Status_SL,range
-                                           ; SOURCE LINE # 126
-0099 AF00        R     MOV     R7,hold_code_IDAC+01H
-009B EF                MOV     A,R7
-009C F500        R     MOV     Status_SL+01H,A
-                                           ; SOURCE LINE # 127
-009E E500        R     MOV     A,hold_code_IDAC
-00A0 F500        R     MOV     hold_code_IDAC+01H,A
-00A2 750000      R     MOV     hold_code_IDAC,#00H
-                                           ; SOURCE LINE # 128
-00A5 AF00        R     MOV     R7,hold_code_IDAC+01H
-00A7 EF                MOV     A,R7
-00A8 F500        R     MOV     Status_SL+02H,A
-                                           ; SOURCE LINE # 129
-00AA 8009              SJMP    ?C0017
-00AC         ?C0016:
-                                           ; SOURCE LINE # 130
-                                           ; SOURCE LINE # 131
-00AC 750000      R     MOV     Status_SL,#00H
-                                           ; SOURCE LINE # 132
-00AF 750000      R     MOV     Status_SL+01H,#00H
-                                           ; SOURCE LINE # 133
-00B2 750000      R     MOV     Status_SL+02H,#00H
-                                           ; SOURCE LINE # 134
-00B5         ?C0017:
-                                           ; SOURCE LINE # 135
-00B5 C200        R     CLR     idac_L1
-                                           ; SOURCE LINE # 136
-00B7 120000      E     LCALL   set_tpic1
-                                           ; SOURCE LINE # 137
-00BA 750000      R     MOV     set_canal_test,#00H
-                                           ; SOURCE LINE # 141
-00BD 020000      R     LJMP    ?C0018
-00C0         ?C0015:
-                                           ; SOURCE LINE # 142
-00C0 E500        R     MOV     A,canal_test
-00C2 6402              XRL     A,#02H
-00C4 702C              JNZ     ?C0019
-                                           ; SOURCE LINE # 143
-00C6 300016      R     JNB     F_hold_data_idac,?C0020
-                                           ; SOURCE LINE # 144
-00C9 850000      R     MOV     Status_SL+03H,range
-                                           ; SOURCE LINE # 146
-00CC AF00        R     MOV     R7,hold_code_IDAC+01H
-00CE EF                MOV     A,R7
-00CF F500        R     MOV     Status_SL+04H,A
-                                           ; SOURCE LINE # 147
-00D1 E500        R     MOV     A,hold_code_IDAC
-00D3 F500        R     MOV     hold_code_IDAC+01H,A
-00D5 750000      R     MOV     hold_code_IDAC,#00H
-                                           ; SOURCE LINE # 148
-00D8 AF00        R     MOV     R7,hold_code_IDAC+01H
-00DA EF                MOV     A,R7
-00DB F500        R     MOV     Status_SL+05H,A
-                                           ; SOURCE LINE # 149
-00DD 8009              SJMP    ?C0021
-00DF         ?C0020:
-                                           ; SOURCE LINE # 150
-                                           ; SOURCE LINE # 151
-00DF 750000      R     MOV     Status_SL+03H,#00H
-                                           ; SOURCE LINE # 152
-00E2 750000      R     MOV     Status_SL+04H,#00H
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 8   
-
-                                           ; SOURCE LINE # 153
-00E5 750000      R     MOV     Status_SL+05H,#00H
-                                           ; SOURCE LINE # 154
-00E8         ?C0021:
-                                           ; SOURCE LINE # 155
-00E8 C200        R     CLR     idac_L2
-                                           ; SOURCE LINE # 156
-00EA 120000      E     LCALL   set_tpic1
-                                           ; SOURCE LINE # 157
-00ED 750000      R     MOV     set_canal_test+01H,#00H
-                                           ; SOURCE LINE # 158
-00F0 8062              SJMP    ?C0018
-00F2         ?C0019:
-                                           ; SOURCE LINE # 159
-00F2 E500        R     MOV     A,canal_test
-00F4 6403              XRL     A,#03H
-00F6 702C              JNZ     ?C0023
-                                           ; SOURCE LINE # 160
-00F8 300016      R     JNB     F_hold_data_idac,?C0024
-                                           ; SOURCE LINE # 161
-00FB 850000      R     MOV     Status_SL+06H,range
-                                           ; SOURCE LINE # 163
-00FE AF00        R     MOV     R7,hold_code_IDAC+01H
-0100 EF                MOV     A,R7
-0101 F500        R     MOV     Status_SL+07H,A
-                                           ; SOURCE LINE # 164
-0103 E500        R     MOV     A,hold_code_IDAC
-0105 F500        R     MOV     hold_code_IDAC+01H,A
-0107 750000      R     MOV     hold_code_IDAC,#00H
-                                           ; SOURCE LINE # 165
-010A AF00        R     MOV     R7,hold_code_IDAC+01H
-010C EF                MOV     A,R7
-010D F500        R     MOV     Status_SL+08H,A
-                                           ; SOURCE LINE # 166
-010F 8009              SJMP    ?C0025
-0111         ?C0024:
-                                           ; SOURCE LINE # 167
-                                           ; SOURCE LINE # 168
-0111 750000      R     MOV     Status_SL+06H,#00H
-                                           ; SOURCE LINE # 169
-0114 750000      R     MOV     Status_SL+07H,#00H
-                                           ; SOURCE LINE # 170
-0117 750000      R     MOV     Status_SL+08H,#00H
-                                           ; SOURCE LINE # 171
-011A         ?C0025:
-                                           ; SOURCE LINE # 172
-011A C200        R     CLR     idac_L3
-                                           ; SOURCE LINE # 173
-011C 120000      E     LCALL   set_tpic2
-                                           ; SOURCE LINE # 174
-011F 750000      R     MOV     set_canal_test+02H,#00H
-                                           ; SOURCE LINE # 175
-0122 8030              SJMP    ?C0018
-0124         ?C0023:
-                                           ; SOURCE LINE # 176
-0124 E500        R     MOV     A,canal_test
-0126 6404              XRL     A,#04H
-0128 702A              JNZ     ?C0018
-                                           ; SOURCE LINE # 177
-012A 300016      R     JNB     F_hold_data_idac,?C0028
-                                           ; SOURCE LINE # 178
-012D 850000      R     MOV     Status_SL+09H,range
-C51 COMPILER V9.60.7.0   MAIN_IPCL                                                         06/23/2026 13:51:18 PAGE 9   
-
-                                           ; SOURCE LINE # 180
-0130 AF00        R     MOV     R7,hold_code_IDAC+01H
-0132 EF                MOV     A,R7
-0133 F500        R     MOV     Status_SL+0AH,A
-                                           ; SOURCE LINE # 181
-0135 E500        R     MOV     A,hold_code_IDAC
-0137 F500        R     MOV     hold_code_IDAC+01H,A
-0139 750000      R     MOV     hold_code_IDAC,#00H
-                                           ; SOURCE LINE # 182
-013C AF00        R     MOV     R7,hold_code_IDAC+01H
-013E EF                MOV     A,R7
-013F F500        R     MOV     Status_SL+0BH,A
-                                           ; SOURCE LINE # 183
-0141 8009              SJMP    ?C0029
-0143         ?C0028:
-                                           ; SOURCE LINE # 184
-                                           ; SOURCE LINE # 185
-0143 750000      R     MOV     Status_SL+09H,#00H
-                                           ; SOURCE LINE # 186
-0146 750000      R     MOV     Status_SL+0AH,#00H
-                                           ; SOURCE LINE # 187
-0149 750000      R     MOV     Status_SL+0BH,#00H
-                                           ; SOURCE LINE # 188
-014C         ?C0029:
-                                           ; SOURCE LINE # 189
-014C C200        R     CLR     idac_L4
-                                           ; SOURCE LINE # 190
-014E 120000      E     LCALL   set_tpic2
-                                           ; SOURCE LINE # 191
-0151 750000      R     MOV     set_canal_test+03H,#00H
-                                           ; SOURCE LINE # 192
-0154         ?C0018:
-                                           ; SOURCE LINE # 194
-0154 120000      E     LCALL   set_f_start_test_Lx
-                                           ; SOURCE LINE # 196
-0157 C200        R     CLR     F_hold_data_idac
-                                           ; SOURCE LINE # 197
-                                           ; SOURCE LINE # 200
-0159 020000      R     LJMP    ?C0001
-015C 22                RET     
-             ; FUNCTION main (END)
-
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    349    ----
+   CODE SIZE        =    396    ----
    CONSTANT SIZE    =    512    ----
    XDATA SIZE       =     60    ----
    PDATA SIZE       =   ----    ----

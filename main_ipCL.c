@@ -91,25 +91,25 @@ else{
 	if(F_start_test_L1){
 		F_start_test_L1=0;
 		set_test_L1();
-		code_IDAC = DacStartValueLines.LineDac1;
+		code_IDAC = DacStartValueLines.LineDac1 << 6;
 	}
 	//запуск тестирования
 	else if(F_start_test_L2){
 		F_start_test_L2=0;
 		set_test_L2();
-		code_IDAC = DacStartValueLines.LineDac2;
+		code_IDAC = DacStartValueLines.LineDac2 << 6;
 	}
 	//запуск тестирования
 	else if(F_start_test_L3){
 		F_start_test_L3=0;
 		set_test_L3();
-		code_IDAC = DacStartValueLines.LineDac3;
+		code_IDAC = DacStartValueLines.LineDac3 << 6;
 	}
 	//запуск тестирования
 	else if(F_start_test_L4){
 		F_start_test_L4=0;
 		set_test_L4();
-		code_IDAC = DacStartValueLines.LineDac4;
+		code_IDAC = DacStartValueLines.LineDac4 << 6;
 	}	
 	
 }

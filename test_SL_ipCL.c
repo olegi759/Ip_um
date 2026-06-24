@@ -332,9 +332,9 @@ else{
 		if(F_in_comp_on==0){//отпустил
 			sum_code_IDAC+=((code_IDAC>>6) -1);//????????IDAC для интегрирования
 			c_sum_code++;
-			if(c_sum_code >=32){//64  усе
+			if(c_sum_code >=8){//64  усе
 				//запоминаем
-				hold_code_IDAC=sum_code_IDAC /32;//64
+				hold_code_IDAC=sum_code_IDAC /8;//64
 				F_hold_data_idac=1;//1-выполнено запоминание
 				F_run_sum=0;//1-выполняем суммирование
 			}
@@ -672,14 +672,14 @@ if(install_code_IDAC_1 > 512) test1_install = install_code_IDAC_1 - 512;
 else test1_install = 512 - install_code_IDAC_1;
 	
 if(install_code_IDAC_2 > 512)test2_install=install_code_IDAC_2 - 512;
-else test2_install = 512 -install_code_IDAC_2;	
+else test2_install = 512 - install_code_IDAC_2;	
 	
 if(test1_install > test2_install) {
-	((WORD*)&DacStartValueLines)[chNumber - 1] = test2_install << 6;	
+	((WORD*)&DacStartValueLines)[chNumber - 1] = install_code_IDAC_2 - 20;	
 	return 2;
 }
 else {
-	((WORD*)&DacStartValueLines)[chNumber - 1] = test1_install << 6;
+	((WORD*)&DacStartValueLines)[chNumber - 1] = install_code_IDAC_1 - 20;
 	return 1;		
 }	
 }
