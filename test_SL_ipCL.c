@@ -328,15 +328,15 @@ if(F_run_sum==0){//не выполняем суммирование
 
 //F_run_sum==1;//1-выполняем суммирование	
 else{
-	if(F_rise_step_idac==0){//вниз
-		if(F_in_comp_on==0){//отпустил
-			sum_code_IDAC+=((code_IDAC>>6) -1);//????????IDAC для интегрирования
+	if(F_rise_step_idac == 0){//вниз
+		if(F_in_comp_on == 0){//отпустил
+			sum_code_IDAC += ((code_IDAC>>6) -1);//????????IDAC для интегрирования
 			c_sum_code++;
 			if(c_sum_code >= INTEGRATION_COUNT){//64  усе
 				//запоминаем
-				hold_code_IDAC=sum_code_IDAC / INTEGRATION_COUNT;//64
-				F_hold_data_idac=1;//1-выполнено запоминание
-				F_run_sum=0;//1-выполняем суммирование
+				hold_code_IDAC = sum_code_IDAC / INTEGRATION_COUNT;//64
+				F_hold_data_idac = 1;//1-выполнено запоминание
+				F_run_sum = 0;//1-выполняем суммирование
 			}
 			else{//разворот вверх
 				F_rise_step_idac=1;//

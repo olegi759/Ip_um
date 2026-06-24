@@ -122,8 +122,8 @@ BYTE data n_byte_Tx_PC;		// необходимо передать байт
 union _WB data CRC_Rx_PC;		   //контрольная сумма
 union _WB data CRC_Tx_PC;		   //контрольная сумма
 
-BYTE xdata bufTX_PC[25];	
-BYTE xdata bufRX_PC[25];
+BYTE xdata bufTX_PC[TX_BUFFER_SIZE];	
+BYTE xdata bufRX_PC[RX_BUFFER_SIZE];
 
 BYTE	data c_bufTX_PC;		//счетчик переданнх байт
 BYTE	data c_bufRX_PC;		//счетчик принятых байт

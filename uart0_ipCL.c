@@ -123,7 +123,7 @@ void uart_0(void) interrupt 4{
 				case TX_DATA:
 					SBUF0 =v_PC=bufTX_PC[c_bufTX_PC];
 					c_bufTX_PC++;
-					if(c_bufTX_PC==n_byte_Tx_PC)st_Tx_PC=TX_CRC_1;
+					if(c_bufTX_PC==n_byte_Tx_PC) st_Tx_PC = TX_CRC_1;
 
 				break;
 			
@@ -139,7 +139,20 @@ void uart_0(void) interrupt 4{
 					 st_Tx_PC=TX_END;
 					 return;
 				break;
-
+				
+				case TX_DEBUG_BEGIN:{
+					SBUF0 = bufTX_PC[0];
+					c_bufTX_PC = 1;
+					return;
+				}
+								
+				case TX_DEBUG: {
+					SBUF0 = bufTX_PC[c_bufTX_PC];
+					c_bufTX_PC++;
+					if(c_bufTX_PC==n_byte_Tx_PC) st_Tx_PC = TX_END;
+					return;
+				}
+				
 				default:
 					//OFF_TX_PC;		//Выкл передатчик 485
 					//SCON1 |= 0x10;			   //разреш прием

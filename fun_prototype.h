@@ -26,4 +26,8 @@ void install_SL(void);
 //выбор оптимального значения
 BYTE optimal_value_selection(BYTE chNumber);
 
+//void SendPc(BYTE* logBuffer, int length);
+
 void set_f_start_test_Lx(void);
+void Ulog1(char *txt);
+void Ulog2(char *txt, int val);

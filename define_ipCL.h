@@ -35,6 +35,9 @@
 текущее состояние UART0 (связь с компом)
 ------------------------------------------------------*/
 
+#define RX_BUFFER_SIZE      25
+#define TX_BUFFER_SIZE      50
+
 #define RX_WAIT 			0x00	// 	   
 #define RX_START			0x01	// 
 #define RX_ADDRESS			0x02	// 
@@ -53,6 +56,8 @@
 #define TX_CRC_1			0x06	// 
 #define TX_CRC_2			0x07	//
 #define TX_END				0x08	//
+#define TX_DEBUG_BEGIN      0x0D
+#define TX_DEBUG            0x1D      
 
 #define ADDR_IPCL		0x10	//адресс cpu контроля линий
 #define ADDR_IPCP		0x11	//адресс cpu контроля источ питания

@@ -3,7 +3,8 @@
 ***************************/
 //#include "C8051F330.h"
 #include "extern_ipCL.h"
-#include <string.h>
+#include <string.h>\
+#include <stdarg.h>
 //обработка команды
 void work_PC(void){
 
@@ -213,3 +214,102 @@ void delayed_response_PC(){
 	
 }
 
+void SendPc(BYTE* logBuffer, int length){
+	int i = 0;
+	for(i = 1; i < length; i++){
+		bufTX_PC[i - 1] = logBuffer[i];
+	}
+	Tx_counter_or_error = length - 1;
+	st_Tx_PC = TX_DEBUG;
+	SBUF0 = logBuffer[0];
+}
+
+//// ========== ulog ==========
+
+//#define MAX_LOG_LEN  TX_BUFFER_SIZE
+
+//// Буфер для логов – статический, в XDATA (если есть XRAM)
+//char xdata logBuffer[MAX_LOG_LEN];
+//static unsigned int msg_id = 0;
+
+//// Вспомогательная функция: дописывает unsigned int в строку
+//static void append_uint(char **ptr, unsigned int val) {
+//    char tmp[12];
+//    int i = 0;
+//    do {
+//        tmp[i++] = '0' + (val % 10);
+//        val /= 10;
+//    } while (val);
+//    while (i > 0) {
+//        *(*ptr)++ = tmp[--i];
+//    }
+//}
+
+//// Вспомогательная функция: копирует строку с ограничением по длине
+//static void copy_string(char **dest, const char *src, int max_len) {
+//    while (max_len > 0 && *src != '\0') {
+//        *(*dest)++ = *src++;
+//        max_len--;
+//    }
+//}
+
+//// Функция с одним параметром (только строка)
+//void Ulog1(char *txt) {
+//    char *ptr = logBuffer;
+//    int remaining = MAX_LOG_LEN;
+//    int len;
+
+//    msg_id++;
+
+//    // Добавляем префикс "[ID] "
+//    *ptr++ = '[';
+//    remaining--;
+//    append_uint(&ptr, msg_id);
+//    *ptr++ = ']';
+//    *ptr++ = ' ';
+//    remaining -= 2;
+
+//    // Копируем текст, оставляя место для завершающего нуля
+//    if (remaining > 1) {
+//        len = remaining - 1;   // максимальная длина копирования
+//        copy_string(&ptr, txt, len);
+//    }
+//    *ptr = '\0';
+
+//    SendPc((BYTE*)logBuffer, (int)(ptr - logBuffer));
+//}
+
+//// Функция с двумя параметрами (строка + число)
+//void Ulog2(char *txt, int val) {
+//    char *ptr = logBuffer;
+//    int remaining = MAX_LOG_LEN;
+//    int len;
+
+//    msg_id++;
+
+//    // Префикс
+//    *ptr++ = '[';
+//    remaining--;
+//    append_uint(&ptr, msg_id);
+//    *ptr++ = ']';
+//    *ptr++ = ' ';
+//    remaining -= 2;
+
+//    // Копируем текст, оставляя место для '=', числа (макс. 11 символов) и '\0'
+//    if (remaining > 1 + 11) {
+//        len = remaining - 1 - 11;
+//        copy_string(&ptr, txt, len);
+//    } else {
+//        len = 0;
+//    }
+
+//    // Добавляем "="
+//    *ptr++ = '=';
+//    remaining -= (len + 1);
+
+//    // Добавляем число
+//    append_uint(&ptr, (unsigned int)val);
+//    *ptr = '\0';
+
+//    SendPc((BYTE*)logBuffer, (int)(ptr - logBuffer));
+//}
