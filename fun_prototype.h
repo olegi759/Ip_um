@@ -29,3 +29,11 @@ BYTE optimal_value_selection(BYTE chNumber);
 void set_f_start_test_Lx(void);
 void Ulog(char *txt);
 void UlogParam(char *txt, int val);
+
+#ifdef DEBUG
+    #define Ulog(txt) Ulog(txt)
+    #define UlogParam(txt, val) UlogParam(txt, val)
+#else
+    #define Ulog(txt) do { } while(0)
+    #define UlogParam(txt, val) do { } while(0)
+#endif

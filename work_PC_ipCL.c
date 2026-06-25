@@ -240,7 +240,7 @@ static void append_uint(char **ptr, unsigned int val) {
         *(*ptr)++ = tmp[--i];
     }
 }
-
+#ifdef DEBUG
 // Вспомогательная функция: копирует строку с ограничением по длине
 static void copy_string(char **dest, const char *src, int max_len) {
     while (max_len > 0 && *src != '\0') {
@@ -313,3 +313,4 @@ void UlogParam(char *txt, int val) {
 
     SendPc((int)(ptr - bufTX_PC));
 }
+#endif
