@@ -277,6 +277,7 @@ if(F_run_sum==0){//не выполняем суммирование
 				F_hold_data_idac=1;//1-выполнено запоминание
 				F_run_test=0;//1-идет тест
 				F_end_test=1;//1-
+				code_IDAC = 0x280;
 			}
 			else{
 					
@@ -319,11 +320,13 @@ if(F_run_sum==0){//не выполняем суммирование
 			//IDA0=code_IDAC;
 			Hi_code_IDAC=(code_IDAC >>8);	
 			IDA0L=code_IDAC & 0xFF;
-			IDA0H=Hi_code_IDAC;			
+			IDA0H=Hi_code_IDAC;	
+			UlogParam("pila down until zero", footim);
 		}	
 		else {
 			F_run_test=0;//1-идет тест
 			F_end_test=1;//
+			UlogParam("finish pila down", footim);
 		}		
 	}
 }
@@ -332,7 +335,6 @@ if(F_run_sum==0){//не выполняем суммирование
 else{
 	if(F_rise_step_idac == 0){//вниз
 		if(F_in_comp_on == 0){//отпустил
-			UlogParam("down; comp = 0", footim);
 			sum_code_IDAC += ((code_IDAC>>6) - 1);//????????IDAC для интегрирования
 			c_sum_code++;
 			if(c_sum_code >= INTEGRATION_COUNT){//64  усе
@@ -343,6 +345,8 @@ else{
 				hold_code_IDAC = sum_code_IDAC / INTEGRATION_COUNT;//64
 				F_hold_data_idac = 1;//1-выполнено запоминание
 				F_run_sum = 0;//1-выполняем суммирование
+				
+				code_IDAC = 0x280;
 			}
 			else{//разворот вверх				
 				F_rise_step_idac=1;//
@@ -360,14 +364,14 @@ else{
 				F_hold_data_idac = 1;//1-выполнено запоминание
 				F_run_test = 0;//1-идет тест
 				F_end_test = 1;//1-
-				UlogParam("down; comp = 1; more  go down", footim);
 			}
 			else{
 				code_IDAC -=64;
 				//IDA0=code_IDAC;
 				Hi_code_IDAC=(code_IDAC >>8);	
 				IDA0L=code_IDAC & 0xFF;
-				IDA0H=Hi_code_IDAC;				
+				IDA0H=Hi_code_IDAC;
+				UlogParam("down; comp = 1; more down", footim);
 			}				
 		}
 
@@ -391,7 +395,7 @@ else{
 				Hi_code_IDAC=(code_IDAC >>8);	
 				IDA0L=code_IDAC & 0xFF;
 				IDA0H=Hi_code_IDAC;	
-				UlogParam("up; comp = 1; change go down", footim);			
+				UlogParam("up; comp = 1; change, go down", footim);			
 			//}
 			
 		}

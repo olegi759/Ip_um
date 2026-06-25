@@ -1,0 +1,85 @@
+# KEIL µVision (C51, MDK-ARM, etc.)
+*.uvopt
+*.uvoptx
+*.uvgui
+*.uvguix
+*.uvproj
+*.uvprojx
+*.uvmpw
+*.uvmpwx
+*.plg
+*.bak
+*.dep
+*.lst
+*.m51
+*.obj
+*.o
+*.crf
+*.d
+*.axf
+*.sct
+*.scvd
+*.iex
+*.htm
+*.lnp
+*.build_log.htm
+*.tra
+*.hex
+*.bin
+*.h86
+*.sbr
+*.sre
+*.ihx
+*.sim
+*.elf
+*.map
+*.i
+*.log
+*.lst
+*.ini
+*.jcfg
+*.dbgconf
+*.dbgconf.*
+*.uvproj.*.user
+*.uvopt.*.user
+*.uvguix.*.user
+*.User
+*.uvmpw.*.user
+
+# Build and temporary directories
+/Objects/
+/Listings/
+/DebugConfig/
+/.settings/
+/.vscode/
+/.vs/
+/.launch/
+/_build/
+/Build/
+/Output/
+
+# External dependencies (if not needed)
+/Packs/
+/.pio/
+
+# Silicon Labs specific
+*.c2
+*.c2data
+
+# Windows files
+Thumbs.db
+desktop.ini
+*.tmp
+*.swp
+*.swo
+*~
+
+# MacOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux files
+.*.swp
+.*.swo
