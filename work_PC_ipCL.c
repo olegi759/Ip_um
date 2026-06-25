@@ -28,7 +28,7 @@ void work_PC(void){
 		 Tx_command_PC=CMD_PC_INSTALL_SL;
 		 n_byte_Tx_PC=sizeof(struct _Status_SL);
 		 /*загружаем данные в буф передачи*/
-		 memcpy(&bufTX_PC[0],&Status_SL,n_byte_Tx_PC);
+		 memcpy(&bufTX_PC[0], &Status_SL, n_byte_Tx_PC);
 		 st_Tx_PC=TX_ADDRESS;
 		 Tx_counter_or_error=n_byte_Tx_PC;
 
@@ -52,17 +52,25 @@ void work_PC(void){
 		DacStartValueLines.LineDac3=Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
 		DacStartValueLines.LineDac4=Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;
 	
-		set_canal_test[0]=bufRX_PC[0];
-		((WORD*)&DacStartValueLines)[0] = ((bufRX_PC[1] << 8) | (bufRX_PC[2]) >> 6) - 20;
-		set_canal_test[1]=bufRX_PC[3];
-	     ((WORD*)&DacStartValueLines)[1] = ((bufRX_PC[4] << 8) | (bufRX_PC[5]) >> 6) - 20;
-		set_canal_test[2]=bufRX_PC[6];
-	    ((WORD*)&DacStartValueLines)[3] = ((bufRX_PC[7] << 8) | (bufRX_PC[8]) >> 6) - 20;
-		set_canal_test[3]=bufRX_PC[9];
-	    ((WORD*)&DacStartValueLines)[4] = ((bufRX_PC[10] << 8) | (bufRX_PC[11]) >> 6) - 20;
+		memcpy(&Status_SL, &bufRX_PC[0], sizeof(struct _Status_SL));
 	
-		F_delaed_response = 1;
-	
+		set_canal_test[0] = Status_SL.NRange1;
+		DacStartValueLines.LineDac1 = (((WORD)Status_SL.Data1_Hi << 8) | Status_SL.Data1_Lo);		
+		set_canal_test[1] = Status_SL.NRange2;
+		DacStartValueLines.LineDac2 = (((WORD)Status_SL.Data2_Hi << 8) | Status_SL.Data2_Lo);
+	    set_canal_test[2] = Status_SL.NRange3;
+		DacStartValueLines.LineDac3 = (((WORD)Status_SL.Data3_Hi << 8) | Status_SL.Data3_Lo);
+	    set_canal_test[3] = Status_SL.NRange4;
+		DacStartValueLines.LineDac4 = (((WORD)Status_SL.Data4_Hi << 8) | Status_SL.Data4_Lo);
+        
+        DacStartValueLines.LineDac1 = (DacStartValueLines.LineDac1 > 20)? DacStartValueLines.LineDac1 - 20 : 0;
+        DacStartValueLines.LineDac2 = (DacStartValueLines.LineDac2 > 20)? DacStartValueLines.LineDac2 - 20 : 0;
+        DacStartValueLines.LineDac3 = (DacStartValueLines.LineDac3 > 20)? DacStartValueLines.LineDac3 - 20 : 0;
+        DacStartValueLines.LineDac4 = (DacStartValueLines.LineDac4 > 20)? DacStartValueLines.LineDac4 - 20 : 0;
+        
+        memset(&Status_SL, 0, sizeof(struct _Status_SL));
+        
+		F_delaed_response = 1;	
 		set_f_start_test_Lx();
 	
 						
@@ -220,8 +228,7 @@ void work_PC(void){
 }
 
 void delayed_response_PC(){
-	if(F_delaed_response == 1){
-		F_delaed_response = 0; // сбрасываем отложенный ответ
+	if(F_delaed_response == 1){		
 		switch(Rx_command_PC){
 			case CMD_PC_TEST_SL:{
 				// если все флаги нули, значит по всем линиям измерения закончились, можно отдавать результат
@@ -275,7 +282,7 @@ void delayed_response_PC(){
 					bufTX_PC[1] = Status_SL.NRange4;
 					bufTX_PC[2]= Status_SL.Data4_Lo;
 					bufTX_PC[3] = Status_SL.Data4_Hi;
-				} else return;
+				} else break;
 				st_Tx_PC=TX_ADDRESS;
 			    Tx_counter_or_error=n_byte_Tx_PC;
 			    
@@ -286,11 +293,11 @@ void delayed_response_PC(){
 					
 			}
 			default: {
-				break;
+				return;
 			}
 		}
 		
-		
+        F_delaed_response = 0;
 	}
 	
 }
