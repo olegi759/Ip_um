@@ -76,6 +76,7 @@ extern bit F_rise_step_idac;//1- растет
 //extern bit F_end_step_idac;//1-конец диапазона
 extern bit F_hold_data_idac;//1-выполнено запоминание
 extern bit F_run_sum;//1-выполняем суммирование
+extern bit F_fast_test;//1-проводим быстрый тест линии 
 
 extern BYTE data range;//диапазон 1,2
 extern BYTE data canal_test;//1,2,3,4

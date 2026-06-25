@@ -136,7 +136,7 @@ void uart_0(void) interrupt 4{
 				case TX_CRC_2:
 					 SBUF0 =CRC_Tx_PC.b[0];
 					//F_run_com_PC = 1;
-					 st_Tx_PC=TX_END;
+					 st_Tx_PC = TX_END;
 					 return;
 				break;
 				
@@ -150,7 +150,11 @@ void uart_0(void) interrupt 4{
 				case TX_DEBUG: {
 					SBUF0 = bufTX_PC[c_bufTX_PC];
 					c_bufTX_PC++;
-					if(c_bufTX_PC==n_byte_Tx_PC + 1) st_Tx_PC = TX_END;
+					if(c_bufTX_PC == n_byte_Tx_PC ) st_Tx_PC = TX_END;
+					return;
+				}
+				case TX_END: {
+					st_Tx_PC = TX_WAIT;
 					return;
 				}
 				

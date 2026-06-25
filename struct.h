@@ -25,6 +25,13 @@ union _FDWB {
 	BYTE	b[4];
 };
 
+//typedef enum {
+//	LN_NONE   = 0
+//    LN_LINE_1 = 1 << 0,
+//    LN_LINE_2 = 1 << 1,
+//    LN_LINE_3 = 1 << 2,
+//    LN_LINE_4 = 1 << 3
+//} LineNumber_e; 
 
 //-----------------
 //структуры обмена с пк
@@ -41,8 +48,7 @@ struct _Status_SL{
 	BYTE Data3_Hi;	
 	BYTE NRange4;
 	BYTE Data4_Lo;	
-	BYTE Data4_Hi;
-		
+	BYTE Data4_Hi;		
 };
 
 struct _Status_Rele_SL{

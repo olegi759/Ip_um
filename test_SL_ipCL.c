@@ -34,7 +34,7 @@ c_in_comp_total++;
 void set_test_L1(void){
 
 //if(set_canal_test[0] ==0)return;
-if(set_canal_test[0] ==1){range=1;GAIN_L1_MAX;}
+if(set_canal_test[0] == 1){range=1;GAIN_L1_MAX;}
 else if(set_canal_test[0] ==2){range=2;GAIN_L1_MIN;}
 else {Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;return;}
 
@@ -208,8 +208,8 @@ if(canal_test==1){
 		}
 	}
 	else{
-		c_in_comp_total=0;
-		c_in_comp1=0;
+		c_in_comp_total = 0;
+		c_in_comp1 = 0;
 		return;
 	}
 }		
@@ -270,14 +270,13 @@ c_in_comp4=0;
 if(F_run_sum==0){//не выполняем суммирование
 	if(F_rise_step_idac){//1- растет		
 
-		if(F_in_comp_on){//1-сработал
+		if(F_in_comp_on){//1-сработал 
 
 			if(code_IDAC < CODE_DAC_CORESPONDING_ZERO){//???64 //128
 				hold_code_IDAC=0;//код срабатывания
 				F_hold_data_idac=1;//1-выполнено запоминание
 				F_run_test=0;//1-идет тест
-				F_end_test=1;//1-
-				code_IDAC = 0x280;
+				F_end_test=1;//1-					
 			}
 			else{
 					
@@ -310,6 +309,16 @@ if(F_run_sum==0){//не выполняем суммирование
 				F_hold_data_idac=1;//1-выполнено запоминание			
 				//меняем направление
 				F_rise_step_idac=0;
+				if(F_fast_test){
+					UlogParam("fast down DAC", footim);
+					//если тест быстрый, просто кидает вниз ацп и выходим из теста
+					code_IDAC = 0x0;
+					Hi_code_IDAC=(code_IDAC >>8);	
+					IDA0L=code_IDAC & 0xFF;
+					IDA0H=Hi_code_IDAC;
+					F_run_test=0;//1-идет тест
+					F_end_test=1;//1-
+				}		
 			}				
 		}
 		
@@ -337,16 +346,29 @@ else{
 		if(F_in_comp_on == 0){//отпустил
 			sum_code_IDAC += ((code_IDAC>>6) - 1);//????????IDAC для интегрирования
 			c_sum_code++;
-			if(c_sum_code >= INTEGRATION_COUNT){//64  усе
+			if( ((F_fast_test == 0) && (c_sum_code >= INTEGRATION_COUNT)) || ((F_fast_test == 1) && (c_sum_code >= INTEGRATION_COUNT_FAST)) ){//64  усе
 				
 				UlogParam("finish", footim);
 				
 				//запоминаем
-				hold_code_IDAC = sum_code_IDAC / INTEGRATION_COUNT;//64
+				if(F_fast_test){
+					hold_code_IDAC = sum_code_IDAC / INTEGRATION_COUNT_FAST;
+				} else {
+					hold_code_IDAC = sum_code_IDAC / INTEGRATION_COUNT;
+				}   				
 				F_hold_data_idac = 1;//1-выполнено запоминание
 				F_run_sum = 0;//1-выполняем суммирование
 				
-				code_IDAC = 0x280;
+				if(F_fast_test){
+					UlogParam("fast down DAC", footim);
+					//если тест быстрый, просто кидаем вниз ацп и выходим из теста
+					code_IDAC = 0x0;
+					Hi_code_IDAC=(code_IDAC >>8);	
+					IDA0L=code_IDAC & 0xFF;
+					IDA0H=Hi_code_IDAC;
+					F_run_test=0;//1-идет тест
+					F_end_test=1;//1-
+				}		
 			}
 			else{//разворот вверх				
 				F_rise_step_idac=1;//
@@ -689,11 +711,11 @@ if(install_code_IDAC_2 > 512)test2_install=install_code_IDAC_2 - 512;
 else test2_install = 512 - install_code_IDAC_2;	
 	
 if(test1_install > test2_install) {
-	((WORD*)&DacStartValueLines)[chNumber - 1] = install_code_IDAC_2 - 20;	
+	//((WORD*)&DacStartValueLines)[chNumber - 1] = install_code_IDAC_2 - 20;	
 	return 2;
 }
 else {
-	((WORD*)&DacStartValueLines)[chNumber - 1] = install_code_IDAC_1 - 20;
+	//((WORD*)&DacStartValueLines)[chNumber - 1] = install_code_IDAC_1 - 20;
 	return 1;		
 }	
 }

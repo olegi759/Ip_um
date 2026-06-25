@@ -109,7 +109,7 @@ if(F_end_test){
 	F_end_test=0;
 	PCA0CPH2  = 0;//reset wdt
 		//переносим в буфер передачи
-		if(canal_test==1){
+		if(canal_test==1) {
 			if(F_hold_data_idac){//1-выполнено запоминание
 				Status_SL.NRange1=range;
 				//hold_code_IDAC=(hold_code_IDAC >>6);

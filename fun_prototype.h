@@ -19,6 +19,9 @@ void set_test_L1(void);
 void set_test_L2(void);
 void set_test_L3(void);
 void set_test_L4(void);
+
+
+
 //выплонение шага тестирования
 void step_test_L(void);
 //инсталяция звуковых линий

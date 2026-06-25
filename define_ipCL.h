@@ -1,7 +1,8 @@
 //параметры проведения теста линий 
 #define CODE_DAC_CORESPONDING_ZERO        128
 #define MAX_CODE_DAC_REG                  0xFFC0
-#define INTEGRATION_COUNT                 8
+#define INTEGRATION_COUNT                 32
+#define INTEGRATION_COUNT_FAST            8
 
 
 //упавление выходными сигналами tpic
@@ -70,8 +71,9 @@
 
 #define CMD_PC_INSTALL_SL         0x01    //провести инстал звуковых линий
 #define CMD_PC_TEST_SL            0x02    //провести тест звуковых линий
-#define CMD_PC_SET_RELE_SL		0x03	//управление реле трансл
-#define CMD_PC_READ_RELE_SL 		0x04	//ЗАПРОС состоян реле трансл
+#define CMD_PC_SET_RELE_SL		  0x03	  //управление реле трансл
+#define CMD_PC_READ_RELE_SL 	  0x04	//ЗАПРОС состоян реле трансл
+#define CMD_PC_FAST_TEST_SL        0x05  //провести быстрый тест звуковых линий
 
 #define CMD_PC_DEBUG_SL 		0xDD	
 

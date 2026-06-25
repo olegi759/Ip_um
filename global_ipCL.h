@@ -74,6 +74,7 @@ bit F_rise_step_idac;//1- растет
 //bit F_end_step_idac;//1-конец диапазона
 bit F_hold_data_idac;//1-выполнено запоминание
 bit F_run_sum;//1-выполняем суммирование
+bit F_fast_test;//1-проводим быстрый тест линии 
 
 BYTE data range;//диапазон 1,2
 BYTE data canal_test;//1,2,3,4

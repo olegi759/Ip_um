@@ -179,6 +179,7 @@ Status_SL.NRange3=Status_SL.Data3_Hi=Status_SL.Data3_Lo=0;
 Status_SL.NRange4=Status_SL.Data4_Hi=Status_SL.Data4_Lo=0;
 F_div_f_start_dac=0;//для получения 4ms в прерывании
 div_f_start_dac=0;
+F_fast_test = 0;
 
 }
 
