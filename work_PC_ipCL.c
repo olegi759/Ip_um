@@ -44,7 +44,7 @@ void work_PC(void){
 		TMR2CN = 0x04;
 		footim = 0;
 	
-		F_fast_test = 0;
+		F_fast_test = 1;
 	
 		//сброс старых
 		DacStartValueLines.LineDac1=Status_SL.NRange1=Status_SL.Data1_Hi=Status_SL.Data1_Lo=0;
